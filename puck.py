@@ -424,7 +424,6 @@ def clientBot(op):
                             if cmd == "rinda comeon":
                               if settings["selfbot"] == True:
                                 if msg._from in admin:
-                                  settings["selfbot"] = True
                                   poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                   creator = client.getContact(poey)                                    
                                   #puy.sendMessage(msg.to, "Rinda aktif kembali")
