@@ -424,11 +424,11 @@ def clientBot(op):
                             if cmd == "rinda comeon":
                               if settings["selfbot"] == True:
                                 if msg._from in admin:
-                                    settings["selfbot"] = True
-                                    poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                    creator = client.getContact(poey)                                    
-                                    #puy.sendMessage(msg.to, "Rinda aktif kembali")
-                                    sendMention(to, "Rinda diaktifkan kembali oleh @!", [poey])
+                                  settings["selfbot"] = True
+                                  poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                  creator = client.getContact(poey)                                    
+                                  #puy.sendMessage(msg.to, "Rinda aktif kembali")
+                                  sendMention(to, "Rinda diaktifkan kembali oleh @!", [poey])
                             elif cmd.startswith("changekey:"):
                               if msg._from in admin:
                                 sep = text.split(" ")
@@ -439,19 +439,21 @@ def clientBot(op):
                                     settings["keyCommand"] = str(key).lower()
                                     client.sendMessage(to, "Berhasil mengubah key command menjadi [ {} ]".format(str(key).lower()))
                             elif cmd == "sp1":
+                                if settings["selfbot"] == True:
                                 start = time.time()
                                 client.sendMessage(to, "Counting...")
                                 speed = time.time() - start
                                 ping = speed * 1000
                                 client.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
-                                
                             elif cmd == "sp2":
                               if msg._from in admin:
+                                if settings["selfbot"] == True:
                                 start = time.time()
                                 client.sendMessage(to, "...")
                                 elapsed_time = time.time() - start
                                 client.sendMessage(to, "{}".format(str(elapsed_time)))
                             elif cmd.startswith("sp3"):
+                                if settings["selfbot"] == True:
                                 Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 get_profile_time_start = time.time()
                                 get_profile = client.getProfile()
