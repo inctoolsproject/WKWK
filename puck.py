@@ -896,66 +896,6 @@ def clientBot(op):
                                         txt += u'@Zero \n'
                                     client.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
                                     client.sendMessage(to, "Total {} Mention".format(str(len(nama))))  
-                            elif cmd == "lurking on":
-                                tz = pytz.timezone("Asia/Makassar")
-                                timeNow = datetime.now(tz=tz)
-                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
-                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-                                hr = timeNow.strftime("%A")
-                                bln = timeNow.strftime("%m")
-                                for i in range(len(day)):
-                                    if hr == day[i]: hasil = hari[i]
-                                for k in range(0, len(bulan)):
-                                    if bln == str(k): bln = bulan[k-1]
-                                readTime = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
-                                if receiver in read['readPoint']:
-                                    try:
-                                        del read['readPoint'][receiver]
-                                        del read['readMember'][receiver]
-                                        del read['readTime'][receiver]
-                                    except:
-                                        pass
-                                    read['readPoint'][receiver] = msg_id
-                                    read['readMember'][receiver] = ""
-                                    read['readTime'][receiver] = readTime
-                                    read['ROM'][receiver] = {}
-                                    client.sendMessage(receiver,"Lurking telah diaktifkan\n\n*lurking* for check readers\n*lurking off* for Nonactived a lurkmode\n*lurking reset* for reset a readers point!")
-                                else:
-                                    try:
-                                        del read['readPoint'][receiver]
-                                        del read['readMember'][receiver]
-                                        del read['readTime'][receiver]
-                                    except:
-                                        pass
-                                    read['readPoint'][receiver] = msg_id
-                                    read['readMember'][receiver] = ""
-                                    read['readTime'][receiver] = readTime
-                                    read['ROM'][receiver] = {}
-                                    client.sendMessage(receiver,"Set reading point : \n" + readTime)
-                            elif cmd == "lurking off":
-                                tz = pytz.timezone("Asia/Makassar")
-                                timeNow = datetime.now(tz=tz)
-                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
-                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-                                hr = timeNow.strftime("%A")
-                                bln = timeNow.strftime("%m")
-                                for i in range(len(day)):
-                                    if hr == day[i]: hasil = hari[i]
-                                for k in range(0, len(bulan)):
-                                    if bln == str(k): bln = bulan[k-1]
-                                readTime = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
-                                if receiver not in read['readPoint']:
-                                    client.sendMessage(receiver,"Lurking telah dinonaktifkan")
-                                else:
-                                    try:
-                                        del read['readPoint'][receiver]
-                                        del read['readMember'][receiver]
-                                        del read['readTime'][receiver]
-                                    except:
-                                        pass
-                                    client.sendMessage(receiver,"Delete reading point : \n" + readTime)
         
                             elif cmd == "lurking reset":
                                 tz = pytz.timezone("Asia/Makassar")
@@ -1356,6 +1296,72 @@ def clientBot(op):
                                 client.sendMessage(to, "Gbye")
                                 #client.getGroupIdsJoined()
                                 client.leaveGroup(to)                                    
+
+                            elif cmd == "rinda get reader on":
+                              if settings["selfbot"] == True:
+                                tz = pytz.timezone("Asia/Jakarta")
+                                timeNow = datetime.now(tz=tz)
+                                read['readPoint'][msg.to] = msg_id
+                                read['readMember'][msg.to] = {}
+                                client.sendMessage(msg.to, "Lurking berhasil dinyalakan\n\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n[ "+ datetime.strftime(timeNow,'%H:%M:%S')+" ]")
+
+                            elif cmd == "rinda get reader off":
+                              if settings["selfbot"] == True:
+                                tz = pytz.timezone("Asia/Jakarta")
+                                timeNow = datetime.now(tz=tz)
+                                del read['readPoint'][msg.to]
+                                del read['readMember'][msg.to]
+                                client.sendMessage(msg.to, "Getreader berhasil dimatikan\n\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n[ "+ datetime.strftime(timeNow,'%H:%M:%S')+" ]")
+
+                        elif cmd == "rinda get readers":
+                            if msg.to in read['readPoint']:
+                                if read['readMember'][msg.to] != {}:
+                                    aa = []
+                                    for x in read['readMember'][msg.to]:
+                                        aa.append(x)
+                                    try:
+                                        arrData = ""
+                                        textx = "  [ {} Reader ]\n\n1. ".format(str(len(aa)))
+                                        arr = []
+                                        no = 1
+                                        b = 1
+                                        for i in aa:
+                                            b = b + 1
+                                            end = "\n"
+                                            mention = "@x\n"
+                                            slen = str(len(textx))
+                                            elen = str(len(textx) + len(mention) - 1)
+                                            arrData = {'S':slen, 'E':elen, 'M':i}
+                                            arr.append(arrData)
+                                            tz = pytz.timezone("Asia/Jakarta")
+                                            timeNow = datetime.now(tz=tz)
+                                            textx += mention
+                                            if no < len(aa):
+                                                no += 1
+                                                textx += str(b) + ". "
+                                            else:
+                                                try:
+                                                    no = "[ {} ]".format(str(client.getGroup(msg.to).name))
+                                                except:
+                                                    no = "  "
+                                        msg.to = msg.to
+                                        msg.text = textx+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n* "+ datetime.strftime(timeNow,'%H:%M:%S')+"* "
+                                        msg.contentMetadata = {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}
+                                        msg.contentType = 0
+                                        client.sendMessage1(msg)
+                                    except:
+                                        pass
+                                    try:
+                                        del read['readPoint'][msg.to]
+                                        del read['readMember'][msg.to]
+                                    except:
+                                        pass
+                                    read['readPoint'][msg.to] = msg.id
+                                    read['readMember'][msg.to] = {}
+                                else:
+                                    client.sendMessage(msg.to, "Tidak ada satupun")
+                            else:
+                                client.sendMessage(msg.to, "Getreader status is Unactived")
 
                             elif cmd.startswith("rinda tutupqr to"):
                               if msg._from in admin:
