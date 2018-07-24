@@ -324,7 +324,7 @@ def clientBot(op):
         if op.type == 5:
             print ("[ 5 ] NOTIFIED ADD CONTACT")
             if settings["autoAdd"] == True:
-                client.findAndAddContactsByMid(op.param1)
+                client.findAndAddContactsByMid(op.param2)
             sendMention(op.param1, "@! Thx for add")
 
         if op.type == 13:
@@ -1658,13 +1658,13 @@ def clientBot(op):
                                    client.sendMessage(group,"" + str(pesan))
 
                             elif cmd.startswith("rindafbc: "):
-                              if msg._from in admin:
+                              if msg._from in admin:                            
                                 sep = text.split(" ")
                                 txt = text.replace(sep[0] + " ","")
                                 friends = client.friends
                                 for friend in friends:
-                                    client.sendMessage(friend, "{}".format(str(txt)))
-                                client.sendMessage(to, "Berhasil mengirim ke {} Teman".format(str(len(friends))))
+                                    sendMention(friend, "「 Broadcast from @! 」\n\n{}".format(str(txt), [sender]))
+                                    client.sendMessage(to, "Berhasil mengirim ke {} Teman".format(str(len(friends))))
 
                             elif cmd.startswith("smule "):
                                 query = cmd.replace("smule ","")
