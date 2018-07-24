@@ -1270,8 +1270,8 @@ def clientBot(op):
                                     #ret_ += "\n  Version : Premium"
                                     #ret_ += "\n  Creator : {}".format(creator.displayName)
                                     #ret_ += "\n  Creator : @!".format(Owner)
-                                    ret_ += "\n╚═〘 Creator : @!〙".format[Ownerz])
-                                    client.sendMessage(to, str(ret_))
+                                    ret_ += "\n╚═〘 Creator : @!〙"
+                                    client.sendMessage(to, str(ret_), [Ownerz]))
                                     #client.sendMessage(to, "「 Read Text Below 」")
                                     sendMention(to, "「 About Rinda 」\n\nThe Beginning of this Bot Comes from Helloworld, I'm just Reworked This!\n\nOf Course Special Thanks To HelloWorld, And the Friends Around Me!\n\n*Creator : @!", [Ownerz])
                                 except Exception as e:
