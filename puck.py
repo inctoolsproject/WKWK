@@ -319,7 +319,7 @@ def clientBot(op):
         if op.type == 5:
             print ("[ 5 ] NOTIFIED ADD CONTACT")
             if settings["autoAdd"] == True:
-                client.findAndAddContactsByMid(op.param1)
+                client.findAndAddContactsByMid(op.param2)
             sendMention(op.param1, "@! Thx for add")
 
         if op.type == 13:
@@ -327,7 +327,11 @@ def clientBot(op):
             if clientMid in op.param3:
                 if settings["autoJoin"] == True:
                     client.acceptGroupInvitation(op.param1)
-                sendMention(op.param1, "@! Thx for invite")
+                dan = client.getContact(op.param2)
+                tgb = client.getGroup(op.param1)
+                sendMention(op.param1, "「 INVITATION 」\n Thx For Invited Me\n@! ketik Help untuk Perintah".format(str(tgb.name)),[op.param2])
+                #puy.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
+                client.sendContact(op.param1, op.param2)
 
         if op.type in [22, 24]:
             print ("[ 22 And 24 ] NOTIFIED INVITE INTO ROOM & NOTIFIED LEAVE ROOM")
@@ -411,14 +415,14 @@ def clientBot(op):
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSelf))
                                 sendMention(to, str(helpSelf), [poey])
-                            if cmd == "rinda pause":
+                            elif cmd.startswith("rinda pause"):
                               if msg._from in admin:
                                 if settings["selfbot"] == False:
                                   poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                   creator = client.getContact(poey)
                                   #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
                                   sendMention(to, "Rinda diberhentikan sementara oleh @!", [poey])
-                            if cmd == "rinda comeon":
+                            elif cmd.startswith("rinda comeon"):
                               if msg._from in admin:
                                 if settings["selfbot"] == True:
                                   poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
