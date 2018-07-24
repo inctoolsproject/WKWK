@@ -2237,3 +2237,4 @@ def atend():
         json.dump(msg_dict, f, ensure_ascii=False, indent=4,separators=(',', ': '))
     print("BYE")
 atexit.register(atend)
+
