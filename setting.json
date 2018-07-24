@@ -1,0 +1,28 @@
+{
+    "autoAdd": false,
+    "autoAddMessage": "@!, Thx for add",
+    "autoJoin": false,
+    "autoJoinMessage": "@!, makasih sudah invite saya",
+    "autoJoinTicket": false,
+    "autoRead": false,
+    "autoRespon": false,
+    "autoResponMessage": "Hey @!, Don't Tag.",
+    "changeGroupPicture": [],
+    "changePictureProfile": false,
+    "checkContact": false,
+    "checkPost": false,
+    "checkSticker": false,
+    "detectUnsend": false,
+    "keyCommand": "",
+    "mimic": {
+        "status": false,
+        "target": {}
+    },
+    "myProfile": {
+        "coverId": "",
+        "displayName": "",
+        "pictureStatus": "",
+        "statusMessage": ""
+    },
+    "setKey": false
+}
