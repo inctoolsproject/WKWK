@@ -1657,14 +1657,14 @@ def clientBot(op):
                                 for group in saya:
                                    client.sendMessage(group,"" + str(pesan))
 
-                        elif cmd.startswith("rindafbc: "):
-                          if msg._from in admin:
-                            sep = text.split(" ")
-                            txt = text.replace(sep[0] + " ","")
-                            friends = client.friends
-                            for friend in friends:
-                                client.sendMessage(friend, "{}".format(str(txt)))
-                            client.sendMessage(to, "Berhasil mengirim ke {} Teman".format(str(len(friends))))
+                            elif cmd.startswith("rindafbc: "):
+                              if msg._from in admin:
+                                sep = text.split(" ")
+                                txt = text.replace(sep[0] + " ","")
+                                friends = client.friends
+                                for friend in friends:
+                                    client.sendMessage(friend, "{}".format(str(txt)))
+                                client.sendMessage(to, "Berhasil mengirim ke {} Teman".format(str(len(friends))))
 
                             elif cmd.startswith("smule "):
                                 query = cmd.replace("smule ","")
