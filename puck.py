@@ -193,6 +193,7 @@ def helpmenu2():
     else:
         key = ''
     helpMenu2 = "╔══[ All Can Used ]" + "\n" + \
+                    "╠ " " " + key + " " + "\n" + \
                     "╠ " "1) " + key + "  Asking [query]" + "\n" + \
                     "╠ " "2) " + key + "  Calc [Sample : Hasil dari 22x22]" + "\n" + \
                     "╠ " "3) " + key + "  Timezone [query]" + "\n" + \
@@ -421,12 +422,12 @@ def clientBot(op):
                                 sendMention(to, str(helpSelf), [poey])
                             if cmd == "rinda pause":
                               if msg._from in admin:
-                                  wait["selfbot"] = False
+                                  settings["selfbot"] = False
                                   client.sendMessage(msg.to, "Rinda diberhentikan sementara")
                             
                             if cmd == "rinda comeon":
                               if msg._from in admin:
-                                  wait["selfbot"] = True
+                                  settings["selfbot"] = True
                                   client.sendMessage(msg.to, "Rinda aktif kembali")
                             elif cmd.startswith("changekey:"):
                               if msg._from in admin:
