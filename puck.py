@@ -450,37 +450,37 @@ def clientBot(op):
                                 restartBot()
 # Pembatas Script #
 
-                        elif cmd == "rinda statuss":
-                          if wait["selfbot"] == True:
-                            if msg._from in admin:
-                                tz = pytz.timezone("Asia/Jakarta")
-                                timeNow = datetime.now(tz=tz)
-                                md = " < S T A T U S >\n\n"
-                                if wait["unsend"] == True: md+=" [*Unsend Actived*]\n"
-                                else: md+=" [*Unsend Unactived*]\n"
-                                if wait["sticker"] == True: md+=" [*StickerInfo Actived*]\n"
-                                else: md+=" [*StickerInfo Unactived*]\n"
-                                if wait["contact"] == True: md+=" [*GetInfo Actived*]\n"
-                                else: md+=" [*GetInfo Unactived*]\n"
-                                if wait["Mentionkick"] == True: md+=" [*Mentionkick Actived*]\n"
-                                else: md+=" [*Mentionkick Unactived*]\n"
-                                if wait["detectMention"] == True: md+=" [*Autoreplytag Actived*]\n"
-                                else: md+=" [*Autoreplytag Unactived*]\n"
-                                if wait["Mentiongift"] == True: md+=" [*Mentiongift Actived*]\n"
-                                else: md+=" [*Mentiongift Unactived*]\n"
-                                if wait["autoJoin"] == True: md+=" [*AutoJoin Actived*]\n"
-                                else: md+=" [*AutoJoin Unactived*]\n"
-                                if settings["autoJoinTicket"] == True: md+=" [*JoinQR Actived*]\n"
-                                else: md+=" [*JoinQR Unactived*]\n"
-                                if msg.to in simisimi: md+=" [*Simisimi Actived*]\n"
-                                else: md+=" [*Simisimi Unactived*]\n"
-                                if wait["autoAdd"] == True: md+=" [*AutoaddMsg Actived*]\n"
-                                else: md+=" [*AutoaddMsg Unactived*]\n"
-                                if msg.to in welcome: md+=" [*WelcomeMsg Actived*]\n"
-                                else: md+=" [*WelcomeMsg Unactived*]\n"
-                                if wait["autoLeave"] == True: md+=" [*LeaveMsg Actived*]\n"
-                                else: md+=" [*LeaveMsg Unactived*]\n"
-                                aditmadzs.sendMessage(msg.to, md+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n<"+ datetime.strftime(timeNow,'%H:%M:%S')+">\n")
+                            elif cmd == "rinda statuss":
+                              if wait["selfbot"] == True:
+                                if msg._from in admin:
+                                    tz = pytz.timezone("Asia/Jakarta")
+                                    timeNow = datetime.now(tz=tz)
+                                    md = " < S T A T U S >\n\n"
+                                    if wait["unsend"] == True: md+=" [*Unsend Actived*]\n"
+                                    else: md+=" [*Unsend Unactived*]\n"
+                                    if wait["sticker"] == True: md+=" [*StickerInfo Actived*]\n"
+                                    else: md+=" [*StickerInfo Unactived*]\n"
+                                    if wait["contact"] == True: md+=" [*GetInfo Actived*]\n"
+                                    else: md+=" [*GetInfo Unactived*]\n"
+                                    if wait["Mentionkick"] == True: md+=" [*Mentionkick Actived*]\n"
+                                    else: md+=" [*Mentionkick Unactived*]\n"
+                                    if wait["detectMention"] == True: md+=" [*Autoreplytag Actived*]\n"
+                                    else: md+=" [*Autoreplytag Unactived*]\n"
+                                    if wait["Mentiongift"] == True: md+=" [*Mentiongift Actived*]\n"
+                                    else: md+=" [*Mentiongift Unactived*]\n"
+                                    if wait["autoJoin"] == True: md+=" [*AutoJoin Actived*]\n"
+                                    else: md+=" [*AutoJoin Unactived*]\n"
+                                    if settings["autoJoinTicket"] == True: md+=" [*JoinQR Actived*]\n"
+                                    else: md+=" [*JoinQR Unactived*]\n"
+                                    if msg.to in simisimi: md+=" [*Simisimi Actived*]\n"
+                                    else: md+=" [*Simisimi Unactived*]\n"
+                                    if wait["autoAdd"] == True: md+=" [*AutoaddMsg Actived*]\n"
+                                    else: md+=" [*AutoaddMsg Unactived*]\n"
+                                    if msg.to in welcome: md+=" [*WelcomeMsg Actived*]\n"
+                                    else: md+=" [*WelcomeMsg Unactived*]\n"
+                                    if wait["autoLeave"] == True: md+=" [*LeaveMsg Actived*]\n"
+                                    else: md+=" [*LeaveMsg Unactived*]\n"
+                                    client.sendMessage(msg.to, md+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n<"+ datetime.strftime(timeNow,'%H:%M:%S')+">\n")
                                 
                             elif cmd == "autoadd on":
                                 settings["autoAdd"] = True
