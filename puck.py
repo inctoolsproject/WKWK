@@ -191,32 +191,32 @@ def helpmenu2():
         key = settings['keyCommand']
     else:
         key = ''
-    helpMenu2 =     " " "「 All Can Used 」" + "\n" + \
-                    " " "1) " + key + "  Asking [query]" + "\n" + \
-                    " " "2) " + key + "  Hasil Dari [query]/[contoh : Hasil dari 22x22]" + "\n" + \
-                    " " "3) " + key + "  Timezone [query]" + "\n" + \
-                    " " "4) " + key + "  Smule [query]" + "\n" + \
-                    " " "5) " + key + "  Twitter [query]" + "\n" + \
-                    " " "6) " + key + "  Memelist" + "\n" + \
-                    " " "7) " + key + "  Github" + "\n" + \
-                    " " "8) " + key + "  Playstore [query]" + "\n" + \
-                    " " "9) " + key + "  Rinda Get Motivation" + "\n" + \
-                    " " "10) " + key + " Rinda get Suggestion to [query]" + "\n" + \
-                    " " "11) " + key + " Rinda get Groupinfo to [number of groups]" + "\n" + \
-                    " " "12) " + key + " Rinda Grouplist" + "\n" + \
-                    " " "13) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
-                    " " "14) " + key + " Rinda Mention to [number of groups]" + "\n" + \
-                    " " "15) " + key + " Rinda get devianart [query]" + "\n" + \
-                    " " "16) " + key + " Rinda get Image [query]" + "\n" + \
-                    " " "17) " + key + " Rinda get Quotes" + "\n" + \
-                    " " "18) " + key + " Rinda get 1Cak" + "\n" + \
-                    " " "20) " + key + " Rinda get Wikipedia [query]" + "\n" + \
-                    " " "21) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
-                    " " "22) " + key + " Rinda get lockscreen [query]" + "\n" + \
-                    " " "23) " + key + " Rinda get creepypasta" + "\n" + \
-                    " " "24) " + key + " Rinda get gif [query]" + "\n\n" + \
-                    "  「Use < " + key + " > For the Prefix」" + "\n" + \
-                    "  「*Creator : @!*」"
+    helpMenu2 = "╔══[ All Can Used ]" + "\n" + \
+                    "╠ " "1) " + key + "  Asking [query]" + "\n" + \
+                    "╠ " "2) " + key + "  Hasil Dari [query]/[contoh : Hasil dari 22x22]" + "\n" + \
+                    "╠ " "3) " + key + "  Timezone [query]" + "\n" + \
+                    "╠ " "4) " + key + "  Smule [query]" + "\n" + \
+                    "╠ " "5) " + key + "  Twitter [query]" + "\n" + \
+                    "╠ " "6) " + key + "  Memelist" + "\n" + \
+                    "╠ " "7) " + key + "  Github" + "\n" + \
+                    "╠ " "8) " + key + "  Playstore [query]" + "\n" + \
+                    "╠ " "9) " + key + "  Rinda Get Motivation" + "\n" + \
+                    "╠ " "10) " + key + " Rinda get Suggestion to [query]" + "\n" + \
+                    "╠ " "11) " + key + " Rinda get Groupinfo to [number of groups]" + "\n" + \
+                    "╠ " "12) " + key + " Rinda Grouplist" + "\n" + \
+                    "╠ " "13) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
+                    "╠ " "14) " + key + " Rinda Mention to [number of groups]" + "\n" + \
+                    "╠ " "15) " + key + " Rinda get devianart [query]" + "\n" + \
+                    "╠ " "16) " + key + " Rinda get Image [query]" + "\n" + \
+                    "╠ " "17) " + key + " Rinda get Quotes" + "\n" + \
+                    "╠ " "18) " + key + " Rinda get 1Cak" + "\n" + \
+                    "╠ " "19) " + key + " Rinda get Wikipedia [query]" + "\n" + \
+                    "╠ " "20) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
+                    "╠ " "21) " + key + " Rinda get lockscreen [query]" + "\n" + \
+                    "╠ " "22) " + key + " Rinda get creepypasta" + "\n" + \
+                    "╠ " "23) " + key + " Rinda get gif [query]" + "\n\n" + \
+                    "╠  「Use < " + key + " > For the Prefix」" + "\n" + \
+                    "╚══「*Creator : @!*」"
     return helpMenu2
 
 def helpmedia():
@@ -379,7 +379,10 @@ def clientBot(op):
                             if cmd == "help":
                               if settings["selfbot"] == True:
                                 helpMessage = helpmessage()
-                                client.sendMessage(to, str(helpMessage))
+                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                creator = client.getContact(poey)
+                                #client.sendMessage(to, str(helpMessage))
+                                sendMention(to, str(helpMessage), [poey])
                             if cmd == "help sett":
                               if settings["selfbot"] == True:
                                 helpSett = helpsett()
@@ -1245,7 +1248,7 @@ def clientBot(op):
                                     arr = []
                                     Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                     creator = client.getContact(Ownerz)
-                                    contact = client.getContact(puyMid)
+                                    contact = client.getContact(clientMid)
                                     grouplist = client.getGroupIdsJoined()
                                     contactlist = client.getAllContactIds()
                                     blockedlist = client.getBlockedContactIds()
