@@ -413,14 +413,14 @@ def clientBot(op):
                                 sendMention(to, str(helpSelf), [poey])
                             if cmd == "rinda pause":                              
                               if msg._from in admin:
-                                settings["selfbot"] == False:
+                                if settings["selfbot"] == False:
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 creator = client.getContact(poey)
                                 #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
                                 sendMention(to, "Rinda diberhentikan sementara oleh @!", [poey])
                             if cmd == "rinda comeon":
                               if msg._from in admin:
-                                settings["selfbot"] == True:
+                                if settings["selfbot"] == True:
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 creator = client.getContact(poey)                                    
                                 #puy.sendMessage(msg.to, "Rinda aktif kembali")
