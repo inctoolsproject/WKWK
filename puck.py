@@ -447,7 +447,7 @@ def clientBot(op):
                                 client.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
                             elif cmd == "sp2":
                               if msg._from in admin:
-                                if settings["selfbot"] == True:
+                              if settings["selfbot"] == True:
                                 start = time.time()
                                 client.sendMessage(to, "...")
                                 elapsed_time = time.time() - start
