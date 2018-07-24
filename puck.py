@@ -412,9 +412,8 @@ def clientBot(op):
                                 #client.sendMessage(to, str(helpSelf))
                                 sendMention(to, str(helpSelf), [poey])
                             if cmd == "rinda pause":
-                              if settings["selfbot"] == True:
+                              if settings["selfbot"] == False:
                                 if msg._from in admin:
-                                  settings["selfbot"] = False
                                   poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                   creator = client.getContact(poey)
                                   #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
