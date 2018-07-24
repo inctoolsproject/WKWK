@@ -1313,55 +1313,55 @@ def clientBot(op):
                                 del read['readMember'][msg.to]
                                 client.sendMessage(msg.to, "Getreader berhasil dimatikan\n\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n[ "+ datetime.strftime(timeNow,'%H:%M:%S')+" ]")
 
-                        elif cmd == "rinda get readers":
-                            if msg.to in read['readPoint']:
-                                if read['readMember'][msg.to] != {}:
-                                    aa = []
-                                    for x in read['readMember'][msg.to]:
-                                        aa.append(x)
-                                    try:
-                                        arrData = ""
-                                        textx = "  [ {} Reader ]\n\n1. ".format(str(len(aa)))
-                                        arr = []
-                                        no = 1
-                                        b = 1
-                                        for i in aa:
-                                            b = b + 1
-                                            end = "\n"
-                                            mention = "@x\n"
-                                            slen = str(len(textx))
-                                            elen = str(len(textx) + len(mention) - 1)
-                                            arrData = {'S':slen, 'E':elen, 'M':i}
-                                            arr.append(arrData)
-                                            tz = pytz.timezone("Asia/Jakarta")
-                                            timeNow = datetime.now(tz=tz)
-                                            textx += mention
-                                            if no < len(aa):
-                                                no += 1
-                                                textx += str(b) + ". "
-                                            else:
-                                                try:
-                                                    no = "[ {} ]".format(str(client.getGroup(msg.to).name))
-                                                except:
-                                                    no = "  "
-                                        msg.to = msg.to
-                                        msg.text = textx+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n* "+ datetime.strftime(timeNow,'%H:%M:%S')+"* "
-                                        msg.contentMetadata = {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}
-                                        msg.contentType = 0
-                                        client.sendMessage1(msg)
-                                    except:
-                                        pass
-                                    try:
-                                        del read['readPoint'][msg.to]
-                                        del read['readMember'][msg.to]
-                                    except:
-                                        pass
-                                    read['readPoint'][msg.to] = msg.id
-                                    read['readMember'][msg.to] = {}
+                            elif cmd == "rinda get readers":
+                                if msg.to in read['readPoint']:
+                                    if read['readMember'][msg.to] != {}:
+                                        aa = []
+                                        for x in read['readMember'][msg.to]:
+                                            aa.append(x)
+                                        try:
+                                            arrData = ""
+                                            textx = "  [ {} Reader ]\n\n1. ".format(str(len(aa)))
+                                            arr = []
+                                            no = 1
+                                            b = 1
+                                            for i in aa:
+                                                b = b + 1
+                                                end = "\n"
+                                                mention = "@x\n"
+                                                slen = str(len(textx))
+                                                elen = str(len(textx) + len(mention) - 1)
+                                                arrData = {'S':slen, 'E':elen, 'M':i}
+                                                arr.append(arrData)
+                                                tz = pytz.timezone("Asia/Jakarta")
+                                                timeNow = datetime.now(tz=tz)
+                                                textx += mention
+                                                if no < len(aa):
+                                                    no += 1
+                                                    textx += str(b) + ". "
+                                                else:
+                                                    try:
+                                                        no = "[ {} ]".format(str(client.getGroup(msg.to).name))
+                                                    except:
+                                                        no = "  "
+                                            msg.to = msg.to
+                                            msg.text = textx+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n* "+ datetime.strftime(timeNow,'%H:%M:%S')+"* "
+                                            msg.contentMetadata = {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}
+                                            msg.contentType = 0
+                                            client.sendMessage1(msg)
+                                        except:
+                                            pass
+                                        try:
+                                            del read['readPoint'][msg.to]
+                                            del read['readMember'][msg.to]
+                                        except:
+                                            pass
+                                        read['readPoint'][msg.to] = msg.id
+                                        read['readMember'][msg.to] = {}
+                                    else:
+                                        client.sendMessage(msg.to, "Tidak ada satupun")
                                 else:
-                                    client.sendMessage(msg.to, "Tidak ada satupun")
-                            else:
-                                client.sendMessage(msg.to, "Getreader status is Unactived")
+                                    client.sendMessage(msg.to, "Getreader status is Unactived")
 
                             elif cmd.startswith("rinda tutupqr to"):
                               if msg._from in admin:
