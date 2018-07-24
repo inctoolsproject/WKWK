@@ -38,6 +38,7 @@ settings = {
     "checkContact": True,
     "selfbot":True,
     "checkPost": True,
+    "Img": {},
     "Sambutan": False,
     "checkSticker": False,
     "changeDisplayPicture": False,
@@ -178,6 +179,7 @@ def helpmessage():
     else:
         key = ''
     helpMessage = "╔══[ Helper ]" + "\n" + \
+                    "╠ " " " + key + " " + "\n" + \
                     "╠ " "1) " + key + " More help" + "\n" + \
                     "╠ " "2) " + key + " About Rinda" + "\n" + \
                     "╠ " "3) " + key + " Rinda bye" + "\n" + \
@@ -199,22 +201,25 @@ def helpmenu2():
                     "╠ " "6) " + key + "  Memelist" + "\n" + \
                     "╠ " "7) " + key + "  Github" + "\n" + \
                     "╠ " "8) " + key + "  Playstore [query]" + "\n" + \
-                    "╠ " "9) " + key + "  Rinda Get Motivation" + "\n" + \
-                    "╠ " "10) " + key + " Rinda get Suggestion to [query]" + "\n" + \
-                    "╠ " "11) " + key + " Rinda Groupinfo to [number]" + "\n" + \
-                    "╠ " "12) " + key + " Rinda Grouplist" + "\n" + \
-                    "╠ " "13) " + key + " Rinda get Memberlist to [number]" + "\n" + \
-                    "╠ " "14) " + key + " Rinda Mention to [number of groups]" + "\n" + \
-                    "╠ " "15) " + key + " Rinda get devianart [query]" + "\n" + \
-                    "╠ " "16) " + key + " Rinda get Image [query]" + "\n" + \
-                    "╠ " "17) " + key + " Rinda get Quotes" + "\n" + \
-                    "╠ " "18) " + key + " Rinda get 1Cak" + "\n" + \
-                    "╠ " "19) " + key + " Rinda get Wikipedia [query]" + "\n" + \
-                    "╠ " "20) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
-                    "╠ " "21) " + key + " Rinda get lockscreen [query]" + "\n" + \
-                    "╠ " "22) " + key + " Rinda get creepypasta" + "\n" + \
-                    "╠ " "23) " + key + " Rinda get gif [query]" + "\n" + \
-                    "╠  「Use < " + key + " > For the Prefix」" + "\n" + \
+                    "╠ " "9) " + key + "  InstaStory [UserName]*[Number]" + "\n" + \
+                    "╠ " "10) " + key + " Rinda Get Motivation" + "\n" + \
+                    "╠ " "11) " + key + " Rinda get Suggestion to [query]" + "\n" + \
+                    "╠ " "12) " + key + " Rinda Groupinfo to [number]" + "\n" + \
+                    "╠ " "13) " + key + " Rinda Grouplist" + "\n" + \
+                    "╠ " "14) " + key + " Rinda get Memberlist to [number]" + "\n" + \
+                    "╠ " "15) " + key + " Rinda Mention to [number of groups]" + "\n" + \
+                    "╠ " "16) " + key + " Rinda get devianart [query]" + "\n" + \
+                    "╠ " "17) " + key + " Rinda get Image [query]" + "\n" + \
+                    "╠ " "18) " + key + " Rinda get Quotes" + "\n" + \
+                    "╠ " "19) " + key + " Rinda get 1Cak" + "\n" + \
+                    "╠ " "20) " + key + " Rinda get Wikipedia [query]" + "\n" + \
+                    "╠ " "21) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
+                    "╠ " "22) " + key + " Rinda get lockscreen [query]" + "\n" + \
+                    "╠ " "23) " + key + " Rinda get creepypasta" + "\n" + \
+                    "╠ " "24) " + key + " Rinda get gif [query]" + "\n" + \
+                    "╠ " "25) " + key + " Rinda get topnews" + "\n" + \
+                    "╠ " " " + key + " " + "\n" + \
+                    "╠══「Use < " + key + " > For the Prefix」" + "\n" + \
                     "╚══「*Creator : @!*」"
     return helpMenu2
 
@@ -1112,7 +1117,7 @@ def clientBot(op):
                                 try:
                                     sep = text.split(" ")
                                     text = text.replace(sep[0] + " ","")
-                                    cond = text.split("|")
+                                    cond = text.split("*")
                                     search = str(cond[0])
                                     if len(cond) == 2:
                                         r = requests.get("http://rahandiapi.herokuapp.com/instastory/{}?key=betakey".format(search))
@@ -1259,7 +1264,7 @@ def clientBot(op):
                                     contactlist = client.getAllContactIds()
                                     blockedlist = client.getBlockedContactIds()
                                     ret_ = " "
-                                    ret_ += "  Bot Name : {}".format(contact.displayName)
+                                    ret_ += " Bot Name : {}".format(contact.displayName)
                                     ret_ += "\n  In Groups : {}".format(str(len(grouplist)))
                                     ret_ += "\n  Friends : {}".format(str(len(contactlist)))
                                     ret_ += "\n  Blocked Account : {}".format(str(len(blockedlist)))                                    
