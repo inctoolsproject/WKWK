@@ -1922,15 +1922,11 @@ def clientBot(op):
                         to = receiver
                     elif msg.toType == 2:
                         to = receiver
-                    if settings["autoRead"] == True:
-                        client.sendChatChecked(to, msg_id)
-                    if to in read["readPoint"]:
-                        if sender not in read["ROM"][to]:
-                            read["ROM"][to][sender] = True
-                    if sender in settings["mimic"]["target"] and settings["mimic"]["status"] == True and settings["mimic"]["target"][sender] == True:
-                        text = msg.text
-                        if text is not None:
-                            client.sendMessage(msg.to,text)
+                    #if settings["autoRead"] == True:
+                    #    client.sendChatChecked(to, msg_id)
+                    #if to in read["readPoint"]:
+                    #    if sender not in read["ROM"][to]:
+                    #        read["ROM"][to][sender] = True
                     if settings["unsendMessage"] == True:
                         try:
                             msg = op.message
