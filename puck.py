@@ -436,7 +436,7 @@ def clientBot(op):
                 sendMention(op.param1, "@! hmm?")
                 client.leaveRoom(op.param1)
 
-        if op.type == 25:
+        if op.type == 26:
             try:
                 print ("[ 25 ] SEND MESSAGE")
                 msg = op.message
