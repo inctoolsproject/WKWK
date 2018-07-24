@@ -23,6 +23,7 @@ clientPoll = OEPoll(client)
 botStart = time.time()
 
 msg_dict = {}
+simisimi = []
 
 admin ="uac8e3eaf1eb2a55770bf10c3b2357c33"
 
@@ -339,6 +340,21 @@ def clientBot(op):
                 client.leaveRoom(op.param1)
 
         if op.type == 26:
+           if wait["selfbot"] == True:
+               msg = op.message
+               if msg.to in simisimi:
+                   try:
+                       if msg.text is not None:
+                           simi = msg.text
+                           r = requests.get("http://leert.corrykalam.gq/chatbot.php?text="+simi)
+                           data = r.text
+                           data = json.loads(data)
+                           if data["status"] == 200:
+                               aditmadzs.sendMessage(msg.to, str(data["answer"]))
+                   except Exception as error:
+                       pass
+
+        if op.type == 26:
             try:
                 print ("[ 25 ] SEND MESSAGE")
                 msg = op.message
@@ -433,6 +449,39 @@ def clientBot(op):
                                 client.sendMessage(to, "Berhasil merestart Bot bos")
                                 restartBot()
 # Pembatas Script #
+
+                        elif cmd == "rinda statuss":
+                          if wait["selfbot"] == True:
+                            if msg._from in admin:
+                                tz = pytz.timezone("Asia/Jakarta")
+                                timeNow = datetime.now(tz=tz)
+                                md = " < S T A T U S >\n\n"
+                                if wait["unsend"] == True: md+=" [*Unsend Actived*]\n"
+                                else: md+=" [*Unsend Unactived*]\n"
+                                if wait["sticker"] == True: md+=" [*StickerInfo Actived*]\n"
+                                else: md+=" [*StickerInfo Unactived*]\n"
+                                if wait["contact"] == True: md+=" [*GetInfo Actived*]\n"
+                                else: md+=" [*GetInfo Unactived*]\n"
+                                if wait["Mentionkick"] == True: md+=" [*Mentionkick Actived*]\n"
+                                else: md+=" [*Mentionkick Unactived*]\n"
+                                if wait["detectMention"] == True: md+=" [*Autoreplytag Actived*]\n"
+                                else: md+=" [*Autoreplytag Unactived*]\n"
+                                if wait["Mentiongift"] == True: md+=" [*Mentiongift Actived*]\n"
+                                else: md+=" [*Mentiongift Unactived*]\n"
+                                if wait["autoJoin"] == True: md+=" [*AutoJoin Actived*]\n"
+                                else: md+=" [*AutoJoin Unactived*]\n"
+                                if settings["autoJoinTicket"] == True: md+=" [*JoinQR Actived*]\n"
+                                else: md+=" [*JoinQR Unactived*]\n"
+                                if msg.to in simisimi: md+=" [*Simisimi Actived*]\n"
+                                else: md+=" [*Simisimi Unactived*]\n"
+                                if wait["autoAdd"] == True: md+=" [*AutoaddMsg Actived*]\n"
+                                else: md+=" [*AutoaddMsg Unactived*]\n"
+                                if msg.to in welcome: md+=" [*WelcomeMsg Actived*]\n"
+                                else: md+=" [*WelcomeMsg Unactived*]\n"
+                                if wait["autoLeave"] == True: md+=" [*LeaveMsg Actived*]\n"
+                                else: md+=" [*LeaveMsg Unactived*]\n"
+                                aditmadzs.sendMessage(msg.to, md+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n<"+ datetime.strftime(timeNow,'%H:%M:%S')+">\n")
+                                
                             elif cmd == "autoadd on":
                                 settings["autoAdd"] = True
                                 client.sendMessage(to, "Auto add is Actived!")
@@ -484,8 +533,6 @@ def clientBot(op):
                             elif cmd == "autojointicket on":
                                 settings["autoJoinTicket"] = True
                                 client.sendMessage(to, "Auto join by Ticket is Actived")
-                            if msg.to in simisimi: md+=" [*Simisimi Actived*]\n"
-                            else: md+=" [*Simisimi Unactived*]\n"
                             elif cmd == "autoJoinTicket off":
                                 settings["autoJoin"] = False
                                 client.sendMessage(to, "Auto join by Ticket is Nonactived")
