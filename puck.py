@@ -167,49 +167,6 @@ def helpmessage():
                     "* " + key + "Status" + "\n" + \
                     "* MyKey" + "\n" + \
                     "* SetKey「On/Off」" + "\n" + \
-                    "* Settings Command *" + "\n" + \
-                    "* " + key + "AutoAdd「On/Off」" + "\n" + \
-                    "* " + key + "AutoJoin「On/Off」" + "\n" + \
-                    "* " + key + "AutoJoinTicket「On/Off」" + "\n" + \
-                    "* " + key + "AutoLeave「On/Off」" + "\n" + \
-                    "* " + key + "AutoRead「On/Off」" + "\n" + \
-                    "* " + key + "AutoRespon「On/Off」" + "\n" + \
-                    "* " + key + "CheckContact「On/Off」" + "\n" + \
-                    "* " + key + "CheckPost「On/Off」" + "\n" + \
-                    "* " + key + "CheckSticker「On/Off」" + "\n" + \
-                    "* " + key + "UnsendChat「On/Off」" + "\n" + \
-                    "* Self Command *" + "\n" + \
-                    "* " + key + "ChangeName:「Query」" + "\n" + \
-                    "* " + key + "ChangeBio:「Query」" + "\n" + \
-                    "* " + key + "Me" + "\n" + \
-                    "* " + key + "MyMid" + "\n" + \
-                    "* " + key + "MyName" + "\n" + \
-                    "* " + key + "MyBio" + "\n" + \
-                    "* " + key + "MyPicture" + "\n" + \
-                    "* " + key + "MyVideoProfile" + "\n" + \
-                    "* " + key + "MyCover" + "\n" + \
-                    "* " + key + "StealContact「Mention」" + "\n" + \
-                    "* " + key + "StealMid「Mention」" + "\n" + \
-                    "* " + key + "StealName「Mention」" + "\n" + \
-                    "* " + key + "StealBio「Mention」" + "\n" + \
-                    "* " + key + "StealPicture「Mention」" + "\n" + \
-                    "* " + key + "StealVideoProfile「Mention」" + "\n" + \
-                    "* " + key + "StealCover「Mention」" + "\n" + \
-                    "* " + key + "CloneProfile「Mention」" + "\n" + \
-                    "* " + key + "RestoreProfile" + "\n" + \
-                    "* " + key + "BackupProfile" + "\n" + \
-                    "* " + key + "ChangePictureProfile" + "\n" + \
-                    "* Group Command *" + "\n" + \
-                    "* " + key + "GroupCreator" + "\n" + \
-                    "* " + key + "GroupId" + "\n" + \
-                    "* " + key + "GroupName" + "\n" + \
-                    "* " + key + "GroupPicture" + "\n" + \
-                    "* " + key + "GroupTicket" + "\n" + \
-                    "* " + key + "GroupTicket「On/Off」" + "\n" + \
-                    "* " + key + "GroupList" + "\n" + \
-                    "* " + key + "GroupMemberList" + "\n" + \
-                    "* " + key + "GroupInfo" + "\n" + \
-                    "* " + key + "ChangeGroupPicture" + "\n" + \
                     "* Special Command *" + "\n" + \
                     "* " + key + "Mimic「On/Off」" + "\n" + \
                     "* " + key + "MimicList" + "\n" + \
@@ -239,7 +196,7 @@ def helpsett():
         key = settings['keyCommand']
     else:
         key = ''
-    helpSett = "     ╔══[ Help Settings ]" + "\n" + \
+    helpSett = " ╔══[ Settings Helper ]" + "\n" + \
                     "╠ " + key + "AutoAdd「On/Off」" + "\n" + \
                     "╠ " + key + "AutoJoin「On/Off」" + "\n" + \
                     "╠ " + key + "AutoJoinTicket「On/Off」" + "\n" + \
@@ -254,6 +211,55 @@ def helpsett():
                     "╚══[*] 「Use < " + key + " > For the Prefix」"
     return helpSett
     
+def helpgroup():
+    if settings['setKey'] == True:
+        key = settings['keyCommand']
+    else:
+        key = ''
+    helpGroup = " ╔══[ Group Helper ]" + "\n" + \
+                    "╠ " + key + "GroupCreator" + "\n" + \
+                    "╠ " + key + "GroupId" + "\n" + \
+                    "╠ " + key + "GroupName" + "\n" + \
+                    "╠ " + key + "GroupPicture" + "\n" + \
+                    "╠ " + key + "GroupTicket" + "\n" + \
+                    "╠ " + key + "GroupMemberList" + "\n" + \
+                    "╠ " + key + "GroupList" + "\n" + \
+                    "╠ " + key + "GroupInfo" + "\n" + \
+                    "╠ " + key + "ChangeGroupPicture" + "\n" + \
+                    "╠ 「*Creator : @!*」" + "\n" + \
+                    "╚══[*] 「Use < " + key + " > For the Prefix」"
+    return helpGroup
+    
+def helpself():
+    if settings['setKey'] == True:
+        key = settings['keyCommand']
+    else:
+        key = ''
+    helpSelf = " ╔══[ Self Helper ]" + "\n" + \
+                    "╠ " + key + "Me" + "\n" + \
+                    "╠ " + key + "MyMid" + "\n" + \
+                    "╠ " + key + "MyName" + "\n" + \
+                    "╠ " + key + "MyBio" + "\n" + \
+                    "╠ " + key + "ChangeBio:「Query」" + "\n" + \
+                    "╠ " + key + "ChangeName:「Query」" + "\n" + \
+                    "╠ " + key + "MyPicture" + "\n" + \
+                    "╠ " + key + "MyVideoProfile" + "\n" + \
+                    "╠ " + key + "MyCover" + "\n" + \
+                    "╠ " + key + "StealContact「Mention」" + "\n" + \
+                    "╠ " + key + "StealMid「Mention」" + "\n" + \
+                    "╠ " + key + "StealName「Mention」" + "\n" + \
+                    "╠ " + key + "StealBio「Mention」" + "\n" + \
+                    "╠ " + key + "StealPicture「Mention」" + "\n" + \
+                    "╠ " + key + "StealVideoProfile「Mention」" + "\n" + \
+                    "╠ " + key + "StealCover「Mention」" + "\n" + \
+                    "╠ " + key + "CloneProfile「Mention」" + "\n" + \
+                    "╠ " + key + "RestoreProfile" + "\n" + \
+                    "╠ " + key + "BackupProfile" + "\n" + \
+                    "╠ " + key + "ChangePictureProfile" + "\n" + \
+                    "╠ 「*Creator : @!*」" + "\n" + \
+                    "╚══[*] 「Use < " + key + " > For the Prefix」"    
+    return helpSelf
+
 def clientBot(op):
     try:
         if op.type == 0:
@@ -310,7 +316,22 @@ def clientBot(op):
                                 client.sendMessage(to, str(helpMessage))
                             if cmd == "help sett":
                                 helpSett = helpsett()
-                                client.sendMessage(to, str(helpSett))
+                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                creator = client.getContact(poey)
+                                #client.sendMessage(to, str(helpSett))
+                                sendMention(to, str(helpSett), [poey])
+                            if cmd == "help group":
+                                helpGroup = helpgroup()
+                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                creator = client.getContact(poey)
+                                #client.sendMessage(to, str(helpGroup))
+                                sendMention(to, str(helpGroup), [poey])
+                            if cmd == "help self":
+                                helpSelf = helpself()
+                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                creator = client.getContact(poey)
+                                #client.sendMessage(to, str(helpSelf))
+                                sendMention(to, str(helpSelf), [poey])
                             elif cmd == "tts":
                                 helpTextToSpeech = helptexttospeech()
                                 client.sendMessage(to, str(helpTextToSpeech))
