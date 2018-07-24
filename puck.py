@@ -183,9 +183,9 @@ def helpmessage():
                     " " "3) " + key + " Rinda bye" + "\n" + \
                     " " "4) " + key + " Rinda get token" + "\n\n" + \
                     " " "「 Get Reader 」" + "\n" + \
-                    " " "1) " + key + " Rinda check reader On/Off - [For SetRead]" + "\n" + \
+                    " " "1) " + key + " Rinda get reader On/Off - [For SetRead]" + "\n" + \
                     " " "2) " + key + " Rinda get reader reset - [For Reset point]" + "\n" + \
-                    " " "3) " + key + " Rinda get reader - [For CheckRead]" + "\n\n" + \
+                    " " "3) " + key + " Rinda get readers - [For CheckRead]" + "\n\n" + \
                     "  「Use < " + key + " > For the Prefix」" + "\n" + \
                     "  「*Creator : @!*」"
     return helpMessage
@@ -204,7 +204,7 @@ def helpmenu2():
                     " " "6) " + key + "  Memelist" + "\n" + \
                     " " "7) " + key + "  Randomlose" + "\n" + \
                     " " "8) " + key + "  Playstore [query]" + "\n" + \
-                    " " "9) " + key + " Rinda Get Motivation" + "\n" + \
+                    " " "9) " + key + "  Rinda Get Motivation" + "\n" + \
                     " " "10) " + key + " Rinda get Suggestion to [query]" + "\n" + \
                     " " "11) " + key + " Rinda Groupinfo [number of groups]" + "\n" + \
                     " " "12) " + key + " Rinda Grouplist" + "\n" + \
@@ -1321,14 +1321,14 @@ def clientBot(op):
                                             aa.append(x)
                                         try:
                                             arrData = ""
-                                            textx = "  [ {} Reader ]\n\n1. ".format(str(len(aa)))
+                                            textx = "  「 {} Reader 」\n\n1. ".format(str(len(aa)))
                                             arr = []
                                             no = 1
                                             b = 1
                                             for i in aa:
                                                 b = b + 1
                                                 end = "\n"
-                                                mention = "@x\n"
+                                                mention = "@!\n"
                                                 slen = str(len(textx))
                                                 elen = str(len(textx) + len(mention) - 1)
                                                 arrData = {'S':slen, 'E':elen, 'M':i}
