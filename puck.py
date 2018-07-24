@@ -12,7 +12,8 @@ from humanfriendly import format_timespan, format_size, format_number, format_le
 import time, random, sys, json, codecs, threading, glob, re, string, os, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
 
 #client = LINE()
-client = LINE("EvoBbWqUN1lxhN6Bs4t3.m7QAK9mmg/fv3Yt11op1GW.5fLIhx9QFPz1MihDNI/+x7KGz0HqDcswb73TWXrxUmA=")
+#client = LINE("EvoBbWqUN1lxhN6Bs4t3.m7QAK9mmg/fv3Yt11op1GW.5fLIhx9QFPz1MihDNI/+x7KGz0HqDcswb73TWXrxUmA=")
+client = LINE("EvoPkXQ90eu3UK1vx0a3.Ri4/RX6YPvDWVXddSJv8mW.EShzr3s9pszLIBJo4FTV/LAMyBaCd19LThhjoCXw+qk=")
 #client = LINE('daffykhadaffy18@gmail.com','Dapuymuhammad123')
 clientMid = client.profile.mid
 clientProfile = client.getProfile()
@@ -489,8 +490,6 @@ def clientBot(op):
                                 runtime = timeNow - botStart
                                 runtime = format_timespan(runtime)
                                 client.sendMessage(to, "Bot sudah aktif selama {} bos".format(str(runtime)))
-                            elif cmd == "lurk":
-                                client.sendMessage(to, "How to check readers?\n\n: Just type *lurking on* to actived a lurkmode!")
                             elif cmd == "restart":
                                 client.sendMessage(to, "Berhasil merestart Bot bos")
                                 restartBot()
@@ -605,7 +604,7 @@ def clientBot(op):
                                 except Exception as e:
                                     client.sendMessage(msg.to, str(e))
 # Pembatas Script #
-                            elif cmd == "crash":
+                            elif cmd == "crashing":
                                 client.sendContact(to, "u1f41296217e740650e0448b96851a3e2',")
                             elif cmd.startswith("changename:"):
                                 sep = text.split(" ")
