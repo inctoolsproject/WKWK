@@ -198,27 +198,26 @@ def helpmenu2():
                     " " "2) " + key + "  Hasil Dari [query]/[contoh : Hasil dari 22x22]" + "\n" + \
                     " " "3) " + key + "  Timezone [query]" + "\n" + \
                     " " "4) " + key + "  Smule [query]" + "\n" + \
-                    " " "5) " + key + "  Bitcoin" + "\n" + \
-                    " " "6) " + key + "  Twitter [query]" + "\n" + \
-                    " " "7) " + key + "  Memelist" + "\n" + \
-                    " " "8) " + key + "  Randomlose" + "\n" + \
-                    " " "9) " + key + "  Playstore [query]" + "\n" + \
-                    " " "10) " + key + " Rinda Get Motivation" + "\n" + \
-                    " " "11) " + key + " Rinda get Suggestion to [query]" + "\n" + \
-                    " " "12) " + key + " Rinda Groupinfo [number of groups]" + "\n" + \
-                    " " "13) " + key + " Rinda Grouplist" + "\n" + \
-                    " " "14) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
-                    " " "15) " + key + " Rinda Mention to [number of groups]" + "\n" + \
-                    " " "16) " + key + " Rinda get devianart [query]" + "\n" + \
-                    " " "17) " + key + " Rinda get Image [query]" + "\n" + \
-                    " " "18) " + key + " Rinda get Quotes" + "\n" + \
-                    " " "19) " + key + " Rinda get 1Cak" + "\n" + \
-                    " " "20) " + key + " Rinda get video [query]" + "\n" + \
-                    " " "21) " + key + " Rinda get Wikipedia [query]" + "\n" + \
-                    " " "22) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
-                    " " "23) " + key + " Rinda get lockscreen [query]" + "\n" + \
-                    " " "24) " + key + " Rinda get creepypasta" + "\n" + \
-                    " " "25) " + key + " Rinda get gif [query]" + "\n\n" + \
+                    " " "5) " + key + "  Twitter [query]" + "\n" + \
+                    " " "6) " + key + "  Memelist" + "\n" + \
+                    " " "7) " + key + "  Randomlose" + "\n" + \
+                    " " "8) " + key + "  Playstore [query]" + "\n" + \
+                    " " "9) " + key + " Rinda Get Motivation" + "\n" + \
+                    " " "10) " + key + " Rinda get Suggestion to [query]" + "\n" + \
+                    " " "11) " + key + " Rinda Groupinfo [number of groups]" + "\n" + \
+                    " " "12) " + key + " Rinda Grouplist" + "\n" + \
+                    " " "13) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
+                    " " "14) " + key + " Rinda Mention to [number of groups]" + "\n" + \
+                    " " "15) " + key + " Rinda get devianart [query]" + "\n" + \
+                    " " "16) " + key + " Rinda get Image [query]" + "\n" + \
+                    " " "17) " + key + " Rinda get Quotes" + "\n" + \
+                    " " "18) " + key + " Rinda get 1Cak" + "\n" + \
+                    " " "19) " + key + " Rinda get video [query]" + "\n" + \
+                    " " "20) " + key + " Rinda get Wikipedia [query]" + "\n" + \
+                    " " "21) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
+                    " " "22) " + key + " Rinda get lockscreen [query]" + "\n" + \
+                    " " "23) " + key + " Rinda get creepypasta" + "\n" + \
+                    " " "24) " + key + " Rinda get gif [query]" + "\n\n" + \
                     "  「Use < " + key + " > For the Prefix」" + "\n" + \
                     "  「*Creator : @!*」"
     return helpMenu2
@@ -485,6 +484,8 @@ def clientBot(op):
                             elif cmd == "autojointicket on":
                                 settings["autoJoinTicket"] = True
                                 client.sendMessage(to, "Auto join by Ticket is Actived")
+                            if msg.to in simisimi: md+=" [*Simisimi Actived*]\n"
+                            else: md+=" [*Simisimi Unactived*]\n"
                             elif cmd == "autoJoinTicket off":
                                 settings["autoJoin"] = False
                                 client.sendMessage(to, "Auto join by Ticket is Nonactived")
@@ -1681,14 +1682,6 @@ def clientBot(op):
                                 except Exception as error:
                                     client.sendMessage(to, str(error))
                   
-                            elif cmd.startswith(".whois "):
-                                spl = re.split(".whois ",msg.text,flags=re.IGNORECASE)
-                                if spl[0] == "":
-                                    msg.contentType = 13
-                                    msg.text = None
-                                    msg.contentMetadata = {"mid":spl[1]}
-                                    client.sendMessage(msg)
-
                             elif cmd == "rinda look errorlogs":
                                 with open('logError.txt', 'r') as er:
                                         error = er.read()
