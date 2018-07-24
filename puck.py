@@ -382,47 +382,55 @@ def clientBot(op):
                         else:
                             cmd = command(text)
                             if cmd == "help":
+                              if settings["selfbot"] == True:
                                 helpMessage = helpmessage()
                                 client.sendMessage(to, str(helpMessage))
                             if cmd == "help sett":
+                              if settings["selfbot"] == True:
                                 helpSett = helpsett()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSett))
                                 sendMention(to, str(helpSett), [poey])
                             if cmd == "more help":
+                              if settings["selfbot"] == True:
                                 helpMenu2 = helpmenu2()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSett))
                                 sendMention(to, str(helpMenu2), [poey])
                             if cmd == "help group":
+                              if settings["selfbot"] == True:
                                 helpGroup = helpgroup()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpGroup))
                                 sendMention(to, str(helpGroup), [poey])
                             if cmd == "help self":
+                              if settings["selfbot"] == True:
                                 helpSelf = helpself()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSelf))
                                 sendMention(to, str(helpSelf), [poey])
                             if cmd == "rinda pause":
-                              if msg._from in admin:
+                              if settings["selfbot"] == True:
+                                if msg._from in admin:
                                   settings["selfbot"] = False
                                   poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                   creator = client.getContact(poey)
                                   #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
-                                  sendMention(to, "Rinda diberhentikan sementara oleh", [poey])
+                                  sendMention(to, "Rinda diberhentikan sementara oleh @!", [poey])
                             if cmd == "rinda comeon":
+                              if settings["selfbot"] == True:
                                 if msg._from in admin:
                                     settings["selfbot"] = True
                                     poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                     creator = client.getContact(poey)                                    
                                     #puy.sendMessage(msg.to, "Rinda aktif kembali")
-                                    sendMention(to, "Rinda diaktifkan kembali oleh", [poey])
+                                    sendMention(to, "Rinda diaktifkan kembali oleh @!", [poey])
                             elif cmd.startswith("changekey:"):
+                              if msg._from in admin:
                                 sep = text.split(" ")
                                 key = text.replace(sep[0] + " ","")
                                 if " " in key:
