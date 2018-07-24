@@ -112,6 +112,25 @@ def delete_log():
                 client.deleteFile(msg_dict[data]["path"])
             del msg_dict[data]
             
+def logError(text):
+    client.log("[ RINDA ERROR ] {}".format(str(text)))
+    tz = pytz.timezone("Asia/Jakarta")
+    timeNow = datetime.now(tz=tz)
+    timeHours = datetime.strftime(timeNow,"(%H:%M)")
+    day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
+    hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+    bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+    inihari = datetime.now(tz=tz)
+    hr = inihari.strftime('%A')
+    bln = inihari.strftime('%m')
+    for i in range(len(day)):
+        if hr == day[i]: hasil = hari[i]
+    for k in range(0, len(bulan)):
+        if bln == str(k): bln = bulan[k-1]
+    time = "{}, {} - {} - {} | {}".format(str(hasil), str(inihari.strftime('%d')), str(bln), str(inihari.strftime('%Y')), str(inihari.strftime('%H:%M:%S')))
+    with open("logError.txt","a") as error:
+            error.write("\n[ {} ] {}".format(str(time), text))
+            
 def sendMention(to, text="", mids=[]):
     arrData = ""
     arr = []
@@ -373,12 +392,6 @@ def clientBot(op):
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSelf))
                                 sendMention(to, str(helpSelf), [poey])
-                            elif cmd == "tts":
-                                helpTextToSpeech = helptexttospeech()
-                                client.sendMessage(to, str(helpTextToSpeech))
-                            elif cmd == "translate":
-                                helpTranslate = helptranslate()
-                                client.sendMessage(to, str(helpTranslate))
                             elif cmd.startswith("changekey:"):
                                 sep = text.split(" ")
                                 key = text.replace(sep[0] + " ","")
@@ -387,16 +400,36 @@ def clientBot(op):
                                 else:
                                     settings["keyCommand"] = str(key).lower()
                                     client.sendMessage(to, "Berhasil mengubah key command menjadi [ {} ]".format(str(key).lower()))
-                            elif cmd == "speed":
+                            elif cmd == "sp1":
                                 start = time.time()
-                                client.sendMessage(to, "Benchmarking...")
+                                client.sendMessage(to, "Counting...")
+                                speed = time.time() - start
+                                ping = speed * 1000
+                                client.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
+                                
+                            elif cmd == "sp2":
+                              if msg._from in Owner:
+                                start = time.time()
+                                client.sendMessage(to, "...")
                                 elapsed_time = time.time() - start
-                                client.sendMessage(to, "[ Speed ]\nKecepatan mengirim pesan {} detik bos".format(str(elapsed_time)))
+                                client.sendMessage(to, "{}".format(str(elapsed_time)))
+                            elif cmd.startswith("sp3"):
+                                Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                get_profile_time_start = time.time()
+                                get_profile = client.getProfile()
+                                get_profile_time = time.time() - get_profile_time_start
+                                get_group_time_start = time.time()
+                                get_group = client.getGroupIdsJoined()
+                                get_group_time = time.time() - get_group_time_start
+                                get_contact_time_start = time.time()
+                                get_contact = client.getContact(Ownerz)
+                                get_contact_time = time.time() - get_contact_time_start
+                                client.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
                             elif cmd == "runtime":
                                 timeNow = time.time()
                                 runtime = timeNow - botStart
                                 runtime = format_timespan(runtime)
-                                client.sendMessage(to, "Bot sudah aktif selama {} bos".format(str(runtime)))
+                                client.sendMessage(to, "Rinda already actived of {}".format(str(runtime)))
                             elif cmd == "restart":
                                 client.sendMessage(to, "Berhasil merestart Bot bos")
                                 restartBot()
@@ -529,9 +562,9 @@ def clientBot(op):
                                     profile.statusMessage = string
                                     client.updateProfile(profile)
                                     client.sendMessage(to,"Successfully changed status message to{}".format(str(string)))
-                            elif cmd == "me":
-                                sendMention(to, "@!", [sender])
-                                client.sendContact(to, sender)
+                            #elif cmd == "me":
+                                #sendMention(to, "@!", [sender])
+                                #client.sendContact(to, sender)
                             elif cmd == "sticker":
                                 try:
                                     query = msg.text.replace("sticker", "")
@@ -940,6 +973,7 @@ def clientBot(op):
                                         client.sendMessage(receiver, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
                                     except Exception as error:
                                         print (error)
+                                        #logError(error)
                                     pass
                                 else:
                                     client.sendMessage(receiver,"Lurking is nonactive\n\nType *lurking on* for actived a lurkmode!")
@@ -1268,7 +1302,122 @@ def clientBot(op):
                                 hasil = translator.translate(say, dest=lang)
                                 A = hasil.text
                                 client.sendMessage(to, str(A))
-# Pembatas Script #
+# SC #
+                            elif cmd.startswith("about rinda"):
+                                try:
+                                    arr = []
+                                    Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                    creator = client.getContact(Ownerz)
+                                    contact = client.getContact(puyMid)
+                                    grouplist = client.getGroupIdsJoined()
+                                    contactlist = client.getAllContactIds()
+                                    blockedlist = client.getBlockedContactIds()
+                                    ret_ = " "
+                                    ret_ += " Bot Name : {}".format(contact.displayName)
+                                    ret_ += "\n  In Groups : {}".format(str(len(grouplist)))
+                                    ret_ += "\n  Friends : {}".format(str(len(contactlist)))
+                                    ret_ += "\n  Blocked Account : {}".format(str(len(blockedlist)))                                    
+                                    #ret_ += "\n  [ About Selfbot ]"
+                                    #ret_ += "\n  Version : Premium"
+                                    #ret_ += "\n  Creator : {}".format(creator.displayName)
+                                    #ret_ += "\n  Creator : @!".format(Owner)
+                                    client.sendMessage(to, str(ret_))
+                                    #client.sendMessage(to, "「 Read Text Below 」")
+                                    sendMention(to, "「 About Rinda 」\n\nThe Beginning of this Bot Comes from Helloworld, I'm just Reworked This!\n\nOf Course Special Thanks To HelloWorld, And the Friends Around Me!\n\n*Creator : @!", [Ownerz])
+                                except Exception as e:
+                                    client.sendMessage(msg.to, str(e))
+                                    
+                            elif cmd.startswith("rinda bye"):
+                                heij = client.getGroupIdsJoined()
+                                #G = client.getGroup(heij)
+                                #client.sendMessage(to, "Gbye {}".format(str(G.name)))
+                                client.sendMessage(to, "Gbye")
+                                #client.getGroupIdsJoined()
+                                client.leaveGroup(to)                                    
+
+                            elif cmd.startswith("rinda get wikipedia "):
+                                query = cmd.replace("rinda get wikipedia ","")
+                                try:
+                                    sep = msg.text.split(" ")
+                                    wiki = msg.text.replace(sep[0] + " ","")
+                                    wikipedia.set_lang("id")
+                                    pesan=" 「Judul」 "
+                                    pesan+=wikipedia.page(wiki).title
+                                    pesan+="\n 「Teks」 "
+                                    pesan+=wikipedia.summary(wiki, sentences=1)
+                                    pesan+="\n 「Alamat url」 "+wikipedia.page(wiki).url
+                                    pesan+="\n"
+                                    client.sendMessage(to, pesan)
+                                except:
+                                        try:
+                                            pesan="Teks terlalu panjang, Klik url untuk lebih lengkap\n"
+                                            pesan+=wikipedia.page(wiki).url
+                                            #client.sendMessage(to, pesan)
+                                            client.sendMessage(to, " Wikipedia Search 「 " + query + " 」  " + pesan)
+                                        except Exception as e:
+                                            #client.sendMessage(to, "Wikipedia [ " + query + " ] " + str(e))
+                                            client.sendMessage(msg.to, " Wikipedia Search 「 " + query + " 」 " + str(e))
+
+                            elif cmd.startswith("rinda getmeme "):
+                                query = cmd.replace("rinda getmeme ","")
+                                #data = r.text
+                                #data = json.loads(data)
+                                meme = query.split('*')
+                                meme = meme[0].replace(' ','_')
+                                atas = query.split('*')
+                                atas = atas[1].replace(' ','_')
+                                bawah = query.split('*')
+                                bawah = bawah[2].replace(' ','_')
+                                memes = 'https://memegen.link/'+meme+'/'+atas+'/'+bawah+'.jpg'
+                                client.sendMessage(msg.to, "Creating Meme " + query + "...")
+                                client.sendImageWithURL(msg.to, memes)
+
+                            elif cmd == "me":
+                                contact = client.getContact(sender)
+                                userid = "https://line.me/ti/p/~" + client.profile.userid
+                                sendMention(to, "@!", [sender])
+                                #client.sendContact(to, sender)
+                                client.sendImageWithURL(to,"http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus))
+
+                            elif cmd == 'rinda memelist':
+                                client.sendMessage(to,"10 Guy = tenguy\nAfraid to Ask Andy = afraid\nAn Older Code Sir, But It Checks Out = older\nAncient Aliens Guy = aag\nAt Least You Tried = tried\nBaby Insanity Wolf = biw\nBad Luck Brian = blb\nBut That's None of My Business = kermit\nButthurt Dweller = bd\nCaptain Hindsight = ch\nComic Book Guy = cbg\nCondescending Wonka = wonka\nConfession Bear = cb\nConspiracy Keanu = keanu\nDating Site Murderer = dsm\nDo It Live! = live\nDo You Want Ants? = ants\nDoge = doge\nDrake Always On Beat = alwaysonbeat\nErmahgerd = ermg\nFirst World Problems = fwp\nForever Alone = fa\nFoul Bachelor Frog = fbf\nFuck Me, Right? = fmr\nFuturama Fry = fry\nGood Guy Greg = ggg\nHipster Barista = hipster\nI Can Has Cheezburger? = icanhas\nI Feel Like I'm Taking Crazy Pills = crazypills\nI Immediately Regret This Decision! = regret\nI Should Buy a Boat Cat = boat\nI Would Be So Happy = sohappy\nI am the Captain Now = captain\nInigo Montoya = inigo\nInsanity Wolf = iw\nIt's A Trap! = ackbar\nIt's Happening = happening\nIt's Simple, Kill the Batman = joker\nJony Ive Redesigns Things = ive\nLaughing Lizard = ll\nMatrix Morpheus = morpheus\nMilk Was a Bad Choice = badchoice\nMinor Mistake Marvin = mmm\nNothing To Do Here = jetpack\nOh, Is That What We're Going to Do Today? = red\nOne Does Not Simply Walk into Mordor = mordor\nOprah You Get a Car = oprah\nOverlay Attached Girlfriend = oag\nPepperidge Farm Remembers = remembers\nPhilosoraptor = philosoraptor\nProbably Not a Good Idea = jw\nSad Barack Obama = sad-obama\nSad Bill Clinton = sad-clinton\nSad Frog / Feels Bad Man = sadfrog\nSad George Bush = sad-bush\nSad Joe Biden = sad-biden\nSad John Boehner = sad-boehner\nSarcastic Bear = sarcasticbear\nSchrute Facts = dwight\nScumbag Brain =  sb\nScumbag Steve = ss\nSealed Fate = sf\nSee? Nobody Cares = dodgson\nShut Up and Take My Money! = money\nSo Hot Right Now = sohot\nSocially Awesome Awkward Penguin = awesome-awkward\nSocially Awesome Penguin = awesome\nSocially Awkward Awesome Penguin = awkward-awesome\nSocially Awkward Penguin = wkward\nStop Trying to Make Fetch Happen = fetch\nSuccess Kid = success\nSuper Cool Ski Instructor = ki\nThat Would Be Great = officespace\nThe Most Interesting Man in the World = interesting\nThe Rent Is Too Damn High = toohigh\nThis is Bull, Shark = bs\nWhy Not Both? = Both\nWinter is coming = winter\nX all the Y = xy\nX, X Everywhere = buzz\nXzibit Yo Dawg = yodawg\nY U NO Guy = yuno\nY'all Got Any More of Them = yallgot\nYou Should Feel Bad = bad\nYou Sit on a Throne of Lies = elf\nYou Were the Chosen One! = chosen\n\nUsage : Rinda getmeme sohot*Hello*Rin")
+
+                            elif cmd.startswith("rinda get quotes"):
+                                r=requests.get("https://talaikis.com/api/quotes/random")
+                                data=r.text
+                                data=json.loads(data)
+                                hasil = "  [ Search Random Quote ]\n\n"
+                                hasil += "Genre : " +str(data["cat"])
+                                hasil += "\n\n" +str(data["quote"])
+                                hasil += "\n\n From : " +str(data["author"])+ " "
+                                client.sendMessage(msg.to, str(hasil))
+
+                            elif cmd.startswith("rinda leave to"):
+                                number = cmd.replace("rinda leave to","")
+                                groups = client.getGroupIdsJoined()
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = client.getGroup(group)
+                                    try:
+                                        client.leaveGroup(G.id)
+                                    except:
+                                        client.leaveGroup(G.id)
+                                    client.sendMessage(to, "Leave To Group : " + G.name)
+                                except Exception as error:
+                                    client.sendMessage(to, str(error))
+                  
+                            elif cmd.startswith(".whois "):
+                                spl = re.split(".whois ",msg.text,flags=re.IGNORECASE)
+                                if spl[0] == "":
+                                    msg.contentType = 13
+                                    msg.text = None
+                                    msg.contentMetadata = {"mid":spl[1]}
+                                    client.sendMessage(msg)
+
+                            elif cmd == "rinda look errorlogs":
+                                with open('logError.txt', 'r') as er:
+                                        error = er.read()
+                                client.sendMessage(to, str(error))
 # Pembatas Script #
                         if text.lower() == "mykey":
                             client.sendMessage(to, "KeyCommand Saat ini adalah [ {} ]".format(str(settings["keyCommand"])))
