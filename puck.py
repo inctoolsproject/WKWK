@@ -1447,13 +1447,13 @@ def clientBot(op):
                                 puy1 = requests.get("https://www.calcatraz.com/calculator/api?c={}".format(urllib.parse.quote(query)))
                                 data=puy1.text
                                 data=json.loads(data)
-                                client.sendMessage(msg.to, "Hasil dari < " + query + " > = " + str(data))
+                                client.sendMessage(msg.to, "Hasil dari 「" + query + "」 = " + str(data))
 
                             elif cmd.startswith("github "):
                                 query = cmd.replace("github ","")
                                 b = urllib.parse.quote(query)
                                 #client.sendMessage(to,"「 Searching 」\n" "Type: GitHub Search\nStatus: Processing...")
-                                client.sendMessage(to, " " + b + "\nhttps://github.com/search?utf8=✓&q="+query)
+                                client.sendMessage(to, " " + b + "\nhttps://github.com/search?q="+query)
                                 
                             elif cmd.startswith("playstore "):
                                 query = cmd.replace("playstore ","")
@@ -1465,7 +1465,130 @@ def clientBot(op):
                                 #client.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Processing")
                                 client.sendMessage(to, "https://www.twitter.com/"+query)
                                 #client.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Success")
-                  
+
+                            elif 'Simi ' in msg.text:
+                              #if msg._from in admin:
+                                spl = msg.text.replace('Simi ','')
+                                if spl == 'on':
+                                    if msg.to in simisimi:
+                                         msgs = "Simi Mode tidak aktif"
+                                    else:
+                                         simisimi.append(msg.to)
+                                         ginfo = client.getGroup(msg.to)
+                                         msgs = "Simi Mode diaktifkan Di Group : \n「" +str(ginfo.name + "」")
+                                    client.sendMessage(msg.to, "Diaktifkan\n" + msgs)
+                                elif spl == 'off':
+                                      if msg.to in simisimi:
+                                           simisimi.remove(msg.to)
+                                           ginfo = client.getGroup(msg.to)
+                                           msgs = "Simi Mode dimatikan Di Group : \n「" +str(ginfo.name + "」")
+                                      else:
+                                           msgs = "Simi Mode tidak aktif"
+                                      client.sendMessage(msg.to, "Dinonaktifkan\n" + msgs)
+
+                            elif cmd.startswith("rinda get motivation"):
+                                puy1 = requests.get("https://talaikis.com/api/quotes/random")
+                                data=puy1.text
+                                data=json.loads(data)
+                                client.sendMessage(to, " 「 Motivation 」 \n" + str(data["quote"]))
+
+                            elif cmd.startswith("rinda get suggestion to "):
+                                query = cmd.replace("rinda get suggestion to ","")
+                                puy1 = requests.get("http://api.ntcorp.us/se/v1/?q={}".format(urllib.parse.quote(query)))
+                                data=puy1.text
+                                data=json.loads(data)
+                                no = 0
+                                ret_ = "\n"                                                                                                                       
+                                anu = data["result"]["suggestions"]
+                                for s in anu:
+                                    hmm = s
+                                    no += 1
+                                    ret_ += "\n" + str(no) + ") " + "{}\n".format(str(hmm))
+                                client.sendMessage(msg.to, " This is Suggestion to 「 " + query + " 」  " + str(ret_))
+
+                            elif cmd.startswith("rinda get gif "):
+                                proses = text.split(" ")
+                                urutan = text.replace(proses[0] + " ","")
+                                count = urutan.split("*")
+                                search = str(count[0])
+                                r = requests.get("https://api.tenor.com/v1/search?key=PVS5D2UHR0EV&limit=10&q="+str(search))
+                                data = json.loads(r.text)
+                                if len(count) == 1:
+                                    no = 0
+                                    hasil = "       「 Gifs Menu 」\n"
+                                    for aa in data["results"]:
+                                        no += 1
+                                        hasil += "\n" + str(no) + ") " + str(aa["title"])
+                                        ret_ = "\n\nRinda get gif {}*number".format(str(search))
+                                    client.sendMessage(to,hasil+ret_)
+                                elif len(count) == 2:
+                                    try:
+                                        num = int(count[1])
+                                        b = data["results"][num - 1]
+                                        c = str(b["id"])
+                                        hasil = " Gif ID : "+str(c)
+                                        hasil += ""
+                                        client.sendMessage(msg.to,hasil)
+                                        dl = str(b["media"][0]["loopedmp4"]["url"])
+                                        client.sendVideoWithURL(msg.to,dl)
+                                    except Exception as e:
+                                        client.sendMessage(to," "+str(e))
+
+                            elif cmd.startswith("rinda get topnews"):
+                                mpui = requests.get("https://newsapi.org/v2/top-headlines?country=id&apiKey=1214d6480f6848e18e01ba6985e2008d")
+                                data = mpui.text
+                                data = json.loads(data)
+                                hasil = "      「 Top News 」\n\n"
+                                hasil += "1) \n<" + str(data["articles"][0]["title"] + ">")
+                                hasil += "\n     Sumber : " + str(data["articles"][0]["source"]["name"])
+                                hasil += "\n     Penulis : " + str(data["articles"][0]["author"])
+                                hasil += "\n     Link : " + str(data["articles"][0]["url"])
+                                hasil += "\n\n2) \n<" + str(data["articles"][0]["title"] + ">")
+                                hasil += "\n     Sumber : " + str(data["articles"][1]["source"]["name"])
+                                hasil += "\n     Penulis : " + str(data["articles"][1]["author"])   
+                                hasil += "\n     Link : " + str(data["articles"][1]["url"])
+                                hasil += "\n\n3) \n<" + str(data["articles"][0]["title"] + ">")
+                                hasil += "\n     Sumber : " + str(data["articles"][2]["source"]["name"])
+                                hasil += "\n     Penulis : " + str(data["articles"][2]["author"])
+                                hasil += "\n     Link : " + str(data["articles"][2]["url"])
+                                path = data["articles"][3]["urlToImage"]
+                                client.sendMessage(msg.to, str(hasil))
+                                client.sendImageWithURL(msg.to, str(path))
+
+                            elif cmd.startswith("rinda get lockscreen "):
+                              #if msg._from in Owner:
+                                query = cmd.replace("rinda get lockscreen ","")
+                                cond = query.split("*")
+                                search = str(cond[0])
+                                result = requests.get("https://api.eater.tech/wallp/{}".format(str(search)))
+                                data = result.text
+                                data = json.loads(data)
+                                if len(cond) == 1:
+                                    num = 0
+                                    ret_ = "[ Lockscreen Search ]\n"
+                                    for sam in data["result"]:
+                                        num += 1
+                                        ret_ += "\n{}. {}".format(str(num),str(sam["judul"]))
+                                    ret_ += "\n\nMore : Rinda get lockscreen {}*(number) to Details.".format(str(search))
+                                    client.sendMessage(to, str(ret_))
+                                elif len(cond) == 2:
+                                    num = int(cond[1])
+                                    if num <= len(data["result"]):
+                                        sam = data["result"][num - 1]
+                                        result = requests.get("https://api.eater.tech/wallp/{}".format(str(search)))
+                                        data = result.text
+                                        data = json.loads(data)
+                                        if data["result"] != []:
+                                            client.sendImageWithURL(to, str(sam["link"]))
+
+                            elif cmd.startswith("rindabc: "):
+                              if msg._from in admin:
+                                sep = text.split(" ")
+                                pesan = text.replace(sep[0] + " ","")
+                                saya = puy.getGroupIdsJoined()
+                                for group in saya:
+                                   puy.sendMessage(group,"" + str(pesan))
+
                             elif cmd.startswith("smule "):
                                 query = cmd.replace("smule ","")
                                 b = urllib.parse.quote(query)
@@ -1570,6 +1693,25 @@ def clientBot(op):
                                 with open('logError.txt', 'r') as er:
                                         error = er.read()
                                 client.sendMessage(to, str(error))
+
+                            elif cmd.startswith("rinda get imageart "):
+                                try:                                   
+                                    search = cmd.replace("rinda get imageart ","")
+                                    puy1 = requests.get("https://xeonwz.herokuapp.com/images/deviantart.api?q={}".format(search))
+                                    data = puy1.text
+                                    data = json.loads(data)
+                                    if data["content"] != []:
+                                        items = data["content"]
+                                        path = random.choice(items)
+                                        a = items.index(path)
+                                        b = len(items)
+                                        client.sendMessage(to,"Image in #%s From #%s." %(str(a),str(b)))
+                                        client.sendImageWithURL(to, str(path))
+                                        log.info("Art #%s from #%s." %(str(a),str(b)))
+                                except Exception as error:
+                                    logError(error)
+                                    traceback.print_tb(error.__traceback__)
+
 # Pembatas Script #
                         if text.lower() == "mykey":
                             client.sendMessage(to, "KeyCommand Saat ini adalah [ {} ]".format(str(settings["keyCommand"])))
