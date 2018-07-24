@@ -177,13 +177,13 @@ def helpmessage():
         key = settings['keyCommand']
     else:
         key = ''
-    helpMessage =   "   「 Helper 」     " + "\n" + \
-                    " " "1) " + key + " More help" + "\n" + \
-                    " " "2) " + key + " About Rinda" + "\n" + \
-                    " " "3) " + key + " Rinda bye" + "\n" + \
-                    " " "4) " + key + " Rinda get token/Rinda tokenlist" + "\n\n" + \
-                    "  「Use < " + key + " > For the Prefix」" + "\n" + \
-                    "  「*Creator : @!*」"
+    helpMessage = "╔══[ Helper ]" + "\n" + \
+                    "╠ " "1) " + key + " More help" + "\n" + \
+                    "╠ " "2) " + key + " About Rinda" + "\n" + \
+                    "╠ " "3) " + key + " Rinda bye" + "\n" + \
+                    "╠ " "4) " + key + " Rinda get token/Rinda tokenlist" + "\n" + \
+                    "╠ " " " + key + " " + " " + \
+                    "╚══「*Creator : @!*」"
     return helpMessage
 
 def helpmenu2():
@@ -329,7 +329,7 @@ def clientBot(op):
                     client.acceptGroupInvitation(op.param1)
                 dan = client.getContact(op.param2)
                 tgb = client.getGroup(op.param1)
-                sendMention(op.param1, "「 INVITATION 」\n Thx For Invited Me\n@! ketik Help untuk Perintah".format(str(tgb.name)),[op.param2])
+                sendMention(op.param1, "Thx For Invited Me@!\nketik Help untuk Perintah".format(str(tgb.name)),[op.param2])
                 #puy.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
                 client.sendContact(op.param1, op.param2)
 
@@ -439,9 +439,9 @@ def clientBot(op):
                                     settings["keyCommand"] = str(key).lower()
                                     client.sendMessage(to, "Berhasil mengubah key command menjadi [ {} ]".format(str(key).lower()))
                             elif cmd == "rinda tokenlist":
-                                sendMentionFooter(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
+                                sendMention(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
                             elif cmd == "rinda get token":
-                                sendMentionFooter(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
+                                sendMention(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
                             elif cmd == "sp1":
                               if settings["selfbot"] == True:
                                 start = time.time()
@@ -1806,9 +1806,9 @@ def clientBot(op):
 ## GET TOKEN ##
                         if text.lower() == 'rinda get token win10':
                           try:
-                              aa = puy.getContact(sender).displayName
-                              ab = puy.getGroup(msg.to).name
-                              ac = puy.getContact(sender).mid
+                              aa = client.getContact(sender).displayName
+                              ab = client.getGroup(msg.to).name
+                              ac = client.getContact(sender).mid
                               req = requests.get('https://api.eater.pw/WIN10')
                               a = req.text
                               b = json.loads(a)
@@ -1820,7 +1820,7 @@ def clientBot(op):
                               'tkn': b['result'][0]['linktkn']
                                   })
                               qrz = b['result'][0]['linkqr']
-                              puy.sendMessage(to, '「 WIN 10 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              client.sendMessage(to, '「 WIN 10 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
                               #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
                               with open('tkn.json', 'w') as outfile:
                                   json.dump(tkn, outfile)
@@ -1830,16 +1830,16 @@ def clientBot(op):
                               req = requests.get(url = '{}'.format(a))
                               b = req.text
                               #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #puy.sendMessage(to, '「 WIN 10 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
-                              puy.sendMessage(receiver, '{}'.format(b))
+                              #client.sendMessage(to, '「 WIN 10 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
+                              client.sendMessage(receiver, '{}'.format(b))
                           except Exception as e:
-                                 puy.sendMessage(to, str(e))
+                                 client.sendMessage(to, str(e))
                              
                         if text.lower() == 'rinda get token chrome':
                           try:
-                              aa = puy.getContact(sender).displayName
-                              ab = puy.getGroup(msg.to).name
-                              ac = puy.getContact(sender).mid
+                              aa = client.getContact(sender).displayName
+                              ab = client.getGroup(msg.to).name
+                              ac = client.getContact(sender).mid
                               req = requests.get('https://api.eater.pw/CHROMEOS')
                               a = req.text
                               b = json.loads(a)
@@ -1851,7 +1851,7 @@ def clientBot(op):
                               'tkn': b['result'][0]['linktkn']
                                   })
                               qrz = b['result'][0]['linkqr']
-                              puy.sendMessage(to, '「 CHROMEOS 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              client.sendMessage(to, '「 CHROMEOS 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
                               with open('tkn.json', 'w') as outfile:
                                   json.dump(tkn, outfile)
                               tknop= codecs.open("tkn.json","r","utf-8")
@@ -1860,16 +1860,16 @@ def clientBot(op):
                               req = requests.get(url = '{}'.format(a))
                               b = req.text
                               #sendMention(to, '- TIPE TOKEN : WIN10\n- For : '+aa+'\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #puy.sendMessage(receiver,'「 CHROME 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
-                              puy.sendMessage(receiver, '{}'.format(b))
+                              #client.sendMessage(receiver,'「 CHROME 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
+                              client.sendMessage(receiver, '{}'.format(b))
                           except Exception as e:
-                                 puy.sendMessage(to, str(e))
+                                 client.sendMessage(to, str(e))
                                
                         if text.lower() == 'rinda get token iospad':
                           try:
-                              aa = puy.getContact(sender).displayName
-                              ab = puy.getGroup(msg.to).name
-                              ac = puy.getContact(sender).mid
+                              aa = client.getContact(sender).displayName
+                              ab = client.getGroup(msg.to).name
+                              ac = client.getContact(sender).mid
                               req = requests.get('https://api.eater.pw/IOSIPAD')
                               a = req.text
                               b = json.loads(a)
@@ -1881,7 +1881,7 @@ def clientBot(op):
                               'tkn': b['result'][0]['linktkn']
                                   })
                               qrz = b['result'][0]['linkqr']
-                              puy.sendMessage(to, '「 IOSIPAD 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              client.sendMessage(to, '「 IOSIPAD 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
                               #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
                               with open('tkn.json', 'w') as outfile:
                                   json.dump(tkn, outfile)
@@ -1891,16 +1891,16 @@ def clientBot(op):
                               req = requests.get(url = '{}'.format(a))
                               b = req.text
                               #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #puy.sendMessage(receiver,'「 IOSPAD 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
-                              puy.sendMessage(receiver, '{}'.format(b))
+                              #client.sendMessage(receiver,'「 IOSPAD 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
+                              client.sendMessage(receiver, '{}'.format(b))
                           except Exception as e:
-                                 puy.sendMessage(to, str(e))
+                                 client.sendMessage(to, str(e))
                                 
                         if text.lower() == 'rinda get token desktopwin':
                           try:
-                              aa = puy.getContact(sender).displayName
-                              ab = puy.getGroup(msg.to).name
-                              ac = puy.getContact(sender).mid
+                              aa = client.getContact(sender).displayName
+                              ab = client.getGroup(msg.to).name
+                              ac = client.getContact(sender).mid
                               req = requests.get('https://api.eater.pw/DESKTOPWIN')
                               a = req.text
                               b = json.loads(a)
@@ -1912,7 +1912,7 @@ def clientBot(op):
                               'tkn': b['result'][0]['linktkn']
                                   })
                               qrz = b['result'][0]['linkqr']
-                              puy.sendMessage(to, '「 DESKTOPWIN 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              client.sendMessage(to, '「 DESKTOPWIN 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
                               #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
                               with open('tkn.json', 'w') as outfile:
                                   json.dump(tkn, outfile)
@@ -1922,16 +1922,16 @@ def clientBot(op):
                               req = requests.get(url = '{}'.format(a))
                               b = req.text
                               #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #puy.sendMessage(receiver,'「 DESKTOPWIN 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
-                              puy.sendMessage(receiver, '{}'.format(b))
+                              #client.sendMessage(receiver,'「 DESKTOPWIN 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
+                              client.sendMessage(receiver, '{}'.format(b))
                           except Exception as e:
-                                 puy.sendMessage(to, str(e))
+                                 client.sendMessage(to, str(e))
                             
                         if text.lower() == 'rinda get token desktopmac':
                           try:
-                              aa = puy.getContact(sender).displayName
-                              ab = puy.getGroup(msg.to).name
-                              ac = puy.getContact(sender).mid
+                              aa = client.getContact(sender).displayName
+                              ab = client.getGroup(msg.to).name
+                              ac = client.getContact(sender).mid
                               req = requests.get('https://api.eater.pw/DESKTOPMAC')
                               a = req.text
                               b = json.loads(a)
@@ -1943,7 +1943,7 @@ def clientBot(op):
                               'tkn': b['result'][0]['linktkn']
                                   })
                               qrz = b['result'][0]['linkqr']
-                              puy.sendMessage(to, '「 DESKTOPMAC 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              client.sendMessage(to, '「 DESKTOPMAC 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
                               #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
                               with open('tkn.json', 'w') as outfile:
                                   json.dump(tkn, outfile)
@@ -1955,9 +1955,9 @@ def clientBot(op):
                               #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
                               #dap.sendMessage(to,'「 CHROMEOS 」\nUntuk: '+aa+'\nFrom Group: '+ab+'\nMid User: '+ac+'\n\n- TOKEN : \n{}'.format(b))
                               #puy.sendMessage(receiver,'「 DESKTOPMAC 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
-                              puy.sendMessage(receiver, '{}'.format(b))
+                              client.sendMessage(receiver, '{}'.format(b))
                           except Exception as e:
-                                 puy.sendMessage(to, str(e))
+                                 client.sendMessage(to, str(e))
 ## GET TOKEN ##
                     elif msg.contentType == 1:
                         if settings["changeDisplayPicture"] == True:
