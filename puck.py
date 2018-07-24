@@ -182,10 +182,6 @@ def helpmessage():
                     " " "2) " + key + " About Rinda" + "\n" + \
                     " " "3) " + key + " Rinda bye" + "\n" + \
                     " " "4) " + key + " Rinda get token" + "\n\n" + \
-                    " " "「 Get Reader 」" + "\n" + \
-                    " " "1) " + key + " Rinda get reader On/Off - [For SetRead]" + "\n" + \
-                    " " "2) " + key + " Rinda get reader reset - [For Reset point]" + "\n" + \
-                    " " "3) " + key + " Rinda get reader - [For CheckRead]" + "\n\n" + \
                     "  「Use < " + key + " > For the Prefix」" + "\n" + \
                     "  「*Creator : @!*」"
     return helpMessage
@@ -202,11 +198,11 @@ def helpmenu2():
                     " " "4) " + key + "  Smule [query]" + "\n" + \
                     " " "5) " + key + "  Twitter [query]" + "\n" + \
                     " " "6) " + key + "  Memelist" + "\n" + \
-                    " " "7) " + key + "  Randomlose" + "\n" + \
+                    " " "7) " + key + "  Github" + "\n" + \
                     " " "8) " + key + "  Playstore [query]" + "\n" + \
                     " " "9) " + key + "  Rinda Get Motivation" + "\n" + \
                     " " "10) " + key + " Rinda get Suggestion to [query]" + "\n" + \
-                    " " "11) " + key + " Rinda Groupinfo [number of groups]" + "\n" + \
+                    " " "11) " + key + " Rinda get Groupinfo to [number of groups]" + "\n" + \
                     " " "12) " + key + " Rinda Grouplist" + "\n" + \
                     " " "13) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
                     " " "14) " + key + " Rinda Mention to [number of groups]" + "\n" + \
@@ -214,7 +210,6 @@ def helpmenu2():
                     " " "16) " + key + " Rinda get Image [query]" + "\n" + \
                     " " "17) " + key + " Rinda get Quotes" + "\n" + \
                     " " "18) " + key + " Rinda get 1Cak" + "\n" + \
-                    " " "19) " + key + " Rinda get video [query]" + "\n" + \
                     " " "20) " + key + " Rinda get Wikipedia [query]" + "\n" + \
                     " " "21) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
                     " " "22) " + key + " Rinda get lockscreen [query]" + "\n" + \
@@ -509,79 +504,79 @@ def clientBot(op):
                             elif cmd == "autoadd on":
                                 settings["autoAdd"] = True
                                 client.sendMessage(to, "Auto add is Actived!")
-                            elif cmd == "welcome on":
+                            elif cmd == "welcomee on":
                                 settings["Sambutan"] == True
                                 client.sendMessage(to,"Sudah On")
-                            elif cmd == "welcome off":
+                            elif cmd == "welcomee off":
                                 settings["Sambutan"] == False
                                 client.sendMessage(to,"Sudah Off")
-                            elif cmd == "autoadd off":
+                            elif cmd == "autoaddd off":
                                 settings["autoAdd"] = False
                                 client.sendMessage(to, "Auto add is Nonactived!")
-                            elif cmd == "autojoin on":
+                            elif cmd == "autojoinn on":
                                 settings["autoJoin"] = True
                                 client.sendMessage(to, "Auto join is Actived!")
-                            elif cmd == "autojoin off":
+                            elif cmd == "autojoinn off":
                                 settings["autoJoin"] = False
                                 client.sendMessage(to, "Auto join is Nonactived!")   
-                            elif cmd == "changedp on":
+                            elif cmd == "changedpp on":
                                 settings["changeDisplayPicture"] = True
                                 client.sendMessage(to, "Change Display Picture is Actived!") 
-                            elif cmd == "changedp off":
+                            elif cmd == "changedpp off":
                                 settings["changeDisplayPicture"] = False
                                 client.sendMessage(to, "Change Display Picture is Nonactived!")                                
-                            elif cmd == "lurkingset on":
+                            elif cmd == "lurkingsett on":
                                 settings["lurk"] = True
                                 client.sendMessage(to, "Lurking is Actived!")     
-                            elif cmd == "lurkingset off":
+                            elif cmd == "lurkingsett off":
                                 settings["lurk"] = False
                                 client.sendMessage(to, "Lurking is Nonactived!")                                
-                            elif cmd == "autoleave on":
+                            elif cmd == "autoleavee on":
                                 settings["autoLeave"] = True
                                 client.sendMessage(to, "Auto leave is Actived!")
-                            elif cmd == "autoleave off":
+                            elif cmd == "autoleavee off":
                                 settings["autoLeave"] = False
                                 client.sendMessage(to, "Auto leave is Nonactived!")
-                            elif cmd == "autorespon on":
+                            elif cmd == "autoresponn on":
                                 settings["autoRespon"] = True
                                 client.sendMessage(to, "Auto respon is Actived")
-                            elif cmd == "autorespon off":
+                            elif cmd == "autoresponn off":
                                 settings["autoRespon"] = False
                                 client.sendMessage(to, "Auto respon is Nonactived")
-                            elif cmd == "autoread on":
+                            elif cmd == "autoreadd on":
                                 settings["autoRead"] = True
                                 client.sendMessage(to, "Auto read is Actived")
-                            elif cmd == "autoread off":
+                            elif cmd == "autoreadd off":
                                 settings["autoRead"] = False
                                 client.sendMessage(to, "Auto read is Nonactived")
-                            elif cmd == "autojointicket on":
+                            elif cmd == "autojointickett on":
                                 settings["autoJoinTicket"] = True
                                 client.sendMessage(to, "Auto join by Ticket is Actived")
-                            elif cmd == "autoJoinTicket off":
+                            elif cmd == "autoJoinTickett off":
                                 settings["autoJoin"] = False
                                 client.sendMessage(to, "Auto join by Ticket is Nonactived")
-                            elif cmd == "checkcontact on":
+                            elif cmd == "checkcontactt on":
                                 settings["checkContact"] = True
                                 client.sendMessage(to, "Check details contact is Actived")
-                            elif cmd == "checkcontact off":
+                            elif cmd == "checkcontactt off":
                                 settings["checkContact"] = False
                                 client.sendMessage(to, "Check details contact is Nonactived")
-                            elif cmd == "checkpost on":
+                            elif cmd == "checkpostt on":
                                 settings["checkPost"] = True
                                 client.sendMessage(to, "Check details post is Actived")
-                            elif cmd == "checkpost off":
+                            elif cmd == "checkpostt off":
                                 settings["checkPost"] = False
                                 client.sendMessage(to, "Check details post is Nonactived")
-                            elif cmd == "checksticker on":
+                            elif cmd == "checkstickerr on":
                                 settings["checkSticker"] = True
                                 client.sendMessage(to, "Check details sticker is Actived")
-                            elif cmd == "checksticker off":
+                            elif cmd == "checkstickerr off":
                                 settings["checkSticker"] = False
                                 client.sendMessage(to, "Check details sticker is Nonactived")
-                            elif cmd == "unsendchat on":
+                            elif cmd == "unsendchatt on":
                                 settings["unsendMessage"] = True
                                 client.sendMessage(to, "Unsend Message Detect is Actived")
-                            elif cmd == "unsendchat off":
+                            elif cmd == "unsendchatt off":
                                 settings["unsendMessage"] = False
                                 client.sendMessage(to, "Unsend Message Detect is Nonactived")
                             elif cmd == "status":
@@ -825,7 +820,7 @@ def clientBot(op):
                                         group.preventedJoinByTicket = True
                                         client.updateGroup(group)
                                         client.sendMessage(to, "Berhasil menutup grup qr")
-                            elif cmd == 'groupinfo':
+                            elif cmd == 'groupinfooo':
                                 group = client.getGroup(to)
                                 try:
                                     gCreator = group.creator.displayName
@@ -853,26 +848,6 @@ def clientBot(op):
                                 ret_ += ""
                                 client.sendMessage(to, str(ret_))
                                 client.sendImageWithURL(to, path)
-                            elif cmd == 'groupmemberlist':
-                                if msg.toType == 2:
-                                    group = client.getGroup(to)
-                                    ret_ = "╔══[ Member List ]"
-                                    no = 0 + 1
-                                    for mem in group.members:
-                                        ret_ += "\n╠ {}. {}".format(str(no), str(mem.displayName))
-                                        no += 1
-                                    ret_ += "\n╚══[ Total {} ]".format(str(len(group.members)))
-                                    client.sendMessage(to, str(ret_))
-                            elif cmd == 'grouplist':
-                                    groups = client.groups
-                                    ret_ = "╔══[ Group List ]"
-                                    no = 0 + 1
-                                    for gid in groups:
-                                        group = client.getGroup(gid)
-                                        ret_ += "\n╠ {}. {} | {}".format(str(no), str(group.name), str(len(group.members)))
-                                        no += 1
-                                    ret_ += "\n╚══[ Total {} Groups ]".format(str(len(groups)))
-                                    client.sendMessage(to, str(ret_))
 # Pembatas Script #
                             elif cmd == "changedp":
                                 settings["changeDisplayPicture"] = True
@@ -882,7 +857,7 @@ def clientBot(op):
                                     if to not in settings["changeGroupPicture"]:
                                         settings["changeGroupPicture"].append(to)
                                     client.sendMessage(to, "*Change Group Picture*\n\nHow to changegp?\n: Just type *changegp* And you will be prompted to Send 1 Picture")
-                            elif cmd == 'mention':
+                            elif cmd == 'mentioning':
                                 group = client.getGroup(msg.to)
                                 nama = [contact.mid for contact in group.members]
                                 k = len(nama)//100
@@ -1288,75 +1263,84 @@ def clientBot(op):
                                     sendMention(to, "「 About Rinda 」\n\nThe Beginning of this Bot Comes from Helloworld, I'm just Reworked This!\n\nOf Course Special Thanks To HelloWorld, And the Friends Around Me!\n\n*Creator : @!", [Ownerz])
                                 except Exception as e:
                                     client.sendMessage(msg.to, str(e))
-                                    
+
                             elif cmd.startswith("rinda bye"):
                                 heij = client.getGroupIdsJoined()
                                 #G = client.getGroup(heij)
                                 #client.sendMessage(to, "Gbye {}".format(str(G.name)))
                                 client.sendMessage(to, "Gbye")
                                 #client.getGroupIdsJoined()
-                                client.leaveGroup(to)                                    
-
-                            elif cmd == "rinda get reader on":
-                              if settings["selfbot"] == True:
-                                tz = pytz.timezone("Asia/Jakarta")
-                                timeNow = datetime.now(tz=tz)
-                                read['readPoint'][msg.to] = msg_id
-                                read['readMember'][msg.to] = {}
-                                client.sendMessage(msg.to, "Lurking berhasil dinyalakan\n\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n[ "+ datetime.strftime(timeNow,'%H:%M:%S')+" ]")
-
-                            elif cmd == "rinda get reader off":
-                              if settings["selfbot"] == True:
-                                tz = pytz.timezone("Asia/Jakarta")
-                                timeNow = datetime.now(tz=tz)
-                                del read['readPoint'][msg.to]
-                                del read['readMember'][msg.to]
-                                client.sendMessage(msg.to, "Getreader berhasil dimatikan\n\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n[ "+ datetime.strftime(timeNow,'%H:%M:%S')+" ]")
-
-                            elif text.lower() == 'rinda get reader':
-                              if settings["selfbot"] == True:
-                                tz = pytz.timezone("Asia/Jakarta")
-                                timeNow = datetime.now(tz=tz)
-                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
-                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-                                hr = timeNow.strftime("%A")
-                                bln = timeNow.strftime("%m")
-                                for i in range(len(day)):
-                                    if hr == day[i]: hasil = hari[i]
-                                for k in range(0, len(bulan)):
-                                    if bln == str(k): bln = bulan[k-1]
-                                readTime = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
-                                if receiver in read['readPoint']:
-                                    if read["ROM"][receiver].items() == []:
-                                        client.sendMessage(receiver,"   「 Daftar Pembaca 」\n\nNone")
-                                    else:
-                                        chiya = []
-                                        for rom in read["ROM"][receiver].items():
-                                            chiya.append(rom[1])
-                                        cmem = client.getContacts(chiya) 
-                                        zx = ""
-                                        zxc = ""
-                                        zx2 = []
-                                        xpesan = '「 Readers 」\n\n'
-                                    for x in range(len(cmem)):
-                                        xname = str(cmem[x].displayName)
-                                        pesan = ''
-                                        pesan2 = pesan+"@c\n"
-                                        xlen = str(len(zxc)+len(xpesan))
-                                        xlen2 = str(len(zxc)+len(pesan2)+len(xpesan)-1)
-                                        zx = {'S':xlen, 'E':xlen2, 'M':cmem[x].mid}
-                                        zx2.append(zx)
-                                        zxc += pesan2
-                                    text = xpesan+ zxc + "\n" + readTime
-                                    try:
-                                        client.sendMessage(receiver, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
-                                    except Exception as error:
-                                        print (error)
-                                    pass
-                                else:
-                                    client.sendMessage(receiver,"*Belum diaktifkan\nKetik 「 Rinda get reader on 」 untuk mengaktifkan.")
+                                client.leaveGroup(to)
                                     
+                            elif cmd.startswith("rinda get memberlist to"):
+                              #if msg._from in Owner:
+                                number = cmd.replace("rinda get memberlist to","")
+                                groups = client.getGroupIdsJoined()
+                                ret_ = ""
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = client.getGroup(group)
+                                    no = 0
+                                    ret_ = " 「 Member List 」\n"
+                                    for mem in G.members:
+                                        no += 1
+                                        ret_ += "\n " + str(no) + ". " + mem.displayName
+                                    client.sendMessage(to,"Members in Group : \n"+ str(G.name) + "\n\n" + ret_ + "\n\nTotal ada %i Members" % len(G.members))
+                                except: 
+                                    pass
+
+                            elif cmd == "rinda grouplist":
+                                groups = client.getGroupIdsJoined()
+                                ret_ = "   [ Group List ]"
+                                no = 0
+                                for gid in groups:
+                                    group = client.getGroup(gid)
+                                    no += 1
+                                    ret_ += "\n{}. {} = {} Members".format(str(no), str(group.name), str(len(group.members)))
+                                ret_ += "\n   [ {} Groups ]".format(str(len(groups)))
+                                client.sendMessage(to, str(ret_))
+
+                            elif cmd.startswith("rinda get groupinfo to "):
+                              #if msg._from in Owner:
+                                number = cmd.replace("rinda get groupinfo to ","")
+                                groups = client.getGroupIdsJoined()
+                                ret_ = ""
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = client.getGroup(group)
+                                    path = "http://dl.profile.line-cdn.net/" + G.pictureStatus
+                                    try:
+                                        gCreator = G.creator.displayName
+                                    except:
+                                        gCreator = "Tidak ditemukan"
+                                    if G.invitee is None:
+                                        gPending = "0"
+                                    else:
+                                        gPending = str(len(G.invitee))
+                                    if G.preventedJoinByTicket == True:
+                                        gQr = "Tertutup"
+                                        gTicket = "Tidak ada"
+                                    else:
+                                        gQr = "Terbuka"
+                                        gTicket = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(G.id)))
+                                    timeCreated = []
+                                    timeCreated.append(time.strftime("%d-%m-%Y [ %H:%M:%S ]", time.localtime(int(G.createdTime) / 1000)))
+                                    ret_ += " 「 Group Info 」 \n"
+                                    ret_ += "\n Nama Group : {}".format(G.name)
+                                    ret_ += "\n ID Group : \n{}".format(G.id)
+                                    ret_ += "\n Pembuat Grup : {}".format(gCreator)
+                                    ret_ += "\n Waktu Dibuat : {}".format(str(timeCreated))
+                                    ret_ += "\n Jumlah Member : {}".format(str(len(G.members)))
+                                    ret_ += "\n Jumlah Pending : {}".format(gPending)
+                                    ret_ += "\n Group Qr : {}".format(gQr)
+                                    ret_ += "\n Group Ticket : {}".format(gTicket)
+                                    ret_ += "\n\n 「 Kontak Pembuat dibawah 」"
+                                    client.sendImageWithURL(to, path)
+                                    client.sendMessage(to, str(ret_))
+                                    client.sendContact(to, G.creator.mid)
+                                except:
+                                    pass
+
                             elif cmd.startswith("rinda tutupqr to"):
                               if msg._from in admin:
                                 number = cmd.replace("rinda tutupqr to","")
@@ -1525,7 +1509,7 @@ def clientBot(op):
                                 query = cmd.replace("github ","")
                                 b = urllib.parse.quote(query)
                                 #client.sendMessage(to,"「 Searching 」\n" "Type: GitHub Search\nStatus: Processing...")
-                                client.sendMessage(to, " " + b + "\nhttps://github.com/search?q="+query)
+                                client.sendMessage(to, " " + b + "\nhttps://github.com/"+query)
                                 
                             elif cmd.startswith("playstore "):
                                 query = cmd.replace("playstore ","")
