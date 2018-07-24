@@ -1919,7 +1919,7 @@ def clientBot(op):
                     #if settings["autoRead"] == True:
                     #    client.sendChatChecked(to, msg_id)
                     if to in read["readPoint"]:
-                        if sender not in read["ROM"][to]:
+                        if receiver not in read["ROM"][to]:
                             read["ROM"][to][sender] = True
                     if settings["unsendMessage"] == True:
                         try:
