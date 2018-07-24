@@ -180,9 +180,8 @@ def helpmessage():
     helpMessage = "╔══[ Helper ]" + "\n" + \
                     "╠ " "1) " + key + " More help" + "\n" + \
                     "╠ " "2) " + key + " About Rinda" + "\n" + \
-                    "╠ " "3) " + key + " Rinda bye" + "\n" + \
-                    "╠ " "4) " + key + " Rinda get token/Rinda tokenlist" + "\n" + \
-                    "╠ " " " + key + " " + " " + \
+                    "╠ " "3) " + key + " Rinda bye" + "\n\n" + \
+                    "╠ " " " + key + " " + "\n" + \
                     "╚══「*Creator : @!*」"
     return helpMessage
 
