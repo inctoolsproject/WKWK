@@ -446,25 +446,25 @@ def clientBot(op):
                                 ping = speed * 1000
                                 client.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
                             elif cmd == "sp2":
-                              if msg._from in admin:
-                              if settings["selfbot"] == True:
-                                start = time.time()
-                                client.sendMessage(to, "...")
-                                elapsed_time = time.time() - start
-                                client.sendMessage(to, "{}".format(str(elapsed_time)))
+                                if msg._from in admin:
+                                  if settings["selfbot"] == True:
+                                    start = time.time()
+                                    client.sendMessage(to, "...")
+                                    elapsed_time = time.time() - start
+                                    client.sendMessage(to, "{}".format(str(elapsed_time)))
                             elif cmd.startswith("sp3"):
-                              if settings["selfbot"] == True:
-                                Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                get_profile_time_start = time.time()
-                                get_profile = client.getProfile()
-                                get_profile_time = time.time() - get_profile_time_start
-                                get_group_time_start = time.time()
-                                get_group = client.getGroupIdsJoined()
-                                get_group_time = time.time() - get_group_time_start
-                                get_contact_time_start = time.time()
-                                get_contact = client.getContact(Ownerz)
-                                get_contact_time = time.time() - get_contact_time_start
-                                client.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
+                                if settings["selfbot"] == True:
+                                  Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                  get_profile_time_start = time.time()
+                                  get_profile = client.getProfile()
+                                  get_profile_time = time.time() - get_profile_time_start
+                                  get_group_time_start = time.time()
+                                  get_group = client.getGroupIdsJoined()
+                                  get_group_time = time.time() - get_group_time_start
+                                  get_contact_time_start = time.time()
+                                  get_contact = client.getContact(Ownerz)
+                                  get_contact_time = time.time() - get_contact_time_start
+                                  client.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
                             elif cmd == "runtime":
                                 timeNow = time.time()
                                 runtime = timeNow - botStart
