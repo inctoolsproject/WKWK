@@ -1693,10 +1693,10 @@ def clientBot(op):
                                             pesan="Teks terlalu panjang, Klik url untuk lebih lengkap\n"
                                             pesan+=wikipedia.page(wiki).url
                                             #client.sendMessage(to, pesan)
-                                            client.sendMessage(to, " Wikipedia Search 「 " + query + " 」  " + pesan)
+                                            client.sendMessage(to, " Wikipedia Search 「 " + query + " 」  \n" + pesan)
                                         except Exception as e:
                                             #client.sendMessage(to, "Wikipedia [ " + query + " ] " + str(e))
-                                            client.sendMessage(msg.to, " Wikipedia Search 「 " + query + " 」 " + str(e))
+                                            client.sendMessage(msg.to, " Wikipedia Search 「 " + query + " 」 \n" + str(e))
 
                             elif cmd.startswith("rinda getmeme "):
                                 query = cmd.replace("rinda getmeme ","")
