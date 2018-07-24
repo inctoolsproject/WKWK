@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from googletrans import Translator
 from humanfriendly import format_timespan, format_size, format_number, format_length
-import time, random, sys, json, codecs, threading, glob, re, string, os, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
+import time, random, sys, json, wikipedia, codecs, threading, glob, re, string, os, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
 
 #client = LINE()
 #client = LINE("EvoBbWqUN1lxhN6Bs4t3.m7QAK9mmg/fv3Yt11op1GW.5fLIhx9QFPz1MihDNI/+x7KGz0HqDcswb73TWXrxUmA=")
@@ -411,16 +411,16 @@ def clientBot(op):
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSelf))
                                 sendMention(to, str(helpSelf), [poey])
-                            if cmd == "rinda pause":
-                              if settings["selfbot"] == False:
-                                if msg._from in admin:
+                            if cmd == "rinda pause":                              
+                              if msg._from in admin:
+                                  settings["selfbot"] == False:
                                   poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                   creator = client.getContact(poey)
                                   #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
                                   sendMention(to, "Rinda diberhentikan sementara oleh @!", [poey])
                             if cmd == "rinda comeon":
-                              if settings["selfbot"] == True:
-                                if msg._from in admin:
+                              if msg._from in admin:
+                                  settings["selfbot"] == True:
                                   poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                   creator = client.getContact(poey)                                    
                                   #puy.sendMessage(msg.to, "Rinda aktif kembali")
