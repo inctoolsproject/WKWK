@@ -198,7 +198,7 @@ def helpmenu2():
                     "╠ " "3) " + key + "  Timezone [query]" + "\n" + \
                     "╠ " "4) " + key + "  Smule [query]" + "\n" + \
                     "╠ " "5) " + key + "  Twitter [query]" + "\n" + \
-                    "╠ " "6) " + key + "  Memelist" + "\n" + \
+                    "╠ " "6) " + key + "  Rinda Memelist" + "\n" + \
                     "╠ " "7) " + key + "  Github" + "\n" + \
                     "╠ " "8) " + key + "  Playstore [query]" + "\n" + \
                     "╠ " "9) " + key + "  InstaStory [UserName]*[Number]" + "\n" + \
@@ -419,20 +419,15 @@ def clientBot(op):
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSelf))
                                 sendMention(to, str(helpSelf), [poey])
-                            elif cmd.startswith("rinda pause"):
+                            if cmd == "rinda pause":
                               if msg._from in admin:
-                                if settings["selfbot"] == False:
-                                  poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                  creator = client.getContact(poey)
-                                  #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
-                                  sendMention(to, "Rinda diberhentikan sementara oleh @!", [poey])
-                            elif cmd.startswith("rinda comeon"):
+                                  wait["selfbot"] = False
+                                  client.sendMessage(msg.to, "Rinda diberhentikan sementara")
+                            
+                            if cmd == "rinda comeon":
                               if msg._from in admin:
-                                if settings["selfbot"] == True:
-                                  poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                  creator = client.getContact(poey)                                    
-                                  #puy.sendMessage(msg.to, "Rinda aktif kembali")
-                                  sendMention(to, "Rinda diaktifkan kembali oleh @!", [poey])
+                                  wait["selfbot"] = True
+                                  client.sendMessage(msg.to, "Rinda aktif kembali")
                             elif cmd.startswith("changekey:"):
                               if msg._from in admin:
                                 sep = text.split(" ")
@@ -473,12 +468,14 @@ def clientBot(op):
                                   get_contact = client.getContact(Ownerz)
                                   get_contact_time = time.time() - get_contact_time_start
                                   client.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
-                            elif cmd == "runtime":
+                            elif cmd == "rinda runtime":
+                              if msg._from in admin:
                                 timeNow = time.time()
                                 runtime = timeNow - botStart
                                 runtime = format_timespan(runtime)
                                 client.sendMessage(to, "Rinda already actived of {}".format(str(runtime)))
-                            elif cmd == "restart":
+                            elif cmd == "rinda restart":
+                              if msg._from in admin:
                                 client.sendMessage(to, "Berhasil merestart Bot bos")
                                 restartBot()
 # Pembatas Script #
