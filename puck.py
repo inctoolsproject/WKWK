@@ -1650,9 +1650,9 @@ def clientBot(op):
                               if msg._from in admin:
                                 sep = text.split(" ")
                                 pesan = text.replace(sep[0] + " ","")
-                                saya = puy.getGroupIdsJoined()
+                                saya = client.getGroupIdsJoined()
                                 for group in saya:
-                                   puy.sendMessage(group,"" + str(pesan))
+                                   client.sendMessage(group,"" + str(pesan))
 
                             elif cmd.startswith("smule "):
                                 query = cmd.replace("smule ","")
