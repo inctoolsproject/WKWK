@@ -193,7 +193,7 @@ def helpmenu2():
         key = ''
     helpMenu2 = "╔══[ All Can Used ]" + "\n" + \
                     "╠ " "1) " + key + "  Asking [query]" + "\n" + \
-                    "╠ " "2) " + key + "  Hasil Dari [query]/[contoh : Hasil dari 22x22]" + "\n" + \
+                    "╠ " "2) " + key + "  Calc [contoh : Hasil dari 22x22]" + "\n" + \
                     "╠ " "3) " + key + "  Timezone [query]" + "\n" + \
                     "╠ " "4) " + key + "  Smule [query]" + "\n" + \
                     "╠ " "5) " + key + "  Twitter [query]" + "\n" + \
@@ -202,9 +202,9 @@ def helpmenu2():
                     "╠ " "8) " + key + "  Playstore [query]" + "\n" + \
                     "╠ " "9) " + key + "  Rinda Get Motivation" + "\n" + \
                     "╠ " "10) " + key + " Rinda get Suggestion to [query]" + "\n" + \
-                    "╠ " "11) " + key + " Rinda get Groupinfo to [number of groups]" + "\n" + \
+                    "╠ " "11) " + key + " Rinda Groupinfo to [number]" + "\n" + \
                     "╠ " "12) " + key + " Rinda Grouplist" + "\n" + \
-                    "╠ " "13) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
+                    "╠ " "13) " + key + " Rinda get Memberlist to [number]" + "\n" + \
                     "╠ " "14) " + key + " Rinda Mention to [number of groups]" + "\n" + \
                     "╠ " "15) " + key + " Rinda get devianart [query]" + "\n" + \
                     "╠ " "16) " + key + " Rinda get Image [query]" + "\n" + \
@@ -214,7 +214,7 @@ def helpmenu2():
                     "╠ " "20) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
                     "╠ " "21) " + key + " Rinda get lockscreen [query]" + "\n" + \
                     "╠ " "22) " + key + " Rinda get creepypasta" + "\n" + \
-                    "╠ " "23) " + key + " Rinda get gif [query]" + "\n\n" + \
+                    "╠ " "23) " + key + " Rinda get gif [query]" + "\n" + \
                     "╠  「Use < " + key + " > For the Prefix」" + "\n" + \
                     "╚══「*Creator : @!*」"
     return helpMenu2
@@ -237,8 +237,8 @@ def helpmedia():
                     "╠ " + key + "SearchMusic [query]" + "\n" + \
                     "╠ " + key + "SearchLyric [query]" + "\n" + \
                     "╠ " + key + "SearchImage [query]" + "\n" + \
-                    "╠ 「*Creator : @!*」" + "\n" + \
-                    "╚══[*] 「Use < " + key + " > For the Prefix」"
+                    "╠ 「Use < " + key + " > For the Prefix」" + "\n" + \
+                    "╚══「*Creator : @!*」"
     return helpMedia
 
 def helpsett():
