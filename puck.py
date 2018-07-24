@@ -13,7 +13,7 @@ import time, random, sys, json, codecs, threading, glob, re, string, os, request
 
 #client = LINE()
 #client = LINE("EvoBbWqUN1lxhN6Bs4t3.m7QAK9mmg/fv3Yt11op1GW.5fLIhx9QFPz1MihDNI/+x7KGz0HqDcswb73TWXrxUmA=")
-client = LINE("EvoPkXQ90eu3UK1vx0a3.Ri4/RX6YPvDWVXddSJv8mW.EShzr3s9pszLIBJo4FTV/LAMyBaCd19LThhjoCXw+qk=")
+client = LINE("Ev0FrM6DTZyCZCQSTNG3.m7QAK9mmg/fv3Yt11op1GW.gogCmbiU5FT05GnAbxI8NDONSUHtO3k/1MWirpUObaA=")
 #client = LINE('daffykhadaffy18@gmail.com','Dapuymuhammad123')
 clientMid = client.profile.mid
 clientProfile = client.getProfile()
