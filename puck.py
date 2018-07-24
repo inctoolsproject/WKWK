@@ -185,7 +185,7 @@ def helpmessage():
                     " " "「 Get Reader 」" + "\n" + \
                     " " "1) " + key + " Rinda get reader On/Off - [For SetRead]" + "\n" + \
                     " " "2) " + key + " Rinda get reader reset - [For Reset point]" + "\n" + \
-                    " " "3) " + key + " Rinda get readers - [For CheckRead]" + "\n\n" + \
+                    " " "3) " + key + " Rinda get reader - [For CheckRead]" + "\n\n" + \
                     "  「Use < " + key + " > For the Prefix」" + "\n" + \
                     "  「*Creator : @!*」"
     return helpMessage
@@ -897,7 +897,7 @@ def clientBot(op):
                                     client.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
                                     client.sendMessage(to, "Total {} Mention".format(str(len(nama))))  
         
-                            elif cmd == "lurking reset":
+                            elif cmd == "rinda get reader reset":
                                 tz = pytz.timezone("Asia/Makassar")
                                 timeNow = datetime.now(tz=tz)
                                 day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
@@ -1918,9 +1918,9 @@ def clientBot(op):
                         to = receiver
                     #if settings["autoRead"] == True:
                     #    client.sendChatChecked(to, msg_id)
-                    #if to in read["readPoint"]:
-                    #    if sender not in read["ROM"][to]:
-                    #        read["ROM"][to][sender] = True
+                    if to in read["readPoint"]:
+                        if sender not in read["ROM"][to]:
+                            read["ROM"][to][sender] = True
                     if settings["unsendMessage"] == True:
                         try:
                             msg = op.message
