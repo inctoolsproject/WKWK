@@ -36,6 +36,7 @@ settings = {
     "autoRespon": False,
     "autoJoinTicket": False,
     "checkContact": True,
+    "selfbot":True,
     "checkPost": True,
     "Sambutan": False,
     "checkSticker": False,
@@ -340,7 +341,7 @@ def clientBot(op):
                 client.leaveRoom(op.param1)
 
         if op.type == 26:
-           if wait["selfbot"] == True:
+           if settings["selfbot"] == True:
                msg = op.message
                if msg.to in simisimi:
                    try:
