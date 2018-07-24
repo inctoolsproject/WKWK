@@ -408,7 +408,7 @@ def clientBot(op):
                                 client.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
                                 
                             elif cmd == "sp2":
-                              if msg._from in owner:
+                              if msg._from in admin:
                                 start = time.time()
                                 client.sendMessage(to, "...")
                                 elapsed_time = time.time() - start
@@ -1346,7 +1346,7 @@ def clientBot(op):
                                             no = (no+1)
                                         text += "\n\nInGroup : {}".format(str(G.name))
                                         sendMention(group, text, contact)
-                                    client.sendMessage(to, "Send Mention To Group : " + G.name)
+                                    client.sendMessage(to, "Sended Mention To Group : " + G.name)
                                 except Exception as error:
                                     client.sendMessage(to, str(error))
 
@@ -1361,15 +1361,99 @@ def clientBot(op):
                                         client.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
                                     except:
                                         client.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
-                                    client.sendMessage(to, "Sending Crash To Group : " + G.name)
+                                    client.sendMessage(to, "Sended Crash To Group : " + G.name)
                                 except Exception as error:
                                     client.sendMessage(to, str(error))
+
+                            elif cmd.startswith("rinda get creepypasta"):
+                                r=requests.get("http://hipsterjesus.com/api")
+                                data=r.text
+                                data=json.loads(data)
+                                hasil = " 「 Creepypasta 」\n\n" 
+                                hasil += str(data["text"])
+                                client.sendMessage(msg.to, str(hasil))
+
+                            elif cmd.startswith("timezone "):
+                                try:
+                                    query = cmd.replace("timezone ","")
+                                    #search = cmd.replace("timezone ","")
+                                    r = requests.get("https://time.siswadi.com/geozone/{}".format(urllib.parse.quote(query)))
+                                    data=r.text
+                                    data=json.loads(data)
+                                    ret_ = "\n"
+                                    ret_ += "\n Latitude : " +str(data["data"]["latitude"])
+                                    ret_ += "\n Longitude : " +str(data["data"]["longitude"])
+                                    ret_ += "\n Address : " +str(data["data"]["address"])
+                                    ret_ += "\n Country : " +str(data["data"]["country"])
+                                    #client.sendMessage(to, str(ret_))
+                                    client.sendMessage(to, " 「 Timezone " + query + " 」  " + str(ret_))
+                                except Exception as error:
+                                    client.sendMessage(to, str(error))
+
+                            elif cmd.startswith("rinda get image "):
+                                try:
+                                    query = cmd.replace("rinda get image ","")
+                                    #search = cmd.replace("client image ","")
+                                    r = requests.get("https://xeonwz.herokuapp.com/images/google.api?q={}".format(query))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data["content"] != []:
+                                        items = data["content"]
+                                        path = random.choice(items)
+                                        a = items.index(path)
+                                        b = len(items)
+                                        client.sendMessage(to, " Search Image 「 " + query + " 」  ")
+                                        client.sendImageWithURL(to, str(path))
+                                except Exception as error:
+                                     logError(error)
+                                     var= traceback.print_tb(error.__traceback__)
+                                     client.sendMessage(to,str(var))
+
+                            elif cmd.startswith("rinda get 1cak"):
+                                r=requests.get("http://api-1cak.herokuapp.com/random")
+                                data=r.text
+                                data=json.loads(data)
+                                hasil = "「 1CAK Result 」"
+                                hasil += "\n\n  Judul : \n " + str(data["title"])
+                                hasil += " \n\n  ID : " +str(data["id"])                                
+                                hasil += "\n  URL : " + str(data["url"])
+                                hasil += "\n  Rates : " + str(data["votes"])
+                                hasil += "\n  Nsfw : " + str(data["nsfw"])
+                                image = str(data["img"])
+                                client.sendImageWithURL(msg.to, str(image))
+                                client.sendMessage(msg.to, str(hasil))
+
+                            elif cmd.startswith("rinda get devianart "):
+                                query = cmd.replace("rinda get devianart ","")
+                                try:
+                                    search = cmd.replace("rinda get devianart ","")
+                                    r = requests.get("https://xeonwz.herokuapp.com/images/deviantart.api?q={}".format(search))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data["content"] != []:
+                                        items = data["content"]
+                                        path = random.choice(items)
+                                        a = items.index(path)
+                                        b = len(items)
+                                        client.sendMessage(msg.to, "Search Image 「 " + query + " 」")
+                                        client.sendImageWithURL(to, str(path))                                        
+                                except Exception as error:
+                                     logError(error)
+                                     var= traceback.print_tb(error.__traceback__)
+                                     client.sendMessage(to,str(var))
+
+                            elif cmd.startswith("hasil dari "):
+                                query = cmd.replace("hasil dari ","")
+                                puy1 = requests.get("https://www.calcatraz.com/calculator/api?c={}".format(urllib.parse.quote(query)))
+                                data=puy1.text
+                                data=json.loads(data)
+                                client.sendMessage(msg.to, "Hasil dari < " + query + " > = " + str(data))
 
                             elif cmd.startswith("github "):
                                 query = cmd.replace("github ","")
                                 b = urllib.parse.quote(query)
                                 #client.sendMessage(to,"「 Searching 」\n" "Type: GitHub Search\nStatus: Processing...")
-                                client.sendMessage(to, " " + a + "\nhttps://github.com/search?utf8=✓&q="+query)
+                                client.sendMessage(to, " " + b + "\nhttps://github.com/search?utf8=✓&q="+query)
                                 
                             elif cmd.startswith("playstore "):
                                 query = cmd.replace("playstore ","")
