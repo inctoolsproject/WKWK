@@ -180,9 +180,9 @@ def helpmessage():
     helpMessage = "╔══[ Helper ]" + "\n" + \
                     "╠ " "1) " + key + " More help" + "\n" + \
                     "╠ " "2) " + key + " About Rinda" + "\n" + \
-                    "╠ " "3) " + key + " Rinda bye" + "\n\n" + \
+                    "╠ " "3) " + key + " Rinda bye" + "\n" + \
                     "╠ " " " + key + " " + "\n" + \
-                    "╚══「*Creator : @!*」"
+                    "╚═「*Creator : @!*」"
     return helpMessage
 
 def helpmenu2():
