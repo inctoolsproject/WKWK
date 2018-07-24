@@ -156,47 +156,82 @@ def helpmessage():
         key = settings['keyCommand']
     else:
         key = ''
-    helpMessage =   "* Help Message *" + "\n" + \
-                    "* " + key + "Help" + "\n" + \
-                    "* " + key + "Translate" + "\n" + \
-                    "* " + key + "TTS" + "\n" + \
-                    "* Status Command *" + "\n" + \
-                    "* " + key + "Restart" + "\n" + \
-                    "* " + key + "Runtime" + "\n" + \
-                    "* " + key + "Speed" + "\n" + \
-                    "* " + key + "Status" + "\n" + \
-                    "* MyKey" + "\n" + \
-                    "* SetKey「On/Off」" + "\n" + \
-                    "* Special Command *" + "\n" + \
-                    "* " + key + "Mimic「On/Off」" + "\n" + \
-                    "* " + key + "MimicList" + "\n" + \
-                    "* " + key + "MimicAdd「Mention」" + "\n" + \
-                    "* " + key + "MimicDel「Mention」" + "\n" + \
-                    "* " + key + "Mention" + "\n" + \
-                    "* " + key + "Lurking「On/Off/Reset」" + "\n" + \
-                    "* " + key + "Lurking" + "\n" + \
-                    "* Media Command *" + "\n" + \
-                    "* " + key + "CheckDate「Date」" + "\n" + \
-                    "* " + key + "CheckWebsite「url」" + "\n" + \
-                    "* " + key + "CheckPraytime「Location」" + "\n" + \
-                    "* " + key + "CheckWeather「Location」" + "\n" + \
-                    "* " + key + "CheckLocation「Location」" + "\n" + \
-                    "* " + key + "InstaInfo 「UserName」" + "\n" + \
-                    "* " + key + "InstaPost 「UserName」|「Number」" + "\n" + \
-                    "* " + key + "InstaStory 「UserName」|「Number」" + "\n" + \
-                    "* " + key + "SearchYoutube「Search」" + "\n" + \
-                    "* " + key + "SearchMusic 「Search」" + "\n" + \
-                    "* " + key + "SearchLyric 「Search」" + "\n" + \
-                    "* " + key + "SearchImage 「Search」" + "\n" + \
-                    ""
+    helpMessage =   "   「 Helper 」     " + "\n" + \
+                    " " "1) " + key + " More help" + "\n" + \
+                    " " "2) " + key + " About Rinda" + "\n" + \
+                    " " "3) " + key + " Rinda bye" + "\n" + \
+                    " " "4) " + key + " Rinda get token" + "\n\n" + \
+                    " " "「 Get Reader 」" + "\n" + \
+                    " " "1) " + key + " Rinda check reader On/Off - [For SetRead]" + "\n" + \
+                    " " "2) " + key + " Rinda get reader reset - [For Reset point]" + "\n" + \
+                    " " "3) " + key + " Rinda get reader - [For CheckRead]" + "\n\n" + \
+                    "  「Use < " + key + " > For the Prefix」" + "\n" + \
+                    "  「*Creator : @!*」"
     return helpMessage
+
+def helpmenu2():
+    if settings['setKey'] == True:
+        key = settings['keyCommand']
+    else:
+        key = ''
+    helpMenu2 =     " " "「 All Can Used 」" + "\n" + \
+                    " " "1) " + key + "  Asking [query]" + "\n" + \
+                    " " "2) " + key + "  Hasil Dari [query]/[contoh : Hasil dari 22x22]" + "\n" + \
+                    " " "3) " + key + "  Timezone [query]" + "\n" + \
+                    " " "4) " + key + "  Smule [query]" + "\n" + \
+                    " " "5) " + key + "  Bitcoin" + "\n" + \
+                    " " "6) " + key + "  Twitter [query]" + "\n" + \
+                    " " "7) " + key + "  Memelist" + "\n" + \
+                    " " "8) " + key + "  Randomlose" + "\n" + \
+                    " " "9) " + key + "  Playstore [query]" + "\n" + \
+                    " " "10) " + key + " Rinda Get Motivation" + "\n" + \
+                    " " "11) " + key + " Rinda get Suggestion to [query]" + "\n" + \
+                    " " "12) " + key + " Rinda Groupinfo [number of groups]" + "\n" + \
+                    " " "13) " + key + " Rinda Grouplist" + "\n" + \
+                    " " "14) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
+                    " " "15) " + key + " Rinda Mention to [number of groups]" + "\n" + \
+                    " " "16) " + key + " Rinda get devianart [query]" + "\n" + \
+                    " " "17) " + key + " Rinda get Image [query]" + "\n" + \
+                    " " "18) " + key + " Rinda get Quotes" + "\n" + \
+                    " " "19) " + key + " Rinda get 1Cak" + "\n" + \
+                    " " "20) " + key + " Rinda get video [query]" + "\n" + \
+                    " " "21) " + key + " Rinda get Wikipedia [query]" + "\n" + \
+                    " " "22) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
+                    " " "23) " + key + " Rinda get lockscreen [query]" + "\n" + \
+                    " " "24) " + key + " Rinda get creepypasta" + "\n" + \
+                    " " "25) " + key + " Rinda get gif [query]" + "\n\n" + \
+                    "  「Use < " + key + " > For the Prefix」" + "\n" + \
+                    "  「*Creator : @!*」"
+    return helpMenu2
+
+def helpmedia():
+    if settings['setKey'] == True:
+        key = settings['keyCommand']
+    else:
+        key = ''
+    helpMedia = "╔══[ Media Helper ]" + "\n" + \
+                    "╠ " + key + "CheckDate [Date]" + "\n" + \
+                    "╠ " + key + "CheckWebsite [url]" + "\n" + \
+                    "╠ " + key + "CheckPraytime [Location]" + "\n" + \
+                    "╠ " + key + "CheckWeather [Location]" + "\n" + \
+                    "╠ " + key + "CheckLocation [Location]" + "\n" + \
+                    "╠ " + key + "InstaStory [UserName]*[Number]" + "\n" + \
+                    "╠ " + key + "InstaInfo [UserName]" + "\n" + \
+                    "╠ " + key + "InstaPost [UserName]*[Number]" + "\n" + \
+                    "╠ " + key + "SearchYoutube[query]" + "\n" + \
+                    "╠ " + key + "SearchMusic [query]" + "\n" + \
+                    "╠ " + key + "SearchLyric [query]" + "\n" + \
+                    "╠ " + key + "SearchImage [query]" + "\n" + \
+                    "╠ 「*Creator : @!*」" + "\n" + \
+                    "╚══[*] 「Use < " + key + " > For the Prefix」"
+    return helpMedia
 
 def helpsett():
     if settings['setKey'] == True:
         key = settings['keyCommand']
     else:
         key = ''
-    helpSett = " ╔══[ Settings Helper ]" + "\n" + \
+    helpSett = "╔══[ Settings Helper ]" + "\n" + \
                     "╠ " + key + "AutoAdd「On/Off」" + "\n" + \
                     "╠ " + key + "AutoJoin「On/Off」" + "\n" + \
                     "╠ " + key + "AutoJoinTicket「On/Off」" + "\n" + \
@@ -216,7 +251,7 @@ def helpgroup():
         key = settings['keyCommand']
     else:
         key = ''
-    helpGroup = " ╔══[ Group Helper ]" + "\n" + \
+    helpGroup = "╔══[ Group Helper ]" + "\n" + \
                     "╠ " + key + "GroupCreator" + "\n" + \
                     "╠ " + key + "GroupId" + "\n" + \
                     "╠ " + key + "GroupName" + "\n" + \
@@ -235,7 +270,7 @@ def helpself():
         key = settings['keyCommand']
     else:
         key = ''
-    helpSelf = " ╔══[ Self Helper ]" + "\n" + \
+    helpSelf = "╔══[ Self Helper ]" + "\n" + \
                     "╠ " + key + "Me" + "\n" + \
                     "╠ " + key + "MyMid" + "\n" + \
                     "╠ " + key + "MyName" + "\n" + \
@@ -320,6 +355,12 @@ def clientBot(op):
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSett))
                                 sendMention(to, str(helpSett), [poey])
+                            if cmd == "more help":
+                                helpMenu2 = helpmenu2()
+                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                creator = client.getContact(poey)
+                                #client.sendMessage(to, str(helpSett))
+                                sendMention(to, str(helpMenu2), [poey])
                             if cmd == "help group":
                                 helpGroup = helpgroup()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
