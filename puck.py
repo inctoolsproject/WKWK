@@ -411,20 +411,20 @@ def clientBot(op):
                                 creator = client.getContact(poey)
                                 #client.sendMessage(to, str(helpSelf))
                                 sendMention(to, str(helpSelf), [poey])
-                            if cmd == "rinda pause":                              
+                            if cmd == "rinda pause":
                               if msg._from in admin:
                                 if settings["selfbot"] == False:
-                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                creator = client.getContact(poey)
-                                #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
-                                sendMention(to, "Rinda diberhentikan sementara oleh @!", [poey])
+                                  poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                  creator = client.getContact(poey)
+                                  #puy.sendMessage(msg.to, "Rinda diberhentikan sementara oleh")
+                                  sendMention(to, "Rinda diberhentikan sementara oleh @!", [poey])
                             if cmd == "rinda comeon":
                               if msg._from in admin:
                                 if settings["selfbot"] == True:
-                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                creator = client.getContact(poey)                                    
-                                #puy.sendMessage(msg.to, "Rinda aktif kembali")
-                                sendMention(to, "Rinda diaktifkan kembali oleh @!", [poey])
+                                  poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                  creator = client.getContact(poey)                                    
+                                  #puy.sendMessage(msg.to, "Rinda aktif kembali")
+                                  sendMention(to, "Rinda diaktifkan kembali oleh @!", [poey])
                             elif cmd.startswith("changekey:"):
                               if msg._from in admin:
                                 sep = text.split(" ")
