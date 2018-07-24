@@ -325,7 +325,7 @@ def clientBot(op):
             print ("[ 5 ] NOTIFIED ADD CONTACT")
             if settings["autoAdd"] == True:
                 client.findAndAddContactsByMid(op.param2)
-            sendMention(op.param1, "@! Thx for add")
+                sendMention(op.param1, "@! Thx for add")
 
         if op.type == 13:
             print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
@@ -1262,7 +1262,7 @@ def clientBot(op):
                                     contactlist = client.getAllContactIds()
                                     blockedlist = client.getBlockedContactIds()
                                     ret_ = "╔══〘 About Rinda 〙"
-                                    ret_ += "\n╠ Bot Name : {}".format(contact.displayName)
+                                    ret_ += "\n╠  Bot Name : {}".format(contact.displayName)
                                     ret_ += "\n╠  In Groups : {}".format(str(len(grouplist)))
                                     ret_ += "\n╠  Friends : {}".format(str(len(contactlist)))
                                     ret_ += "\n╠  Blocked Account : {}".format(str(len(blockedlist)))                                    
