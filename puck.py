@@ -2079,27 +2079,27 @@ def puyBot(op):
                                         puy.sendMessage(msg.to, None, contentMetadata={'mid': 'sezer'}, contentType=13)
 #=======================================================  ADMIN FINISHED ===============================================================#
         ## PREFIX ##          
-                        elif cmd.startswith("setprefix:"):
-                          if msg._from in Owner:
-                            sep = text.split(" ")
-                            key = text.replace(sep[0] + " ","")
-                            if " " in key:
-                                puy.sendMessage(to, "\nTanpa spasi.\n")
-                            else:
-                                settings["keyCommand"] = str(key).lower()
-                                sendMessageWithFooter(to, "text [ {} ]".format(str(key).lower()))        
-                        if text.lower() == "myprefix":
-                            puy.sendMessage(to, "Prefix diterapkan menjadi [ {} ]\n".format(str(settings["keyCommand"])))
-                        elif text.lower() == "prefix":
-                            puy.sendMessage(to, "Prefix saat ini [ {} ]".format(str(settings["keyCommand"])))
-                        elif text.lower() == "prefix on":
-                          if msg._from in Owner:
-                            settings["prefix"] = True
-                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix")
-                        elif text.lower() == "prefix off":
-                          if msg._from in Owner:
-                            settings["prefix"] = False
-                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix")
+                            elif cmd.startswith("setprefix:"):
+                              if msg._from in Owner:
+                                sep = text.split(" ")
+                                key = text.replace(sep[0] + " ","")
+                                if " " in key:
+                                    puy.sendMessage(to, "\nTanpa spasi.\n")
+                                else:
+                                    settings["keyCommand"] = str(key).lower()
+                                    sendMessageWithFooter(to, "text [ {} ]".format(str(key).lower()))        
+                            if text.lower() == "myprefix":
+                                puy.sendMessage(to, "Prefix diterapkan menjadi [ {} ]\n".format(str(settings["keyCommand"])))
+                            elif text.lower() == "prefix":
+                                puy.sendMessage(to, "Prefix saat ini [ {} ]".format(str(settings["keyCommand"])))
+                            elif text.lower() == "prefix on":
+                              if msg._from in Owner:
+                                settings["prefix"] = True
+                                puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix")
+                            elif text.lower() == "prefix off":
+                              if msg._from in Owner:
+                                settings["prefix"] = False
+                                puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix")
         ## PREFIX ##                            
                     if msg.contentType == 0:
                         if text is None:
