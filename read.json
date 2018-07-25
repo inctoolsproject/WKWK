@@ -1,4 +1,6 @@
 {
-    "readMember": {},
-    "readPoint": {}
+    "readPoint":{},
+    "readMember":{},
+    "readTime":{},
+    "ROM":{}
 }
