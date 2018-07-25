@@ -1,62 +1,92 @@
 # -*- coding: utf-8 -*-
 
+#  「 From Helloworld+Eater/ Edited by Puy 」 "
+#The Beginning of this Bot Comes from Helloworld, I'm just Reworked This!
+#Of Course Special Thanks To HelloWorld, And the Friends Around Me!
+#ID : yapuy
+
 from LineAPI.linepy import *
 from LineAPI.akad.ttypes import Message
 from LineAPI.akad.ttypes import ContentType as Type
-from gtts import gTTS
 from time import sleep
 from datetime import datetime, timedelta
-from bs4 import BeautifulSoup
 from googletrans import Translator
+from bs4 import BeautifulSoup
 from humanfriendly import format_timespan, format_size, format_number, format_length
-import time, random, sys, json, wikipedia, codecs, threading, glob, re, string, os, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
+import time, random, sys, json, codecs, pafy, subprocess, threading, glob, re, string, os, wikipedia, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
 
-#client = LINE()
-#client = LINE("EvoBbWqUN1lxhN6Bs4t3.m7QAK9mmg/fv3Yt11op1GW.5fLIhx9QFPz1MihDNI/+x7KGz0HqDcswb73TWXrxUmA=")
-#client = LINE("EvoPkXQ90eu3UK1vx0a3.Ri4/RX6YPvDWVXddSJv8mW.EShzr3s9pszLIBJo4FTV/LAMyBaCd19LThhjoCXw+qk=")
-client = LINE("Ev0FrM6DTZyCZCQSTNG3.m7QAK9mmg/fv3Yt11op1GW.gogCmbiU5FT05GnAbxI8NDONSUHtO3k/1MWirpUObaA=") #DESKTOPWIN
-#client = LINE('daffykhadaffy18@gmail.com','Dapuymuhammad123')
-clientMid = client.profile.mid
-clientProfile = client.getProfile()
-clientSettings = client.getSettings()
-clientPoll = OEPoll(client)
+#puy = LINE() 
+#puy = LINE("EvoBbWqUN1lxhN6Bs4t3.m7QAK9mmg/fv3Yt11op1GW.5fLIhx9QFPz1MihDNI/+x7KGz0HqDcswb73TWXrxUmA=")    # UNTUK LOGIN TOKEN #
+puy = LINE('mkhadaffy1805@gmail.com','Muhamad18')      # UNTUK LOGIN MAIL LINE #
+puyMid = puy.profile.mid
+puyProfile = puy.getProfile()
+puySettings = puy.getSettings()
+puyPoll = OEPoll(puy)
 botStart = time.time()
 
 msg_dict = {}
+temp_flood = {}
+msg_sticker={}
+wbanlist = []
+translateen = []
+translateid = []
+translatetr = []
 simisimi = []
 
-admin ="uac8e3eaf1eb2a55770bf10c3b2357c33"
+Owner = ["uac8e3eaf1eb2a55770bf10c3b2357c33","u33ba9a93d30c1be155df24f5d4e3f583"]
+admin =["uac8e3eaf1eb2a55770bf10c3b2357c33","u33ba9a93d30c1be155df24f5d4e3f583"]
 
 settings = {
-    "autoAdd": True,
     "autoJoin": True,
     "autoLeave": False,
-    "autoRead": False,
-    "lurk": True,
-    "autoRespon": False,
-    "autoJoinTicket": False,
-    "checkContact": True,
-    "selfbot":True,
-    "checkPost": True,
-    "Img": {},
-    "Sambutan": False,
-    "checkSticker": False,
-    "changeDisplayPicture": False,
+    "Inroom": True,
+    "Outroom": True,
+    "timeRestart": "18000",
     "changeGroupPicture": [],
+    "limit": 50,
+    "limits": 50,
+    "wordban": [],
+    "autoAdd": True,
+    "autoRead": False,
     "keyCommand": "",
+    "ADITMADZSautoread": True,
+    "welcomePesan": False,
+    "mutebot2": False,
+    "messageSticker": True,
+    "leaveMessage": False,
+    "welcomeMessage": True,
+    "welcomeSticker": True,
+    "unsend": True,
+    "detectUnsend": True,
     "myProfile": {
         "displayName": "",
         "coverId": "",
         "pictureStatus": "",
         "statusMessage": ""
     },
-    "mimic": {
-        "copy": False,
-        "status": False,
-        "target": {}
-    },
-    "setKey": False,
-    "unsendMessage": True
+    "prefix": False,
+    "userAgent": [
+        "Mozilla/5.0 (X11; U; Linux i586; de; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (X11; U; Linux amd64; rv:5.0) Gecko/20100101 Firefox/5.0 (Debian)",
+        "Mozilla/5.0 (X11; U; Linux amd64; en-US; rv:5.0) Gecko/20110619 Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux) Gecko Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 FirePHP/0.5",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux x86_64) Gecko Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux ppc; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux AMD64) Gecko Firefox/5.0",
+        "Mozilla/5.0 (X11; FreeBSD amd64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:5.0) Gecko/20110619 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1.1; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.1; U; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.0; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.0; rv:5.0) Gecko/20100101 Firefox/5.0"
+    ]
 }
 
 read = {
@@ -66,83 +96,84 @@ read = {
     "readTime": {}
 }
 
+wait = {
+    "Talkblacklist": {},
+    "Talkwblacklist": False,
+    "Talkdblacklist": False,
+    "talkban": True,
+    "admin":{},
+    "addadmin":False,
+    "delladmin":False,    
+    "contact": False,
+    "autoJoin": True,
+    "autoAdd": True,
+    "autoLeave": False,
+    "autoLeave1": False,
+    "detectMention": False,
+    "selfbot": True,
+    "ADITMADZSmessage1": "Author Rinda (https://line.me/ti/p/~yapuy)",
+    "Mentiongift": False,
+    "Mentionkick": True,
+    "welcomeOn": True,
+    "sticker": False,
+    "selfbot": True,
+    "unsend": True,
+    "mention": "Di baca doang ish :(",
+    "Respontag": "Im busy huh",
+    "welcome": "Selamat Datang",
+    "leave": "Selamat Jalan",
+    "comment": "Auto like by PUY\nhttps://line.me/ti/p/~yapuy",
+    "message": "Thx For Added Rinda",
+    }
+
+cctv = {
+    "cyduk":{},
+    "point":{},
+    "sidermem":{}
+}
+
 try:
     with open("Log_data.json","r",encoding="utf_8_sig") as f:
-        msg_dict = json.loads(f.read())
+        msg_dict = json.loads(f.read())    
 except:
-    print("Couldn't read Log data")
+    print("PUY") 
     
-settings["myProfile"]["displayName"] = clientProfile.displayName
-settings["myProfile"]["statusMessage"] = clientProfile.statusMessage
-settings["myProfile"]["pictureStatus"] = clientProfile.pictureStatus
-coverId = client.getProfileDetail()["result"]["objectId"]
+adminOpen = codecs.open("admin.json","r","utf-8")
+ownerOpen = codecs.open("Owner.json","r","utf-8")
+
+settings["myProfile"]["displayName"] = puyProfile.displayName
+settings["myProfile"]["statusMessage"] = puyProfile.statusMessage
+settings["myProfile"]["pictureStatus"] = puyProfile.pictureStatus
+coverId = puy.getProfileDetail()["result"]["objectId"]
 settings["myProfile"]["coverId"] = coverId
 
 def restartBot():
     print ("[ INFO ] BOT RESTART")
     python = sys.executable
     os.execl(python, python, *sys.argv)
-    
-def logError(text):
-    client.log("[ ERROR ] {}".format(str(text)))
-    tz = pytz.timezone("Asia/Jakarta")
-    timeNow = datetime.now(tz=tz)
-    timeHours = datetime.strftime(timeNow,"(%H:%M)")
-    day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
-    hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-    bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-    inihari = datetime.now(tz=tz)
-    hr = inihari.strftime('%A')
-    bln = inihari.strftime('%m')
-    for i in range(len(day)):
-        if hr == day[i]: hasil = hari[i]
-    for k in range(0, len(bulan)):
-        if bln == str(k): bln = bulan[k-1]
-    time = "{}, {} - {} - {} | {}".format(str(hasil), str(inihari.strftime('%d')), str(bln), str(inihari.strftime('%Y')), str(inihari.strftime('%H:%M:%S')))
-    with open("logError.txt","a") as error:
-        error.write("\n[ {} ] {}".format(str(time), text))
 
-def cTime_to_datetime(unixtime):
-    return datetime.fromtimestamp(int(str(unixtime)[:len(str(unixtime))-3]))
-def dt_to_str(dt):
-    return dt.strftime('%H:%M:%S')
-
-def delete_log():
-    ndt = datetime.now()
-    for data in msg_dict:
-        if (datetime.utcnow() - cTime_to_datetime(msg_dict[data]["createdTime"])) > timedelta(1):
-            if "path" in msg_dict[data]:
-                client.deleteFile(msg_dict[data]["path"])
-            del msg_dict[data]
-            
-def logError(text):
-    client.log("[ RINDA ERROR ] {}".format(str(text)))
-    tz = pytz.timezone("Asia/Jakarta")
-    timeNow = datetime.now(tz=tz)
-    timeHours = datetime.strftime(timeNow,"(%H:%M)")
-    day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
-    hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-    bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-    inihari = datetime.now(tz=tz)
-    hr = inihari.strftime('%A')
-    bln = inihari.strftime('%m')
-    for i in range(len(day)):
-        if hr == day[i]: hasil = hari[i]
-    for k in range(0, len(bulan)):
-        if bln == str(k): bln = bulan[k-1]
-    time = "{}, {} - {} - {} | {}".format(str(hasil), str(inihari.strftime('%d')), str(bln), str(inihari.strftime('%Y')), str(inihari.strftime('%H:%M:%S')))
-    with open("logError.txt","a") as error:
-            error.write("\n[ {} ] {}".format(str(time), text))
-            
-def sendMention(to, text="", mids=[]):
+def autoRestart():
+    if time.time() - botStart > int(settings["timeRestart"]):
+        time.sleep(100)
+        restartBot()
+        
+def sendSticker(to, version, packageId, stickerId):
+    contentMetadata = {
+        'STKVER': version,
+        'STKPKGID': packageId,
+        'STKID': stickerId
+    }
+    puy.sendMessage(to, '', contentMetadata, 7)        
+        
+def sendMentionFooter(to, text="", mids=[]):
     arrData = ""
     arr = []
-    mention = "@zeroxyuuki "
+    mention = "@Meka Finee "
     if mids == []:
-        raise Exception("Invalid mids")
+        raise Exception("Lost Time")
     if "@!" in text:
         if text.count("@!") != len(mids):
-            raise Exception("Invalid mids")
+            raise Exception("Lost Time")
         texts = text.split("@!")
         textx = ""
         for mid in mids:
@@ -160,11 +191,123 @@ def sendMention(to, text="", mids=[]):
         arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mids[0]}
         arr.append(arrData)
         textx += mention + str(text)
-    client.sendMessage(to, textx, {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)
+    puy.sendMessage(to, textx, {'AGENT_NAME':'@Muh.khadaffy on Instagram', 'AGENT_LINK': 'https://www.instagram.com/muh.khadaffy', 'AGENT_ICON': "http://dl.profile.line-cdn.net/" + puy.getProfile().picturePath, 'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)    
+    #'AGENT_LINK': 'line://ti/p/~{}'.format(puy.getProfile().userid),
+    
+def sendMusic(send_to,music_id,title,artist,thumbnail,link):
+ puy.sendMessage(send_to, '',
+  {'text': title,
+  'subText': artist,
+  'id': music_id,
+  'previewUrl': thumbnail,
+  'linkUri': link,
+  'i-linkUri': link,
+  'a-linkUri': link,
+  'i-installUrl': link,
+  'a-installUrl': link,
+  'a-packageName': 'jp.linecorp.linemusic.android',
+  'type': 'mt',
+  'countryCode': 'JP',
+  'ORGCONTP': 'MUSIC'},
+  19)    
+    
+def sendMessageWithFooter(to, text, name, url, iconlink):
+        contentMetadata = {
+            'AGENT_NAME': name,
+            'AGENT_LINK': url,
+            'AGENT_ICON': iconlink
+        }
+        return puy.sendMessage(to, text, contentMetadata, 0)
+    
+def cTime_to_datetime(unixtime):
+    return datetime.fromtimestamp(int(str(unixtime)[:len(str(unixtime))-3]))
+def dt_to_str(dt):
+    return dt.strftime('%H:%M:%S')
+
+def delete_log():
+    ndt = datetime.now()
+    for data in msg_dict:
+        if (datetime.utcnow() - cTime_to_datetime(msg_dict[data]["createdTime"])) > timedelta(1):
+            if "path" in msg_dict[data]:
+                puy.deleteFile(msg_dict[data]["path"])
+            del msg_dict[data]
+            
+def delExpire():
+    if temp_flood != {}:
+        for tmp in temp_flood:
+            if temp_flood[tmp]["expire"] == True:
+                if time.time() - temp_flood[tmp]["time"] >= 3*10:
+                    temp_flood[tmp]["expire"] = False
+                    temp_flood[tmp]["time"] = time.time()
+                    try:
+                        userid = "https://line.me/ti/p/~" + puy.profile.userid
+                        puy.sendFooter(tmp, "Spam is over , Now Bots Actived !", str(userid), "http://dl.profile.line-cdn.net/"+puy.getContact(puyMid).pictureStatus, puy.getContact(puyMid).displayName)
+                    except Exception as error:
+                        logError(error)            
+            
+def backupData():
+    try:
+        backup = read
+        f = codecs.open('read.json','w','utf-8')
+        json.dump(backup, f, sort_keys=True, indent=4, ensure_ascii=False)
+#        backup = unsend
+#        f = codecs.open('unsend.json','w','utf-8')
+#        json.dump(backup, f, sort_keys=True, indent=4, ensure_ascii=False)
+        return True
+    except Exception as error:
+        logError(error)
+        return False            
+            
+def logError(text):
+    puy.log("[ ERROR ] {}".format(str(text)))
+    tz = pytz.timezone("Asia/Jakarta")
+    timeNow = datetime.now(tz=tz)
+    timeHours = datetime.strftime(timeNow,"(%H:%M)")
+    day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
+    hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+    bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+    inihari = datetime.now(tz=tz)
+    hr = inihari.strftime('%A')
+    bln = inihari.strftime('%m')
+    for i in range(len(day)):
+        if hr == day[i]: hasil = hari[i]
+    for k in range(0, len(bulan)):
+        if bln == str(k): bln = bulan[k-1]
+    time = "{}, {} - {} - {} | {}".format(str(hasil), str(inihari.strftime('%d')), str(bln), str(inihari.strftime('%Y')), str(inihari.strftime('%H:%M:%S')))
+    with open("logError.txt","a") as error:
+            error.write("\n[ {} ] {}".format(str(time), text))
+        
+def sendMention(to, text="", mids=[]):
+    arrData = ""
+    arr = []
+    mention = "@zeroxyuuki "
+    if mids == []:
+        raise Exception("Lost Time")
+    if "@!" in text:
+        if text.count("@!") != len(mids):
+            raise Exception("Lost Time")
+        texts = text.split("@!")
+        textx = ""
+        for mid in mids:
+            textx += str(texts[mids.index(mid)])
+            slen = len(textx)
+            elen = len(textx) + 15
+            arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mid}
+            arr.append(arrData)
+            textx += mention
+        textx += str(texts[len(mids)])
+    else:
+        textx = ""
+        slen = len(textx)
+        elen = len(textx) + 15
+        arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mids[0]}
+        arr.append(arrData)
+        textx += mention + str(text)
+    puy.sendMessage(to, textx, {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)
 
 def command(text):
     pesan = text.lower()
-    if settings["setKey"] == True:
+    if settings["prefix"] == True:
         if pesan.startswith(settings["keyCommand"]):
             cmd = pesan.replace(settings["keyCommand"],"")
         else:
@@ -174,148 +317,72 @@ def command(text):
     return cmd
     
 def helpmessage():
-    if settings['setKey'] == True:
+    if settings['prefix'] == True:
         key = settings['keyCommand']
     else:
         key = ''
-    helpMessage = "╔══[ Helper ]" + "\n" + \
-                    "╠ " " " + key + " " + "\n" + \
-                    "╠ " "1) " + key + " More help" + "\n" + \
-                    "╠ " "2) " + key + " About Rinda" + "\n" + \
-                    "╠ " "3) " + key + " Rinda bye" + "\n" + \
-                    "╠ " " " + key + " " + "\n" + \
-                    "╚═「*Creator : @!*」"
+    helpMessage =   "   「 Helper 」     " + "\n" + \
+                    " " "1) " + key + " About Rinda" + "\n" + \
+                    " " "2) " + key + " Rinda bye" + "\n" + \
+                    " " "3) " + key + " Rinda get token" + "\n\n" + \
+                    " " "「 Get Reader 」" + "\n" + \
+                    " " "1) " + key + " Rinda check reader On/Off - [For SetRead]" + "\n" + \
+                    " " "2) " + key + " Rinda get reader reset - [For Reset point]" + "\n" + \
+                    " " "3) " + key + " Rinda get reader - [For CheckRead]" + "\n\n" + \
+                    " " "「 All Can Used 」" + "\n" + \
+                    " " "1) " + key + "  Asking [query]" + "\n" + \
+                    " " "2) " + key + "  Hasil Dari [query]/[contoh : Hasil dari 22x22]" + "\n" + \
+                    " " "3) " + key + "  Timezone [query]" + "\n" + \
+                    " " "4) " + key + "  Smule [query]" + "\n" + \
+                    " " "5) " + key + "  Bitcoin" + "\n" + \
+                    " " "6) " + key + "  Twitter [query]" + "\n" + \
+                    " " "7) " + key + "  Memelist" + "\n" + \
+                    " " "8) " + key + "  Randomlose" + "\n" + \
+                    " " "9) " + key + "  Playstore [query]" + "\n" + \
+                    " " "10) " + key + " Rinda Get Motivation" + "\n" + \
+                    " " "11) " + key + " Rinda get Suggestion to [query]" + "\n" + \
+                    " " "12) " + key + " Rinda Groupinfo [number of groups]" + "\n" + \
+                    " " "13) " + key + " Rinda Grouplist" + "\n" + \
+                    " " "14) " + key + " Rinda get Memberlist to [number of groups]" + "\n" + \
+                    " " "15) " + key + " Rinda Mention to [number of groups]" + "\n" + \
+                    " " "16) " + key + " Rinda get devianart [query]" + "\n" + \
+                    " " "17) " + key + " Rinda get Image [query]" + "\n" + \
+                    " " "18) " + key + " Rinda get Quotes" + "\n" + \
+                    " " "19) " + key + " Rinda get 1Cak" + "\n" + \
+                    " " "20) " + key + " Rinda get video [query]" + "\n" + \
+                    " " "21) " + key + " Rinda get Wikipedia [query]" + "\n" + \
+                    " " "22) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
+                    " " "23) " + key + " Rinda get lockscreen [query]" + "\n" + \
+                    " " "24) " + key + " Rinda get creepypasta" + "\n" + \
+                    " " "25) " + key + " Rinda get gif [query]" + "\n\n" + \
+                    "  「Use < " + key + " > For the Prefix」" + "\n" + \
+                    "  「*Creator : @!*」"
     return helpMessage
-
-def helpmenu2():
-    if settings['setKey'] == True:
+                    
+def ownermessage():
+    if settings['prefix'] == True:
         key = settings['keyCommand']
     else:
         key = ''
-    helpMenu2 = "╔══[ All Can Used ]" + "\n" + \
-                    "╠ " " " + key + " " + "\n" + \
-                    "╠ " "1) " + key + "  Asking [query]" + "\n" + \
-                    "╠ " "2) " + key + "  Calc [Sample : Hasil dari 22x22]" + "\n" + \
-                    "╠ " "3) " + key + "  Timezone [query]" + "\n" + \
-                    "╠ " "4) " + key + "  Smule [query]" + "\n" + \
-                    "╠ " "5) " + key + "  Twitter [query]" + "\n" + \
-                    "╠ " "6) " + key + "  Rinda Memelist" + "\n" + \
-                    "╠ " "7) " + key + "  Github" + "\n" + \
-                    "╠ " "8) " + key + "  Playstore [query]" + "\n" + \
-                    "╠ " "9) " + key + "  InstaStory [UserName]*[Number]" + "\n" + \
-                    "╠ " "10) " + key + " Rinda Get Motivation" + "\n" + \
-                    "╠ " "11) " + key + " Rinda get Suggestion to [query]" + "\n" + \
-                    "╠ " "12) " + key + " Rinda Groupinfo to [number]" + "\n" + \
-                    "╠ " "13) " + key + " Rinda Grouplist" + "\n" + \
-                    "╠ " "14) " + key + " Rinda get Memberlist to [number]" + "\n" + \
-                    "╠ " "15) " + key + " Rinda Mention to [number of groups]" + "\n" + \
-                    "╠ " "16) " + key + " Rinda get devianart [query]" + "\n" + \
-                    "╠ " "17) " + key + " Rinda get Image [query]" + "\n" + \
-                    "╠ " "18) " + key + " Rinda get Quotes" + "\n" + \
-                    "╠ " "19) " + key + " Rinda get 1Cak" + "\n" + \
-                    "╠ " "20) " + key + " Rinda get Wikipedia [query]" + "\n" + \
-                    "╠ " "21) " + key + " Rinda getmeme dwight*Hei*Rin" + "\n" + \
-                    "╠ " "22) " + key + " Rinda get lockscreen [query]" + "\n" + \
-                    "╠ " "23) " + key + " Rinda get creepypasta" + "\n" + \
-                    "╠ " "24) " + key + " Rinda get gif [query]" + "\n" + \
-                    "╠ " "25) " + key + " Rinda get topnews" + "\n" + \
-                    "╠ " " " + key + " " + "\n" + \
-                    "╠══「Use < " + key + " > For the Prefix」" + "\n" + \
-                    "╚══「*Creator : @!*」"
-    return helpMenu2
-
-def helpmedia():
-    if settings['setKey'] == True:
-        key = settings['keyCommand']
-    else:
-        key = ''
-    helpMedia = "╔══[ Media Helper ]" + "\n" + \
-                    "╠ " + key + "CheckDate [Date]" + "\n" + \
-                    "╠ " + key + "CheckWebsite [url]" + "\n" + \
-                    "╠ " + key + "CheckPraytime [Location]" + "\n" + \
-                    "╠ " + key + "CheckWeather [Location]" + "\n" + \
-                    "╠ " + key + "CheckLocation [Location]" + "\n" + \
-                    "╠ " + key + "InstaStory [UserName]*[Number]" + "\n" + \
-                    "╠ " + key + "InstaInfo [UserName]" + "\n" + \
-                    "╠ " + key + "InstaPost [UserName]*[Number]" + "\n" + \
-                    "╠ " + key + "SearchYoutube[query]" + "\n" + \
-                    "╠ " + key + "SearchMusic [query]" + "\n" + \
-                    "╠ " + key + "SearchLyric [query]" + "\n" + \
-                    "╠ " + key + "SearchImage [query]" + "\n" + \
-                    "╠ 「Use < " + key + " > For the Prefix」" + "\n" + \
-                    "╚══「*Creator : @!*」"
-    return helpMedia
-
-def helpsett():
-    if settings['setKey'] == True:
-        key = settings['keyCommand']
-    else:
-        key = ''
-    helpSett = "╔══[ Settings Helper ]" + "\n" + \
-                    "╠ " + key + "AutoAdd「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoJoin「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoJoinTicket「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoLeave「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoRead「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoRespon「On/Off」" + "\n" + \
-                    "╠ " + key + "CheckContact「On/Off」" + "\n" + \
-                    "╠ " + key + "CheckPost「On/Off」" + "\n" + \
-                    "╠ " + key + "CheckSticker「On/Off」" + "\n" + \
-                    "╠ " + key + "UnsendChat「On/Off」" + "\n" + \
-                    "╠ 「*Creator : @!*」" + "\n" + \
-                    "╚══[*] 「Use < " + key + " > For the Prefix」"
-    return helpSett
+    ownerMessage =  " " "「 Only Owner Can Used 」" + "\n" + \
+                    " " "1) " + key + " SetPrefix:" + "\n" + \
+                    " " "2) " + key + " Prefix on" + "\n" + \
+                    " " "3) " + key + " Prefix off" + "\n" + \
+                    " " "4) " + key + " Logout" + "\n" + \
+                    " " "5) " + key + " Rinda check errorlog" + "\n" + \
+                    " " "6) " + key + " Rinda reset errorlog" + "\n" + \
+                    " " "7) " + key + " Rinda Update" + "\n" + \
+                    " " "8) " + key + " Rinda Mention to [number of Groups]" + "\n" + \
+                    " " "9) " + key + " Rinda Memberlist to [number of groups]" + "\n" + \
+                    " " "10) " + key + " Rinda Bukaqr to [number of Groups]" + "\n" + \
+                    " " "11) " + key + " Rinda Tutupqr to [number of Groups]" + "\n" + \
+                    " " "12) " + key + " Rinda Crash to [number of Groups]" + "\n" + \
+                    " " "13) " + key + " Rinda Leave to [number of Groups]" + "\n\n" + \
+                    "  「Use < " + key + " > For the Prefix」" + "\n" + \
+                    "  「*Creator : @!*」"
+    return ownerMessage
     
-def helpgroup():
-    if settings['setKey'] == True:
-        key = settings['keyCommand']
-    else:
-        key = ''
-    helpGroup = "╔══[ Group Helper ]" + "\n" + \
-                    "╠ " + key + "GroupCreator" + "\n" + \
-                    "╠ " + key + "GroupId" + "\n" + \
-                    "╠ " + key + "GroupName" + "\n" + \
-                    "╠ " + key + "GroupPicture" + "\n" + \
-                    "╠ " + key + "GroupTicket" + "\n" + \
-                    "╠ " + key + "GroupMemberList" + "\n" + \
-                    "╠ " + key + "GroupList" + "\n" + \
-                    "╠ " + key + "GroupInfo" + "\n" + \
-                    "╠ " + key + "ChangeGroupPicture" + "\n" + \
-                    "╠ 「*Creator : @!*」" + "\n" + \
-                    "╚══[*] 「Use < " + key + " > For the Prefix」"
-    return helpGroup
-    
-def helpself():
-    if settings['setKey'] == True:
-        key = settings['keyCommand']
-    else:
-        key = ''
-    helpSelf = "╔══[ Self Helper ]" + "\n" + \
-                    "╠ " + key + "Me" + "\n" + \
-                    "╠ " + key + "MyMid" + "\n" + \
-                    "╠ " + key + "MyName" + "\n" + \
-                    "╠ " + key + "MyBio" + "\n" + \
-                    "╠ " + key + "ChangeBio:「Query」" + "\n" + \
-                    "╠ " + key + "ChangeName:「Query」" + "\n" + \
-                    "╠ " + key + "MyPicture" + "\n" + \
-                    "╠ " + key + "MyVideoProfile" + "\n" + \
-                    "╠ " + key + "MyCover" + "\n" + \
-                    "╠ " + key + "StealContact「Mention」" + "\n" + \
-                    "╠ " + key + "StealMid「Mention」" + "\n" + \
-                    "╠ " + key + "StealName「Mention」" + "\n" + \
-                    "╠ " + key + "StealBio「Mention」" + "\n" + \
-                    "╠ " + key + "StealPicture「Mention」" + "\n" + \
-                    "╠ " + key + "StealVideoProfile「Mention」" + "\n" + \
-                    "╠ " + key + "StealCover「Mention」" + "\n" + \
-                    "╠ " + key + "CloneProfile「Mention」" + "\n" + \
-                    "╠ " + key + "RestoreProfile" + "\n" + \
-                    "╠ " + key + "BackupProfile" + "\n" + \
-                    "╠ " + key + "ChangePictureProfile" + "\n" + \
-                    "╠ 「*Creator : @!*」" + "\n" + \
-                    "╚══[*] 「Use < " + key + " > For the Prefix」"    
-    return helpSelf
-
-def clientBot(op):
+def puyBot(op):
     try:
         if op.type == 0:
             print ("[ 0 ] END OF OPERATION")
@@ -324,28 +391,129 @@ def clientBot(op):
         if op.type == 5:
             print ("[ 5 ] NOTIFIED ADD CONTACT")
             if settings["autoAdd"] == True:
-                client.findAndAddContactsByMid(op.param2)
-                sendMention(op.param1, "@! Thx for add")
+                puy.findAndAddContactsByMid(op.param2)
+                sendMessageWithFooter(op.param1, "Thx for add")
 
         if op.type == 13:
-            print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
-            if clientMid in op.param3:
+            print ("[ 13 ] Invite Into Group")
+            if puyMid in op.param3:
                 if settings["autoJoin"] == True:
-                    client.acceptGroupInvitation(op.param1)
-                dan = client.getContact(op.param2)
-                tgb = client.getGroup(op.param1)
-                sendMention(op.param1, "Thx For Invited Me@!\nketik Help untuk Perintah".format(str(tgb.name)),[op.param2])
+                    puy.acceptGroupInvitation(op.param1)
+                dan = puy.getContact(op.param2)
+                tgb = puy.getGroup(op.param1)
+                sendMention(op.param1, "[ INVITATION ]\n Thx For Invited Me".format(str(tgb.name)),[op.param2])
                 #puy.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
-                client.sendContact(op.param1, op.param2)
+                puy.sendContact(op.param1, op.param2)
 
+#ADD ADMIN
+            if msg._from in admin:
+             if wait["addadmin"] == True:
+               if msg.contentMetadata["mid"] in admin:
+                   puy.sendMessage(msg.to,"Dia udah menjadi admin Rindaaaaaa")
+                   wait["addadmin"] = True
+               else:
+                   admin.append(msg.contentMetadata["mid"])
+                   wait["addadmin"] = True
+                   puy.sendMessage(msg.to,"Berhasil menambahkan dia menjadi admin Rinda.")
+            if wait["delladmin"] == True:
+               if msg.contentMetadata["mid"] in admin:
+                   admin.remove(msg.contentMetadata["mid"])
+                   puy.sendMessage(msg.to,"Berhasil menghapus dia dari admin Rinda kak")
+               else:
+                   wait["delladmin"] = True
+                   puy.sendMessage(msg.to,"Dia bukan admin rinda kak")                
+                
+        if op.type == 15:
+            print ("[ 15 ]  NOTIFIED LEAVE GROUP")
+            if settings["leaveMessage"] == True:
+                if "{gname}" in settings['leavePesan']:
+                    gName = puy.getGroup(op.param1).name
+                    msg = settings['leavePesan'].replace("{gname}", gName)
+                    msgSticker = settings["messageSticker"]["listSticker"]["leaveSticker"]
+                    if msgSticker != None:
+                        sid = msgSticker["STKID"]
+                        spkg = msgSticker["STKPKGID"]
+                        sver = msgSticker["STKVER"]
+                        sendSticker(op.param2, sver, spkg, sid)
+                    if "@!" in settings['leavePesan']:
+                        msg = msg.split("@!")
+                        return sendMention(op.param2, op.param2, msg[0], msg[1])
+                    return sendMention(op.param2, op.param2, "Hallo ", msg)
+                msgSticker = settings["messageSticker"]["listSticker"]["leaveSticker"]
+                if msgSticker != None:
+                    sid = msgSticker["STKID"]
+                    spkg = msgSticker["STKPKGID"]
+                    sver = msgSticker["STKVER"]
+                    sendSticker(op.param1, sver, spkg, sid)
+                sendMention(op.param1, op.param2, "Bye", "\n{}".format(str(settings['leavePesan'])))
+                
+        if op.type == 17:
+            print ("[ 17 ]  NOTIFIED ACCEPT GROUP INVITATION")
+            if settings["welcomeMessage"] == True:
+                group = puy.getGroup(op.param1)
+                contact = puy.getContact(op.param2)
+                msgSticker = settings["messageSticker"]["listSticker"]["welcomeSticker"]
+                if msgSticker != None:
+                    sid = msgSticker["STKID"]
+                    spkg = msgSticker["STKPKGID"]
+                    sver = msgSticker["STKVER"]
+                    sendSticker(op.param1, sver, spkg, sid)
+                if "{gname}" in settings['welcomePesan'].lower():
+                    gName = group.name
+                    msg = settings['welcomePesan'].replace("{gname}", gName)
+                    if "@!" in msg:
+                        msg = msg.split("@!")
+                        return sendMention(op.param1, op.param2, msg[0], msg[1])
+                    sendMention(op.param1, op.param2, "Hi", msg)
+                else:
+                    sendMention(op.param1, op.param2, "Hi","\n{}".format(str(settings['welcomePesan'])))
+                    contact = puy.getContact(op.param2)
+                    puy.sendImageWithURL(op.param1,image)
+                    arg = "   Group Name : {}".format(str(group.name))
+                    arg += "\n   User Join : {}".format(str(contact.displayName))
+                    print (arg)                
+                
+        if op.type == 19:
+            print ("[ 19 ] NOTIFIED KICKOUT FROM GROUP")
+            group = puy.getGroup(op.param1)
+            contact = puy.getContact(op.param2)
+            victim = puy.getContact(op.param3)
+            dap = "   Group Name : {}".format(str(group.name))
+            dapp = "\n   Executor : {}".format(str(contact.displayName))
+            dappp = "\n   Victim : {}".format(str(victim.displayName))
+            puy.sendMessage(op.param1, "「 Notify Kickout From Group 」\n\nPelaku Kick : {}\nK{}".format(str(contact.displayName),"orban Kick : {}".format(str(victim.displayName))))
+            puy.sendContact(op.param1, op.param2)
+            puy.sendContact(op.param1, op.param3)
+            print (dap)                
+                
+        if op.type == 65:
+            if settings["detectUnsend"] == False:
+                try:
+                    at = op.param1
+                    msg_id = op.param2
+                    if msg_id in msg_dict:
+                        if msg_dict[msg_id]["from"]:
+                                ginfo = puy.getGroup(at)
+                                ariftj = puy.getContact(msg_dict[msg_id]["from"])
+                                ret_ =  "Sticker Dihapus\n"
+                                ret_ += "Pengirim : {}".format(str(ariftj.displayName))
+                                ret_ += "\nNama Grup : {}".format(str(ginfo.name))
+                                ret_ += "\nWaktu Ngirim : {}".format(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"])))
+                                ret_ += "{}".format(str(msg_dict[msg_id]["text"]))
+                                puy.sendMessage(at, str(ret_))
+                                puy.sendImage(at, msg_dict[msg_id]["data"])
+                        del msg_dict[msg_id]
+                except Exception as e:
+                    print(e)                
+                
         if op.type in [22, 24]:
             print ("[ 22 And 24 ] NOTIFIED INVITE INTO ROOM & NOTIFIED LEAVE ROOM")
             if settings["autoLeave"] == True:
-                sendMention(op.param1, "@! hmm?")
-                client.leaveRoom(op.param1)
-
+                sendMention(op.param2, "@! hmm?")
+                puy.leaveRoom(op.param1)
+                                
         if op.type == 26:
-           if settings["selfbot"] == True:
+           if wait["selfbot"] == True:
                msg = op.message
                if msg.to in simisimi:
                    try:
@@ -355,24 +523,57 @@ def clientBot(op):
                            data = r.text
                            data = json.loads(data)
                            if data["status"] == 200:
-                               aditmadzs.sendMessage(msg.to, str(data["answer"]))
+                               puy.sendMessage(msg.to, str(data["answer"]))
                    except Exception as error:
                        pass
 
+               if msg.to in translatetr:
+                   try:
+                       if msg.text is not None:
+                           kata = msg.text
+                           translator = Translator()
+                           hasil = translator.translate(kata, dest='tr')
+                           A = hasil.text
+                           puy.sendMessage(msg.to, A)
+                   except Exception as error:
+                       pass
+
+               if msg.to in translateen:
+                   try:
+                       if msg.text is not None:
+                           kata = msg.text
+                           translator = Translator()
+                           hasil = translator.translate(kata, dest='en')
+                           A = hasil.text
+                           puy.sendMessage(msg.to, A)
+                   except Exception as error:
+                       pass
+
+               if msg.to in translateid:
+                   try:
+                       if msg.text is not None:
+                           kata = msg.text
+                           translator = Translator()
+                           hasil = translator.translate(kata, dest='id')
+                           A = hasil.text
+                           puy.sendMessage(msg.to, A)
+                   except Exception as error:
+                       pass                                
+                                
         if op.type == 26:
             try:
-                print ("[ 25 ] SEND MESSAGE")
+                print ("[ 26 ] PUBLIC")
                 msg = op.message
                 text = msg.text
                 msg_id = msg.id
                 receiver = msg.to
                 sender = msg._from
-                setKey = settings["keyCommand"].title()
-                if settings["setKey"] == False:
-                    setKey = ''
+                prefix = settings["keyCommand"].title()
+                if settings["prefix"] == False:
+                    prefix = ''
                 if msg.toType == 0 or msg.toType == 1 or msg.toType == 2:
                     if msg.toType == 0:
-                        if sender != client.profile.mid:
+                        if sender != puy.profile.mid:
                             to = sender
                         else:
                             to = receiver
@@ -386,506 +587,209 @@ def clientBot(op):
                         else:
                             cmd = command(text)
                             if cmd == "help":
-                              if settings["selfbot"] == True:
+                              if wait["selfbot"] == True:
                                 helpMessage = helpmessage()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                creator = client.getContact(poey)
-                                #client.sendMessage(to, str(helpMessage))
+                                creator = puy.getContact(poey)
                                 sendMention(to, str(helpMessage), [poey])
-                            if cmd == "help sett":
-                              if settings["selfbot"] == True:
-                                helpSett = helpsett()
+                                
+                            if cmd == "helpstaff":
+                              if wait["selfbot"] == True:
+                                ownerMessage = ownermessage()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                creator = client.getContact(poey)
-                                #client.sendMessage(to, str(helpSett))
-                                sendMention(to, str(helpSett), [poey])
-                            if cmd == "more help":
-                              if settings["selfbot"] == True:
-                                helpMenu2 = helpmenu2()
-                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                creator = client.getContact(poey)
-                                #client.sendMessage(to, str(helpSett))
-                                sendMention(to, str(helpMenu2), [poey])
-                            if cmd == "help group":
-                              if settings["selfbot"] == True:
-                                helpGroup = helpgroup()
-                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                creator = client.getContact(poey)
-                                #client.sendMessage(to, str(helpGroup))
-                                sendMention(to, str(helpGroup), [poey])
-                            if cmd == "help self":
-                              if settings["selfbot"] == True:
-                                helpSelf = helpself()
-                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                creator = client.getContact(poey)
-                                #client.sendMessage(to, str(helpSelf))
-                                sendMention(to, str(helpSelf), [poey])
+                                creator = puy.getContact(poey)
+                                sendMention(to, str(ownerMessage), [poey])
+                            
                             if cmd == "rinda pause":
                               if msg._from in admin:
-                                  settings["selfbot"] = False
-                                  client.sendMessage(msg.to, "Rinda diberhentikan sementara")
+                                  wait["selfbot"] = False
+                                  puy.sendMessage(msg.to, "Rinda diberhentikan sementara")
                             
                             if cmd == "rinda comeon":
-                              if msg._from in admin:
-                                  settings["selfbot"] = True
-                                  client.sendMessage(msg.to, "Rinda aktif kembali")
-                            elif cmd.startswith("changekey:"):
-                              if msg._from in admin:
-                                sep = text.split(" ")
-                                key = text.replace(sep[0] + " ","")
-                                if " " in key:
-                                    client.sendMessage(to, "Key tidak bisa menggunakan spasi")
-                                else:
-                                    settings["keyCommand"] = str(key).lower()
-                                    client.sendMessage(to, "Berhasil mengubah key command menjadi [ {} ]".format(str(key).lower()))
-                            elif cmd == "rinda tokenlist":
-                                sendMention(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
+                                if msg._from in admin:
+                                    wait["selfbot"] = True
+                                    puy.sendMessage(msg.to, "Rinda aktif kembali")
+                            
+                            if cmd == "#help":
+                              if wait["selfbot"] == True:
+                                helpMessage = helpmessage()
+                                puy.sendMessage(to, str(helpMessage),{'AGENT_ICON':'http://dl.profile.line-cdn.net/0hkY3juiptNHYOExk5wsdLITJWOht5PTI-diUpGX8RPhZ0IydzMSV_FC0VaxV0I3JyMCZ4Ei8VOEQh','AGENT_LINK':'https://line.me/ti/p/~yapuy','AGENT_NAME':'Help Message'})
+                            
+                            elif cmd == "tokengen":
+                                sendMentionFooter(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
                             elif cmd == "rinda get token":
-                                sendMention(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
+                                sendMentionFooter(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
+                                
                             elif cmd == "sp1":
-                              if settings["selfbot"] == True:
                                 start = time.time()
-                                client.sendMessage(to, "Counting...")
+                                puy.sendMessage(to, "Counting...")
                                 speed = time.time() - start
                                 ping = speed * 1000
-                                client.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
+                                puy.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
+                                
                             elif cmd == "sp2":
-                                if msg._from in admin:
-                                  if settings["selfbot"] == True:
-                                    start = time.time()
-                                    client.sendMessage(to, "...")
-                                    elapsed_time = time.time() - start
-                                    client.sendMessage(to, "{}".format(str(elapsed_time)))
-                            elif cmd.startswith("sp3"):
-                                if settings["selfbot"] == True:
-                                  Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                  get_profile_time_start = time.time()
-                                  get_profile = client.getProfile()
-                                  get_profile_time = time.time() - get_profile_time_start
-                                  get_group_time_start = time.time()
-                                  get_group = client.getGroupIdsJoined()
-                                  get_group_time = time.time() - get_group_time_start
-                                  get_contact_time_start = time.time()
-                                  get_contact = client.getContact(Ownerz)
-                                  get_contact_time = time.time() - get_contact_time_start
-                                  client.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
+                              if msg._from in Owner:
+                                start = time.time()
+                                puy.sendMessage(to, "...")
+                                elapsed_time = time.time() - start
+                                puy.sendMessage(to, "{}".format(str(elapsed_time)))
+                                
                             elif cmd == "rinda runtime":
-                              if msg._from in admin:
                                 timeNow = time.time()
                                 runtime = timeNow - botStart
                                 runtime = format_timespan(runtime)
-                                client.sendMessage(to, "Rinda already actived of {}".format(str(runtime)))
-                            elif cmd == "rinda restart":
-                              if msg._from in admin:
-                                client.sendMessage(to, "Berhasil merestart Bot bos")
-                                restartBot()
-# Pembatas Script #
-
-                            elif cmd == "rinda statuss":
-                              if wait["selfbot"] == True:
-                                if msg._from in admin:
-                                    tz = pytz.timezone("Asia/Jakarta")
-                                    timeNow = datetime.now(tz=tz)
-                                    md = " < S T A T U S >\n\n"
-                                    if wait["unsend"] == True: md+=" [*Unsend Actived*]\n"
-                                    else: md+=" [*Unsend Unactived*]\n"
-                                    if wait["sticker"] == True: md+=" [*StickerInfo Actived*]\n"
-                                    else: md+=" [*StickerInfo Unactived*]\n"
-                                    if wait["contact"] == True: md+=" [*GetInfo Actived*]\n"
-                                    else: md+=" [*GetInfo Unactived*]\n"
-                                    if wait["Mentionkick"] == True: md+=" [*Mentionkick Actived*]\n"
-                                    else: md+=" [*Mentionkick Unactived*]\n"
-                                    if wait["detectMention"] == True: md+=" [*Autoreplytag Actived*]\n"
-                                    else: md+=" [*Autoreplytag Unactived*]\n"
-                                    if wait["Mentiongift"] == True: md+=" [*Mentiongift Actived*]\n"
-                                    else: md+=" [*Mentiongift Unactived*]\n"
-                                    if wait["autoJoin"] == True: md+=" [*AutoJoin Actived*]\n"
-                                    else: md+=" [*AutoJoin Unactived*]\n"
-                                    if settings["autoJoinTicket"] == True: md+=" [*JoinQR Actived*]\n"
-                                    else: md+=" [*JoinQR Unactived*]\n"
-                                    if msg.to in simisimi: md+=" [*Simisimi Actived*]\n"
-                                    else: md+=" [*Simisimi Unactived*]\n"
-                                    if wait["autoAdd"] == True: md+=" [*AutoaddMsg Actived*]\n"
-                                    else: md+=" [*AutoaddMsg Unactived*]\n"
-                                    if msg.to in welcome: md+=" [*WelcomeMsg Actived*]\n"
-                                    else: md+=" [*WelcomeMsg Unactived*]\n"
-                                    if wait["autoLeave"] == True: md+=" [*LeaveMsg Actived*]\n"
-                                    else: md+=" [*LeaveMsg Unactived*]\n"
-                                    client.sendMessage(msg.to, md+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n<"+ datetime.strftime(timeNow,'%H:%M:%S')+">\n")
+                                puy.sendMessage(to, "Rinda has been Active for {} puy".format(str(runtime)))                                
                                 
-                            elif cmd == "autoadd on":
-                                settings["autoAdd"] = True
-                                client.sendMessage(to, "Auto add is Actived!")
-                            elif cmd == "welcomee on":
-                                settings["Sambutan"] == True
-                                client.sendMessage(to,"Sudah On")
-                            elif cmd == "welcomee off":
-                                settings["Sambutan"] == False
-                                client.sendMessage(to,"Sudah Off")
-                            elif cmd == "autoaddd off":
-                                settings["autoAdd"] = False
-                                client.sendMessage(to, "Auto add is Nonactived!")
-                            elif cmd == "autojoinn on":
-                                settings["autoJoin"] = True
-                                client.sendMessage(to, "Auto join is Actived!")
-                            elif cmd == "autojoinn off":
-                                settings["autoJoin"] = False
-                                client.sendMessage(to, "Auto join is Nonactived!")   
-                            elif cmd == "changedpp on":
-                                settings["changeDisplayPicture"] = True
-                                client.sendMessage(to, "Change Display Picture is Actived!") 
-                            elif cmd == "changedpp off":
-                                settings["changeDisplayPicture"] = False
-                                client.sendMessage(to, "Change Display Picture is Nonactived!")                                
-                            elif cmd == "lurkingsett on":
-                                settings["lurk"] = True
-                                client.sendMessage(to, "Lurking is Actived!")     
-                            elif cmd == "lurkingsett off":
-                                settings["lurk"] = False
-                                client.sendMessage(to, "Lurking is Nonactived!")                                
-                            elif cmd == "autoleavee on":
-                                settings["autoLeave"] = True
-                                client.sendMessage(to, "Auto leave is Actived!")
-                            elif cmd == "autoleavee off":
-                                settings["autoLeave"] = False
-                                client.sendMessage(to, "Auto leave is Nonactived!")
-                            elif cmd == "autoresponn on":
-                                settings["autoRespon"] = True
-                                client.sendMessage(to, "Auto respon is Actived")
-                            elif cmd == "autoresponn off":
-                                settings["autoRespon"] = False
-                                client.sendMessage(to, "Auto respon is Nonactived")
-                            elif cmd == "autoreadd on":
-                                settings["autoRead"] = True
-                                client.sendMessage(to, "Auto read is Actived")
-                            elif cmd == "autoreadd off":
-                                settings["autoRead"] = False
-                                client.sendMessage(to, "Auto read is Nonactived")
-                            elif cmd == "autojointickett on":
-                                settings["autoJoinTicket"] = True
-                                client.sendMessage(to, "Auto join by Ticket is Actived")
-                            elif cmd == "autoJoinTickett off":
-                                settings["autoJoin"] = False
-                                client.sendMessage(to, "Auto join by Ticket is Nonactived")
-                            elif cmd == "checkcontactt on":
-                                settings["checkContact"] = True
-                                client.sendMessage(to, "Check details contact is Actived")
-                            elif cmd == "checkcontactt off":
-                                settings["checkContact"] = False
-                                client.sendMessage(to, "Check details contact is Nonactived")
-                            elif cmd == "checkpostt on":
-                                settings["checkPost"] = True
-                                client.sendMessage(to, "Check details post is Actived")
-                            elif cmd == "checkpostt off":
-                                settings["checkPost"] = False
-                                client.sendMessage(to, "Check details post is Nonactived")
-                            elif cmd == "checkstickerr on":
-                                settings["checkSticker"] = True
-                                client.sendMessage(to, "Check details sticker is Actived")
-                            elif cmd == "checkstickerr off":
-                                settings["checkSticker"] = False
-                                client.sendMessage(to, "Check details sticker is Nonactived")
-                            elif cmd == "unsendchatt on":
-                                settings["unsendMessage"] = True
-                                client.sendMessage(to, "Unsend Message Detect is Actived")
-                            elif cmd == "unsendchatt off":
-                                settings["unsendMessage"] = False
-                                client.sendMessage(to, "Unsend Message Detect is Nonactived")
-                            elif cmd == "status":
+                            elif cmd.startswith("sp3"):
+                                Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                get_profile_time_start = time.time()
+                                get_profile = puy.getProfile()
+                                get_profile_time = time.time() - get_profile_time_start
+                                get_group_time_start = time.time()
+                                get_group = puy.getGroupIdsJoined()
+                                get_group_time = time.time() - get_group_time_start
+                                get_contact_time_start = time.time()
+                                get_contact = puy.getContact(Ownerz)
+                                get_contact_time = time.time() - get_contact_time_start
+                                puy.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
+                                
+                            elif cmd == "rinda update":
+                              if sender in Owner:
+                                tz = pytz.timezone("Asia/Jakarta")
+                                timeNow = datetime.now(tz=tz)
+                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
+                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+                                hr = timeNow.strftime("%A")
+                                bln = timeNow.strftime("%m")
+                                for i in range(len(day)):
+                                    if hr == day[i]: hasil = hari[i]
+                                for k in range(0, len(bulan)):
+                                    if bln == str(k): bln = bulan[k-1]
+                                Timed = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
+                                #if msg.to not in read['readPoint']:
+                                    #dap.sendMessage(msg.to, "「 NOTIFIED BOT SPEED 」\n\n" + Timed)
+                                #sendMention(to, "@! \nPUY berhasil diperbarui.\n\nPada :\n" + Timed, [sender])
+                                puy.sendMessage(to, "Rinda berhasil diperbarui.\n\nPada :\n" + Timed)
+                                restartBot()
+                              else:
+                                  puy.sendMessage("Permission Denied")
+
+                            elif cmd.startswith("about rinda"):
                                 try:
-                                    ret_ = "*Status*"
-                                    if settings["autoAdd"] == True: ret_ += "\n*[ ON ] Auto Add"
-                                    else: ret_ += "\n*[ OFF ] Auto Add"
-                                    if settings["autoJoin"] == True: ret_ += "\n*[ ON ] Auto Join"
-                                    else: ret_ += "\n*[ OFF ] Auto Join"
-                                    if settings["autoLeave"] == True: ret_ += "\n*[ ON ] Auto Leave Room"
-                                    else: ret_ += "\n*[ OFF ] Auto Leave Room"
-                                    if settings["autoJoinTicket"] == True: ret_ += "\n*[ ON ] Auto Join Ticket"
-                                    else: ret_ += "\n*[ OFF ] Auto Join Ticket"
-                                    if settings["autoRead"] == True: ret_ += "\n*[ ON ] Auto Read"
-                                    else: ret_ += "\n*[ OFF ] Auto Read"
-                                    if settings["autoRespon"] == True: ret_ += "\n*[ ON ] Detect Mention"
-                                    else: ret_ += "\n*[ OFF ] Detect Mention"
-                                    if settings["checkContact"] == True: ret_ += "\n*[ ON ] Check Contact"
-                                    else: ret_ += "\n*[ OFF ] Check Contact"
-                                    if settings["checkPost"] == True: ret_ += "\n*[ ON ] Check Post"
-                                    else: ret_ += "\n*[ OFF ] Check Post"
-                                    if settings["checkSticker"] == True: ret_ += "\n*[ ON ] Check Sticker"
-                                    else: ret_ += "\n*[ OFF ] Check Sticker"
-                                    if settings["lurk"] == True: ret_ += "\n*[ ON ] Lurkset"
-                                    else: ret_ += "\n*[ OFF ] Lurkset"                                    
-                                    if settings["setKey"] == True: ret_ += "\n*[ ON ] Set Key"
-                                    else: ret_ += "\n*[ OFF ] Set Key"
-                                    if settings["unsendMessage"] == True: ret_ += "\n*[ ON ] Unsend Message"
-                                    else: ret_ += "\n*[ OFF ] Unsend Message"
-                                    ret_ += ""
-                                    client.sendMessage(to, str(ret_))
+                                    arr = []
+                                    Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                    creator = puy.getContact(Ownerz)
+                                    contact = puy.getContact(puyMid)
+                                    grouplist = puy.getGroupIdsJoined()
+                                    contactlist = puy.getAllContactIds()
+                                    blockedlist = puy.getBlockedContactIds()
+                                    ret_ = " "
+                                    ret_ += " Bot Name : {}".format(contact.displayName)
+                                    ret_ += "\n  In Groups : {}".format(str(len(grouplist)))
+                                    ret_ += "\n  Friends : {}".format(str(len(contactlist)))
+                                    ret_ += "\n  Blocked Account : {}".format(str(len(blockedlist)))                                    
+                                    #ret_ += "\n  [ About Selfbot ]"
+                                    #ret_ += "\n  Version : Premium"
+                                    #ret_ += "\n  Creator : {}".format(creator.displayName)
+                                    #ret_ += "\n  Creator : @!".format(Owner)
+                                    puy.sendMessage(to, str(ret_))
+                                    #puy.sendMessage(to, "「 Read Text Below 」")
+                                    sendMention(to, "「 About Rinda 」\n\nThe Beginning of this Bot Comes from Helloworld, I'm just Reworked This!\n\nOf Course Special Thanks To HelloWorld, And the Friends Around Me!\n\n*Creator : @!", [Ownerz])
                                 except Exception as e:
-                                    client.sendMessage(msg.to, str(e))
-# Pembatas Script #
-                            elif cmd == "crashing":
-                                client.sendContact(to, "u1f41296217e740650e0448b96851a3e2',")
-                            elif cmd.startswith("changename:"):
-                                sep = text.split(" ")
-                                string = text.replace(sep[0] + " ","")
-                                if len(string) <= 20:
-                                    profile = client.getProfile()
-                                    profile.displayName = string
-                                    client.updateProfile(profile)
-                                    client.sendMessage(to,"Successfully changed display name to{}".format(str(string)))
-                            elif cmd.startswith("changebio:"):
-                                sep = text.split(" ")
-                                string = text.replace(sep[0] + " ","")
-                                if len(string) <= 500:
-                                    profile = client.getProfile()
-                                    profile.statusMessage = string
-                                    client.updateProfile(profile)
-                                    client.sendMessage(to,"Successfully changed status message to{}".format(str(string)))
-                            #elif cmd == "me":
-                                #sendMention(to, "@!", [sender])
-                                #client.sendContact(to, sender)
-                            elif cmd == "sticker":
-                                try:
-                                    query = msg.text.replace("sticker", "")
-                                    query = int(query)
-                                    if type(query) == int:
-                                        client.sendImageWithURL(receiver, 'https://stickershop.line-scdn.net/stickershop/v1/product/'+str(query)+'/ANDROID/main.png')
-                                        client.sendText(receiver, 'https://line.me/S/sticker/'+str(query))
-                                    else:
-                                        client.sendText(receiver, 'gunakan key sticker angka bukan huruf')
-                                except Exception as e:
-                                    client.sendText(receiver, str(e))     
-                            elif cmd == "unsendme":
-                                client.unsendMessage(msg_id)                                    
-                            elif cmd == "mymid":
-                                client.sendMessage(to, "[ MID ]\n{}".format(sender))
-                            elif cmd == "myname":
-                                contact = client.getContact(sender)
-                                client.sendMessage(to, "[ Display Name ]\n{}".format(contact.displayName))
-                            elif cmd == "mybio":
-                                contact = client.getContact(sender)
-                                client.sendMessage(to, "[ Status Message ]\n{}".format(contact.statusMessage))
-                            elif cmd == "mypicture":
-                                contact = client.getContact(sender)
-                                client.sendImageWithURL(to,"http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus))
-                            elif cmd == "myvideoprofile":
-                                contact = client.getContact(sender)
-                                client.sendVideoWithURL(to,"http://dl.profile.line-cdn.net/{}/vp".format(contact.pictureStatus))
-                            elif cmd == "mycover":
-                                channel = client.getProfileCoverURL(sender)          
-                                path = str(channel)
-                                client.sendImageWithURL(to, path)
-                            elif cmd.startswith("cloneprofile "):
-                                if 'MENTION' in msg.contentMetadata.keys()!= None:
-                                    names = re.findall(r'@(\w+)', text)
-                                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                                    mentionees = mention['MENTIONEES']
-                                    lists = []
-                                    for mention in mentionees:
-                                        if mention["M"] not in lists:
-                                            lists.append(mention["M"])
-                                    for ls in lists:
-                                        contact = client.getContact(ls)
-                                        client.cloneContactProfile(ls)
-                                        client.sendMessage(to, "Successfully clone profile {}".format(contact.displayName))
-                            elif cmd == "restoreprofile":
-                                try:
-                                    clientProfile = client.getProfile()
-                                    clientProfile.displayName = str(settings["myProfile"]["displayName"])
-                                    clientProfile.statusMessage = str(settings["myProfile"]["statusMessage"])
-                                    clientProfile.pictureStatus = str(settings["myProfile"]["pictureStatus"])
-                                    client.updateProfileAttribute(8, clientProfile.pictureStatus)
-                                    client.updateProfile(clientProfile)
-                                    coverId = str(settings["myProfile"]["coverId"])
-                                    client.updateProfileCoverById(coverId)
-                                    client.sendMessage(to, "Successfully restore profile wait a while until profile change")
-                                except Exception as e:
-                                    client.sendMessage(to, "Failed restore profile")
-                                    logError(error)
-                            elif cmd == "backupprofile":
-                                try:
-                                    profile = client.getProfile()
-                                    settings["myProfile"]["displayName"] = str(profile.displayName)
-                                    settings["myProfile"]["statusMessage"] = str(profile.statusMessage)
-                                    settings["myProfile"]["pictureStatus"] = str(profile.pictureStatus)
-                                    coverId = client.getProfileDetail()["result"]["objectId"]
-                                    settings["myProfile"]["coverId"] = str(coverId)
-                                    client.sendMessage(to, "Successfully backup profile")
-                                except Exception as e:
-                                    client.sendMessage(to, "Failed backup profile")
-                                    logError(error)
-                            elif cmd.startswith("stealmid "):
-                                if 'MENTION' in msg.contentMetadata.keys()!= None:
-                                    names = re.findall(r'@(\w+)', text)
-                                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                                    mentionees = mention['MENTIONEES']
-                                    lists = []
-                                    for mention in mentionees:
-                                        if mention["M"] not in lists:
-                                            lists.append(mention["M"])
-                                    ret_ = "[ Mid User ]"
-                                    for ls in lists:
-                                        ret_ += "\n{}".format(str(ls))
-                                    client.sendMessage(to, str(ret_))
-                            elif cmd.startswith("stealname "):
-                                if 'MENTION' in msg.contentMetadata.keys()!= None:
-                                    names = re.findall(r'@(\w+)', text)
-                                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                                    mentionees = mention['MENTIONEES']
-                                    lists = []
-                                    for mention in mentionees:
-                                        if mention["M"] not in lists:
-                                            lists.append(mention["M"])
-                                    for ls in lists:
-                                        contact = client.getContact(ls)
-                                        client.sendMessage(to, "[ Display Name ]\n{}".format(str(contact.displayName)))
-                            elif cmd.startswith("stealbio "):
-                                if 'MENTION' in msg.contentMetadata.keys()!= None:
-                                    names = re.findall(r'@(\w+)', text)
-                                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                                    mentionees = mention['MENTIONEES']
-                                    lists = []
-                                    for mention in mentionees:
-                                        if mention["M"] not in lists:
-                                            lists.append(mention["M"])
-                                    for ls in lists:
-                                        contact = client.getContact(ls)
-                                        client.sendMessage(to, "[ Status Message ]\n{}".format(str(contact.statusMessage)))
-                            elif cmd.startswith("stealpicture"):
-                                if 'MENTION' in msg.contentMetadata.keys()!= None:
-                                    names = re.findall(r'@(\w+)', text)
-                                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                                    mentionees = mention['MENTIONEES']
-                                    lists = []
-                                    for mention in mentionees:
-                                        if mention["M"] not in lists:
-                                            lists.append(mention["M"])
-                                    for ls in lists:
-                                        contact = client.getContact(ls)
-                                        path = "http://dl.profile.line.naver.jp/{}".format(contact.pictureStatus)
-                                        client.sendImageWithURL(to, str(path))
-                            elif cmd.startswith("stealvideoprofile "):
-                                if 'MENTION' in msg.contentMetadata.keys()!= None:
-                                    names = re.findall(r'@(\w+)', text)
-                                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                                    mentionees = mention['MENTIONEES']
-                                    lists = []
-                                    for mention in mentionees:
-                                        if mention["M"] not in lists:
-                                            lists.append(mention["M"])
-                                    for ls in lists:
-                                        contact = client.getContact(ls)
-                                        path = "http://dl.profile.line.naver.jp/{}/vp".format(contact.pictureStatus)
-                                        client.sendVideoWithURL(to, str(path))
-                            elif cmd.startswith("stealcover "):
-                                if client != None:
-                                    if 'MENTION' in msg.contentMetadata.keys()!= None:
-                                        names = re.findall(r'@(\w+)', text)
-                                        mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                                        mentionees = mention['MENTIONEES']
-                                        lists = []
-                                        for mention in mentionees:
-                                            if mention["M"] not in lists:
-                                                lists.append(mention["M"])
-                                        for ls in lists:
-                                            channel = client.getProfileCoverURL(ls)
-                                            path = str(channel)
-                                            client.sendImageWithURL(to, str(path))
-# Pembatas Script #
-                            elif cmd == 'groupcreator':
-                                group = client.getGroup(to)
-                                GS = group.creator.mid
-                                client.sendContact(to, GS)
-                            elif cmd == 'groupid':
-                                gid = client.getGroup(to)
-                                client.sendMessage(to, "[ID Group : ]\n" + gid.id)
-                            elif cmd == 'grouppicture':
-                                group = client.getGroup(to)
-                                path = "http://dl.profile.line-cdn.net/" + group.pictureStatus
-                                client.sendImageWithURL(to, path)
-                            elif cmd == 'groupname':
-                                gid = client.getGroup(to)
-                                client.sendMessage(to, "[Nama Group : ]\n" + gid.name)
-                            elif cmd == 'groupticket':
-                                if msg.toType == 2:
-                                    group = client.getGroup(to)
-                                    if group.preventedJoinByTicket == False:
-                                        ticket = client.reissueGroupTicket(to)
-                                        client.sendMessage(to, "[ Group Ticket ]\nhttps://line.me/R/ti/g/{}".format(str(ticket)))
-                                    else:
-                                        client.sendMessage(to, "The qr group is not open please open it first with the command {}openqr".format(str(settings["keyCommand"])))
-                            elif cmd == 'groupticket on':
-                                if msg.toType == 2:
-                                    group = client.getGroup(to)
-                                    if group.preventedJoinByTicket == False:
-                                        client.sendMessage(to, "The qr group is already open")
-                                    else:
-                                        group.preventedJoinByTicket = False
-                                        client.updateGroup(group)
-                                        client.sendMessage(to, "Berhasil membuka grup qr")
-                            elif cmd == 'groupticket off':
-                                if msg.toType == 2:
-                                    group = client.getGroup(to)
-                                    if group.preventedJoinByTicket == True:
-                                        client.sendMessage(to, "The qr group is already closed")
-                                    else:
-                                        group.preventedJoinByTicket = True
-                                        client.updateGroup(group)
-                                        client.sendMessage(to, "Berhasil menutup grup qr")
-                            elif cmd == 'groupinfooo':
-                                group = client.getGroup(to)
-                                try:
-                                    gCreator = group.creator.displayName
-                                except:
-                                    gCreator = "Not Found"
-                                if group.invitee is None:
-                                    gPending = "0"
+                                    puy.sendMessage(msg.to, str(e))
+                                  
+                            elif cmd.startswith("#me"):
+                                contact = puy.getContact(puyMid)
+                                image = "http://dl.profile.line-cdn.net/" + contact.pictureStatus
+                                name = contact.displayName
+                                puy.sendMessage(to, contentMetadata={'countryCode': 'ID', 'i-installUrl': 'line://ti/p/~yapuy', 'a-packageName': 'com.spotify.music', 'linkUri': 'line://ti/p/~yapuy', 'subText': 'Hei', 'a-installUrl': 'line://ti/p/~yapuy', 'type': 'mt', 'previewUrl': image, 'a-linkUri': 'line://ti/p/~yapuy', 'text': name, 'id': 'mt000000000a6b79f9', 'i-linkUri': 'line://ti/p/~yapuy'}, contentType=19)                                  
+                                  
+                            elif cmd == "me":
+                                contact = puy.getContact(sender)
+                                userid = "https://line.me/ti/p/~" + puy.profile.userid
+                                sendMention(to, "@!", [sender])
+                                #puy.sendContact(to, sender)
+                                puy.sendImageWithURL(to,"http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus))
+                                
+                            elif cmd == "rinda check errorlog":
+                                with open('logError.txt', 'r') as er:
+                                        error = er.read()
+                                puy.sendMessage(to, str(error))
+
+              ## LURKING ##                      
+                            elif text.lower() == 'rinda get reader on':
+                                tz = pytz.timezone("Asia/Jakarta")
+                                timeNow = datetime.now(tz=tz)
+                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
+                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+                                hr = timeNow.strftime("%A")
+                                bln = timeNow.strftime("%m")
+                                for i in range(len(day)):
+                                    if hr == day[i]: hasil = hari[i]
+                                for k in range(0, len(bulan)):
+                                    if bln == str(k): bln = bulan[k-1]
+                                readTime = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
+                                if msg.to in read['readPoint']:
+                                        try:
+                                            del read['readPoint'][msg.to]
+                                            del read['readMember'][msg.to]
+                                            del read['readTime'][msg.to]
+                                        except:
+                                            pass
+                                        read['readPoint'][msg.to] = msg.id
+                                        read['readMember'][msg.to] = ""
+                                        read['readTime'][msg.to] = datetime.now().strftime('%H:%M:%S')
+                                        read['ROM'][msg.to] = {}
+                                        with open('read.json', 'w') as fp:
+                                            json.dump(read, fp, sort_keys=True, indent=4)                                                                                                                                                                                                                                                                                                                                                           
+                                            #sendMention(to, "@!\n「 Getreader Diaktifkan 」\nWaktu :\n" + readTime, [sender])
+                                            puy.sendMessage(to, "「 Getreader Diaktifkan 」\n\nWaktu :\n" + readTime)
                                 else:
-                                    gPending = str(len(group.invitee))
-                                if group.preventedJoinByTicket == True:
-                                    gQr = "Closed"
-                                    gTicket = "There is no"
+                                    try:
+                                        del read['readPoint'][msg.to]
+                                        del read['readMember'][msg.to]
+                                        del read['readTime'][msg.to]
+                                    except:
+                                        pass
+                                    read['readPoint'][msg.to] = msg.id
+                                    read['readMember'][msg.to] = ""
+                                    read['readTime'][msg.to] = datetime.now().strftime('%H:%M:%S')
+                                    read['ROM'][msg.to] = {}
+                                    with open('read.json', 'w') as fp:
+                                        json.dump(read, fp, sort_keys=True, indent=4)
+                                        #sendMention(to, "@!\n「 Getreader Diaktifkan 」\n" + readTime, [sender])
+                                        puy.sendMessage(to, "「 Getreader Diaktifkan 」\n\n" + readTime)
+                            
+                            elif text.lower() == 'rinda get reader off':
+                                tz = pytz.timezone("Asia/Jakarta")
+                                timeNow = datetime.now(tz=tz)
+                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
+                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+                                hr = timeNow.strftime("%A")
+                                bln = timeNow.strftime("%m")
+                                for i in range(len(day)):
+                                    if hr == day[i]: hasil = hari[i]
+                                for k in range(0, len(bulan)):
+                                    if bln == str(k): bln = bulan[k-1]
+                                readTime = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
+                                if msg.to not in read['readPoint']:
+                                    #sendMention(to, "「 Getreader telah dimatikan  」\n@!\nWaktu :\n" + readTime, [sender])
+                                    puy.sendMessage(to, "「 Getreader telah dimatikan  」\n\nWaktu :\n" + readTime)
                                 else:
-                                    gQr = "Opened"
-                                    gTicket = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(group.id)))
-                                path = "http://dl.profile.line-cdn.net/" + group.pictureStatus
-                                ret_ = "* Group Info Started *"
-                                ret_ += "\n*Group name : {}".format(str(group.name))
-                                ret_ += "\n*ID Group : {}".format(group.id)
-                                ret_ += "\n*Group maker : {}".format(str(gCreator))
-                                ret_ += "\n*Number of Members : {}".format(str(len(group.members)))
-                                ret_ += "\n*Number of Pending Members : {}".format(gPending)
-                                ret_ += "\n*Group Qr : {}".format(gQr)
-                                ret_ += "\n*Group Ticket : {}".format(gTicket)
-                                ret_ += ""
-                                client.sendMessage(to, str(ret_))
-                                client.sendImageWithURL(to, path)
-# Pembatas Script #
-                            elif cmd == "changedp":
-                                settings["changeDisplayPicture"] = True
-                                client.sendMessage(to, "*Change Display Picture*\n\nHow to change dp?\n: Just type *changedp* And you will be prompted to Send 1 Picture")
-                            elif cmd == "changegp":
-                                if msg.toType == 2:
-                                    if to not in settings["changeGroupPicture"]:
-                                        settings["changeGroupPicture"].append(to)
-                                    client.sendMessage(to, "*Change Group Picture*\n\nHow to changegp?\n: Just type *changegp* And you will be prompted to Send 1 Picture")
-                            elif cmd == 'mentioning':
-                                group = client.getGroup(msg.to)
-                                nama = [contact.mid for contact in group.members]
-                                k = len(nama)//100
-                                for a in range(k+1):
-                                    txt = u''
-                                    s=0
-                                    b=[]
-                                    for i in group.members[a*100 : (a+1)*100]:
-                                        b.append({"S":str(s), "E" :str(s+6), "M":i.mid})
-                                        s += 7
-                                        txt += u'@Zero \n'
-                                    client.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
-                                    client.sendMessage(to, "Total {} Mention".format(str(len(nama))))  
+                                    try:
+                                        del read['readPoint'][msg.to]
+                                        del read['readMember'][msg.to]
+                                        del read['readTime'][msg.to]
+                                    except:
+                                          pass
+                                    #sendMention(to, "「 Getreader telah dimatikan  」\n@!\n" + readTime, [sender])
+                                    puy.sendMessage(to, "「 Getreader belum diaktifkan  」\n\n" + readTime)
         
-                            elif cmd == "rinda get reader reset":
-                                tz = pytz.timezone("Asia/Makassar")
+                            elif text.lower() == 'rinda get reader reset':
+                                tz = pytz.timezone("Asia/Jakarta")
                                 timeNow = datetime.now(tz=tz)
                                 day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
                                 hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -902,425 +806,585 @@ def clientBot(op):
                                         del read["readPoint"][msg.to]
                                         del read["readMember"][msg.to]
                                         del read["readTime"][msg.to]
-                                        del read["ROM"][msg.to]
                                     except:
                                         pass
-                                    read['readPoint'][receiver] = msg_id
-                                    read['readMember'][receiver] = ""
-                                    read['readTime'][receiver] = readTime
-                                    read['ROM'][receiver] = {}
-                                    client.sendMessage(msg.to, "Reset reading point : \n" + readTime)
+                                    #sendMention(to, "「 Mengulangi riwayat pembaca 」 :\n@!\n" + readTime, [sender])
+                                    puy.sendMessage(to, "「 Getreader telah direset 」\n\n" + readTime)
                                 else:
-                                    client.sendMessage(msg.to, "Lurking is nonactive\n\nType *lurking on* for actived a lurkmode!")
-                                    
-                            elif text.lower() == 'spamcall':
-                                if msg.toType == 2:
-                                    sep = text.split(" ")
-                                    strnum = text.replace(sep[0] + " ","")
-                                    num = int(strnum)
-                                    client.sendMessage(to, "Berhasil mengundang kedalam telponan group")
-                                    for var in range(0,num):
-                                        group = client.getGroup(to)
-                                        members = [mem.mid for mem in group.members]
-                                        client.acquireGroupCallRoute(to)
-                                        client.inviteIntoGroupCall(to, contactIds=members)                                    
-                                    
-                            elif msg.text.lower().startswith("Gbc "):   
-                                sep = text.split(" ")
-                                txt = text.replace(sep[0] + " ","")
-                                groups = client.groups
-                                for group in groups:
-                                    client.sendMessage(group, "[ Broadcast ]\n{}".format(str(txt)))
-                                    client.sendMessage(to, "Berhasil broadcast ke {} group".format(str(len(groups))))
-                                    
-                            elif cmd == "lurking":
-                                tz = pytz.timezone("Asia/Makassar")
-                                timeNow = datetime.now(tz=tz)
-                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
-                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-                                hr = timeNow.strftime("%A")
-                                bln = timeNow.strftime("%m")
-                                for i in range(len(day)):
-                                    if hr == day[i]: hasil = hari[i]
-                                for k in range(0, len(bulan)):
-                                    if bln == str(k): bln = bulan[k-1]
-                                readTime = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
-                                if receiver in read['readPoint']:
-                                    if read["ROM"][receiver].items() == []:
-                                        client.sendMessage(receiver,"Tidak Ada Sider")
+                                    #sendMention(to, "「 Getreader belum diaktifkan 」\n@!", [sender])
+                                    puy.sendMessage(to, "「 Getreader belum diaktifkan 」\n\n" + readTime)
+
+                            elif cmd == "rinda get readers":
+                              #if msg._from in admin:
+                                if msg.to in wait['readPoint']:
+                                    if wait['readPoint'][msg.to] != {}:
+                                        aa = []
+                                        for x in wait['readPoint'][msg.to]:
+                                            aa.append(x)
+                                        try:
+                                            arrData = ""
+                                            textx = "  [ {} Reader ]\n\n1. ".format(str(len(aa)))
+                                            arr = []
+                                            no = 1
+                                            b = 1
+                                            for i in aa:
+                                                b = b + 1
+                                                end = "\n"
+                                                mention = "@!\n"
+                                                slen = str(len(textx))
+                                                elen = str(len(textx) + len(mention) - 1)
+                                                arrData = {'S':slen, 'E':elen, 'M':i}
+                                                arr.append(arrData)
+                                                tz = pytz.timezone("Asia/Jakarta")
+                                                timeNow = datetime.now(tz=tz)
+                                                textx += mention
+                                                if no < len(aa):
+                                                    no += 1
+                                                    textx += str(b) + ". "
+                                                else:
+                                                    try:
+                                                        no = "[ {} ]".format(str(puy.getGroup(msg.to).name))
+                                                    except:
+                                                        no = "  "
+                                            msg.to = msg.to
+                                            msg.text = textx+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n* "+ datetime.strftime(timeNow,'%H:%M:%S')+"* "
+                                            msg.contentMetadata = {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}
+                                            msg.contentType = 0
+                                            puy.sendMessage1(msg)
+                                        except:
+                                            pass
+                                        try:
+                                            del wait['readPoint'][msg.to]
+                                            del wait['readPoint'][msg.to]
+                                        except:
+                                            pass
+                                        wait['readPoint'][msg.to] = msg.id
+                                        wait['readPoint'][msg.to] = {}
                                     else:
-                                        chiya = []
-                                        for rom in read["ROM"][receiver].items():
-                                            chiya.append(rom[1])
-                                        cmem = client.getContacts(chiya) 
-                                        zx = ""
-                                        zxc = ""
-                                        zx2 = []
-                                        xpesan = '[R E A D E R ]\n'
-                                    for x in range(len(cmem)):
-                                        xname = str(cmem[x].displayName)
-                                        pesan = ''
-                                        pesan2 = pesan+"@c\n"
-                                        xlen = str(len(zxc)+len(xpesan))
-                                        xlen2 = str(len(zxc)+len(pesan2)+len(xpesan)-1)
-                                        zx = {'S':xlen, 'E':xlen2, 'M':cmem[x].mid}
-                                        zx2.append(zx)
-                                        zxc += pesan2
-                                    text = xpesan+ zxc + "\n" + readTime
-                                    try:
-                                        client.sendMessage(receiver, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
-                                    except Exception as error:
-                                        print (error)
-                                        #logError(error)
-                                    pass
+                                        puy.sendMessage(msg.to, "Tidak ada satupun")
                                 else:
-                                    client.sendMessage(receiver,"Lurking is nonactive\n\nType *lurking on* for actived a lurkmode!")
-# Pembatas Script #   
-                            elif cmd.startswith("checkwebsite"):
+                                    puy.sendMessage(msg.to, "Getreader status is Unactived")
+              ## LURKING ##
+              
+##SETTINGS MESSAGE##
+                            elif cmd.startswith('Set pesan: '):
+                              if msg._from in Owner:
+                                spl = msg.text.replace('Set pesan: ','')
+                                if spl in [""," ","\n",None]:
+                                    puy.sendMessage(msg.to, "Gagal menerapkan Messages")
+                                else:
+                                    wait["message"] = spl
+                                    puy.sendMessage(msg.to, "Pesan Messages diterapkan menjadi :\n\n{}".format(str(spl)))
+                            elif cmd.startswith('Set wlcmsg: '):
+                              if msg._from in Owner:
+                                spl = msg.text.replace('Set wlcmsg: ','')
+                                if spl in [""," ","\n",None]:
+                                    puy.sendMessage(msg.to, "Gagal menerapkan Welcome Messages")
+                                else:
+                                    wait["welcome"] = spl
+                                    puy.sendMessage(msg.to, "Welcome Messages diterapkan menjadi :\n\n{}".format(str(spl)))
+                            elif cmd.startswith('Set leave: '):
+                              if msg._from in Owner:
+                                spl = msg.text.replace('Set leave: ','')
+                                if spl in [""," ","\n",None]:
+                                    puy.sendMessage(msg.to, "Gagal menerapkan Leave Messages")
+                                else:
+                                    wait["leave"] = spl
+                                    puy.sendMessage(msg.to, "Leave Messages diterapkan menjadi :\n\n{}".format(str(spl)))
+                            elif cmd.startswith('Set respon: '):
+                              if msg._from in Owner:
+                                spl = msg.text.replace('Set respon: ','')
+                                if spl in [""," ","\n",None]:
+                                    puy.sendMessage(msg.to, "Gagal menerapkan Respon Messages")
+                                else:
+                                    wait["Respontag"] = spl
+                                    puy.sendMessage(msg.to, "Respon Messages diterapkan menjadi :\n\n{}".format(str(spl)))
+                            elif cmd.startswith('Set spam: '):
+                              if msg._from in Owner:
+                                spl = msg.text.replace('Set spam: ','')
+                                if spl in [""," ","\n",None]:
+                                    puy.sendMessage(msg.to, "Gagal menerapkan Spam")
+                                else:
+                                    Settings["ADITMADZSmessage1"] = spl
+                                    puy.sendMessage(msg.to, "Spam Messages diterapkan menjadi :\n\n{}".format(str(spl)))
+                            elif cmd.startswith('Set sider: '):
+                              if msg._from in Owner:
+                                spl = msg.text.replace('Set sider: ','')
+                                if spl in [""," ","\n",None]:
+                                    puy.sendMessage(msg.to, "Gagal menerapkan Sider Messages")
+                                else:
+                                    wait["mention"] = spl
+                                    puy.sendMessage(msg.to, "Sider Messages diterapkan menjadi :\n\n{}".format(str(spl)))
+                            elif cmd == "cek pesan":
+                              if msg._from in Owner:
+                                puy.sendMessage(msg.to, "Pesan Msg mu :\n\n " + str(wait["message"]) + " ")
+                            elif cmd == "cek welcome":
+                              if msg._from in Owner:
+                                puy.sendMessage(msg.to, "Welcome Msg mu :\n\n " + str(wait["welcome"]) + " ")
+                            elif cmd == "cek leave":
+                              if msg._from in Owner:
+                                puy.sendMessage(msg.to, "Leave Msg mu :\n\n " + str(wait["leave"]) + " ")
+                            elif cmd == "cek respon":
+                              if msg._from in Owner:
+                                puy.sendMessage(msg.to, "Respon Msg mu :\n\n " + str(wait["Respontag"]) + " ")
+                            elif cmd == "cek spam":
+                              if msg._from in Owner:
+                                puy.sendMessage(msg.to, "Spam Msg mu :\n\n " + str(Setmain["ADITMADZSmessage1"]) + " ")
+                            elif cmd == "cek sider":
+                              if msg._from in Owner:
+                                puy.sendMessage(msg.to, "Sider Msg mu :\n\n " + str(wait["mention"]) + " ")
+                               
+                            elif cmd == "autojoin on":
+                              if msg._from in Owner:
+                                settings["autoJoin"] = True
+                                sendMention(to, "[ Notified Auto Join ]\nBerhasil mengaktifkan Auto Join @!", [sender])
+                            elif cmd == "autojoin off":
+                              if msg._from in Owner:
+                                settings["autoJoin"] = False
+                                sendMention(to, "[ Notified Auto Join ]\nBerhasil menonaktifkan Auto Join @!", [sender])
+                            elif cmd == "detectunsend on":
+                              if msg._from in Owner:
+                                settings["detectUnsend"] = True
+                                sendMention(to, "[ Notified Detect Unsend ]\nBerhasil mengaktifkan Detect Unsend\n@!", [sender])
+                            elif cmd == "detectunsend off":
+                              if msg._from in Owner:
+                                settings["detectUnsend"] = False
+                                sendMention(to, "[ Notified Detect Unsend ]\nBerhasil menonaktifkan Detect Unsend\n@!", [sender])                                
+                            elif cmd == "autoleave on":
+                              if msg._from in Owner:
+                                settings["autoLeave"] = True
+                                sendMention(to, "[ Notified Auto Leave ]\nBerhasil mengaktifkan Auto leave @!", [sender])
+                            elif cmd == "autoleave off":
+                              if msg._from in Owner:
+                                settings["autoLeave"] = False
+                                sendMention(to, "[ Notified Auto Leave ]\nBerhasil menonaktifkan Auto leave @!", [sender])
+                            elif cmd == "autoadd on":
+                              if msg._from in Owner:
+                                wait["autoAdd"] = True
+                                puy.sendMessage(to,"Auto add diaktifkan")
+                            elif cmd == "autoadd off":
+                              if msg._from in Owner:
+                                wait["autoAdd"] = False
+                                puy.sendMessage(to,"Auto add dinonaktifkan")                                
+                            elif cmd == "status":
                                 try:
-                                    sep = text.split(" ")
-                                    query = text.replace(sep[0] + " ","")
-                                    r = requests.get("http://rahandiapi.herokuapp.com/sswebAPI?key=betakey&link={}".format(urllib.parse.quote(query)))
-                                    data = r.text
-                                    data = json.loads(data)
-                                    client.sendImageWithURL(to, data["result"])
-                                except Exception as error:
-                                    logError(error)
-                            elif cmd.startswith("checkdate"):
+                                    ret_ = "\n   [ BOT STATUS ]\n"
+                                    if settings["autoJoin"] == True: ret_ += "\n   [ ON ] Auto Join"
+                                    else: ret_ += "\n   [ OFF ] Auto Join"
+                                    if settings["autoLeave"] == True: ret_ += "\n   [ ON ] Auto Leave Room"
+                                    else: ret_ += "\n   [ OFF ] Auto Leave Room"
+                                    ret_ += ""
+                                    sendMessageWithFooter(to, str(ret_))
+                                except Exception as e:
+                                    sendMessageWithFooter(to, str(e))
+##SETTINGS MESSAGE##
+                                
+               ## RINDA SC ##                                    
+                            elif cmd.startswith("rinda bye"):
+                                heij = puy.getGroupIdsJoined()
+                                #G = puy.getGroup(heij)
+                                #puy.sendMessage(to, "Gbye {}".format(str(G.name)))
+                                puy.sendMessage(to, "Gbye")
+                                #puy.getGroupIdsJoined()
+                                puy.leaveGroup(to)
+
+                            elif cmd.startswith("rinda get wikipedia "):
+                                query = cmd.replace("rinda get wikipedia ","")
                                 try:
                                     sep = msg.text.split(" ")
-                                    tanggal = msg.text.replace(sep[0] + " ","")
-                                    r = requests.get('https://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=ervan&tanggal='+tanggal)
-                                    data=r.text
-                                    data=json.loads(data)
-                                    ret_ = "[ D A T E ]"
-                                    ret_ += "\nDate Of Birth : {}".format(str(data["data"]["lahir"]))
-                                    ret_ += "\nAge : {}".format(str(data["data"]["usia"]))
-                                    ret_ += "\nBirthday : {}".format(str(data["data"]["ultah"]))
-                                    ret_ += "\nZodiak : {}".format(str(data["data"]["zodiak"]))
-                                    client.sendMessage(to, str(ret_))
-                                except Exception as error:
-                                    logError(error)
-                            elif cmd.startswith("checkpraytime "):
-                                separate = msg.text.split(" ")
-                                location = msg.text.replace(separate[0] + " ","")
-                                r = requests.get("http://api.corrykalam.net/apisholat.php?lokasi={}".format(location))
-                                data = r.text
-                                data = json.loads(data)
-                                tz = pytz.timezone("Asia/Makassar")
-                                timeNow = datetime.now(tz=tz)
-                                if data[1] != "Subuh : " and data[2] != "Dzuhur : " and data[3] != "Ashar : " and data[4] != "Maghrib : " and data[5] != "Isya : ":
-                                    ret_ = "* Jadwal Sholat Sekitar *" + data[0] + " ]"
-                                    ret_ += "\n* Tanggal : " + datetime.strftime(timeNow,'%Y-%m-%d')
-                                    ret_ += "\n* Jam : " + datetime.strftime(timeNow,'%H:%M:%S')
-                                    ret_ += "\n* " + data[1]
-                                    ret_ += "\n* " + data[2]
-                                    ret_ += "\n* " + data[3]
-                                    ret_ += "\n* " + data[4]
-                                    ret_ += "\n* " + data[5]
-                                    ret_ += ""
-                                    client.sendMessage(msg.to, str(ret_))
-                            elif cmd.startswith("checkweather "):
-                                try:
-                                    sep = text.split(" ")
-                                    location = text.replace(sep[0] + " ","")
-                                    r = requests.get("http://api.corrykalam.net/apicuaca.php?kota={}".format(location))
-                                    data = r.text
-                                    data = json.loads(data)
-                                    tz = pytz.timezone("Asia/Makassar")
-                                    timeNow = datetime.now(tz=tz)
-                                    if "result" not in data:
-                                        ret_ = "* Weather Status *"
-                                        ret_ += "\n* Location : " + data[0].replace("Temperatur di kota ","")
-                                        ret_ += "\n* Suhu : " + data[1].replace("Suhu : ","") + "°C"
-                                        ret_ += "\n* Kelembaban : " + data[2].replace("Kelembaban : ","") + "%"
-                                        ret_ += "\n* Tekanan udara : " + data[3].replace("Tekanan udara : ","") + "HPa"
-                                        ret_ += "\n* Kecepatan angin : " + data[4].replace("Kecepatan angin : ","") + "m/s"
-                                        ret_ += "\n* Time Status *"
-                                        ret_ += "\n* Tanggal : " + datetime.strftime(timeNow,'%Y-%m-%d')
-                                        ret_ += "\n* Jam : " + datetime.strftime(timeNow,'%H:%M:%S') + " WIB"
-                                        ret_ += ""
-                                        client.sendMessage(to, str(ret_))
-                                except Exception as error:
-                                    logError(error)
-                            elif cmd.startswith("checklocation "):
-                                try:
-                                    sep = text.split(" ")
-                                    location = text.replace(sep[0] + " ","")
-                                    r = requests.get("http://api.corrykalam.net/apiloc.php?lokasi={}".format(location))
-                                    data = r.text
-                                    data = json.loads(data)
-                                    if data[0] != "" and data[1] != "" and data[2] != "":
-                                        link = "https://www.google.co.id/maps/@{},{},15z".format(str(data[1]), str(data[2]))
-                                        ret_ = "* Location Status *"
-                                        ret_ += "\n* Location : " + data[0]
-                                        ret_ += "\n* Google Maps : " + link
-                                        ret_ += ""
-                                        client.sendMessage(to, str(ret_))
-                                except Exception as error:
-                                    logError(error)
-                            elif cmd.startswith("instainfo"):
-                                try:
-                                    sep = text.split(" ")
-                                    search = text.replace(sep[0] + " ","")
-                                    r = requests.get("https://www.instagram.com/{}/?__a=1".format(search))
-                                    data = r.text
-                                    data = json.loads(data)
-                                    if data != []:
-                                        ret_ = "* Profile Instagram *"
-                                        ret_ += "\n* Nama : {}".format(str(data["graphql"]["user"]["full_name"]))
-                                        ret_ += "\n* Username : {}".format(str(data["graphql"]["user"]["username"]))
-                                        ret_ += "\n* Bio : {}".format(str(data["graphql"]["user"]["biography"]))
-                                        ret_ += "\n* Followers : {}".format(str(data["graphql"]["user"]["edge_followed_by"]["count"]))
-                                        ret_ += "\n* Following : {}".format(str(data["graphql"]["user"]["edge_follow"]["count"]))
-                                        if data["graphql"]["user"]["is_verified"] == True:
-                                            ret_ += "\n* Verified : Sudah"
-                                        else:
-                                            ret_ += "\n* Verified : Belum"
-                                        if data["graphql"]["user"]["is_private"] == True:
-                                            ret_ += "\n* Private Account : Iya"
-                                        else:
-                                            ret_ += "\n* Private Account : Tidak"
-                                        ret_ += "\n* Total Post : {}".format(str(data["graphql"]["user"]["edge_owner_to_timeline_media"]["count"]))
-                                        ret_ += "\n* [ https://www.instagram.com/{} ]".format(search)
-                                        path = data["graphql"]["user"]["profile_pic_url_hd"]
-                                        client.sendImageWithURL(to, str(path))
-                                        client.sendMessage(to, str(ret_))
-                                except Exception as error:
-                                    logError(error)
-                            elif cmd.startswith("instapost"):
-                                try:
-                                    sep = text.split(" ")
-                                    text = text.replace(sep[0] + " ","")   
-                                    cond = text.split("|")
-                                    username = cond[0]
-                                    no = cond[1] 
-                                    r = requests.get("http://rahandiapi.herokuapp.com/instapost/{}/{}?key=betakey".format(str(username), str(no)))
-                                    data = r.text
-                                    data = json.loads(data)
-                                    if data["find"] == True:
-                                        if data["media"]["mediatype"] == 1:
-                                            client.sendImageWithURL(msg.to, str(data["media"]["url"]))
-                                        if data["media"]["mediatype"] == 2:
-                                            client.sendVideoWithURL(msg.to, str(data["media"]["url"]))
-                                        ret_ = "* Info Post *"
-                                        ret_ += "\n* Number of Like : {}".format(str(data["media"]["like_count"]))
-                                        ret_ += "\n* Number of Comment : {}".format(str(data["media"]["comment_count"]))
-                                        ret_ += "\n* [ Caption ]\n{}".format(str(data["media"]["caption"]))
-                                        client.sendMessage(to, str(ret_))
-                                except Exception as error:
-                                    logError(error)
-                            elif cmd.startswith("instastory"):
-                                try:
-                                    sep = text.split(" ")
-                                    text = text.replace(sep[0] + " ","")
-                                    cond = text.split("*")
-                                    search = str(cond[0])
-                                    if len(cond) == 2:
-                                        r = requests.get("http://rahandiapi.herokuapp.com/instastory/{}?key=betakey".format(search))
+                                    wiki = msg.text.replace(sep[0] + " ","")
+                                    wikipedia.set_lang("id")
+                                    pesan=" 「Judul」 "
+                                    pesan+=wikipedia.page(wiki).title
+                                    pesan+="\n 「Teks」 "
+                                    pesan+=wikipedia.summary(wiki, sentences=1)
+                                    pesan+="\n 「Alamat url」 "+wikipedia.page(wiki).url
+                                    pesan+="\n"
+                                    puy.sendMessage(to, pesan)
+                                except:
+                                        try:
+                                            pesan="Teks terlalu panjang, Klik url untuk lebih lengkap\n"
+                                            pesan+=wikipedia.page(wiki).url
+                                            #puy.sendMessage(to, pesan)
+                                            puy.sendMessage(to, " Wikipedia Search 「 " + query + " 」  " + pesan)
+                                        except Exception as e:
+                                            #puy.sendMessage(to, "Wikipedia [ " + query + " ] " + str(e))
+                                            puy.sendMessage(msg.to, " Wikipedia Search 「 " + query + " 」 " + str(e))
+                                
+                            elif cmd.startswith("searchporn "):
+                                kata = cmd.replace("searchporn ", "")
+                                with _session as web:
+                                    try:
+                                        r = web.get("https://api.redtube.com/?data=redtube.Videos.searchVideos&output=json&search={}".format(urllib.parse.quote(kata)))
                                         data = r.text
                                         data = json.loads(data)
-                                        if data["url"] != []:
-                                            num = int(cond[1])
-                                            if num <= len(data["url"]):
-                                                search = data["url"][num - 1]
-                                                if search["tipe"] == 1:
-                                                    client.sendImageWithURL(to, str(search["link"]))
-                                                if search["tipe"] == 2:
-                                                    client.sendVideoWithURL(to, str(search["link"]))
-                                except Exception as error:
-                                    logError(error)
-                                    
-                            elif cmd.startswith("say-"):
-                                sep = text.split("-")
-                                sep = sep[1].split(" ")
-                                lang = sep[0]
-                                say = text.replace("say-" + lang + " ","")
-                                if lang not in list_language["list_textToSpeech"]:
-                                    return client.sendMessage(to, "Language not found")
-                                tts = gTTS(text=say, lang=lang)
-                                tts.save("hasil.mp3")
-                                client.sendAudio(to,"hasil.mp3")
+                                        ret_ = "Porns Link\n"
+                                        no = 1
+                                        anu = data["videos"]
+                                        if len(anu) >= 5:
+                                            for s in range(5):
+                                                hmm = anu[s]
+                                                title = hmm['video']['title']
+                                                duration = hmm['video']['duration']
+                                                views = hmm['video']['views']
+                                                link = hmm['video']['embed_url']
+                                                ret_ += "\n\n{}. Title : {}\n    Duration : {}\n    Views : {}\n    Link : {}".format(str(no), str(title), str(duration), str(views), str(link))
+                                                no += 1
+                                        else:
+                                            for s in anu:
+                                                hmm = s
+                                                title = hmm['video']['title']
+                                                duration = hmm['video']['duration']
+                                                views = hmm['video']['views']
+                                                link = hmm['video']['embed_url']
+                                                ret_ += "\n\n{}. Title : {}\n    Duration : {}\n    Views : {}\n    Link : {}".format(str(no), str(title), str(duration), str(views), str(link))
+                                                no += 1
+                                        puy.sendMessage(to, str(ret_))
+                                    except:
+                                        puy.sendMessage(to, "Porn Not Found !")                                
                                 
-                            elif cmd.startswith("searchimage"):
-                                try:
-                                    separate = msg.text.split(" ")
-                                    search = msg.text.replace(separate[0] + " ","")
-                                    r = requests.get("http://rahandiapi.herokuapp.com/imageapi?key=betakey&q={}".format(search))
-                                    data = r.text
-                                    data = json.loads(data)
-                                    if data["result"] != []:
-                                        items = data["result"]
-                                        path = random.choice(items)
-                                        a = items.index(path)
-                                        b = len(items)
-                                        client.sendImageWithURL(to, str(path))
-                                except Exception as error:
-                                    logError(error)
-                            elif cmd.startswith("searchmusic "):
-                                sep = msg.text.split(" ")
-                                query = msg.text.replace(sep[0] + " ","")
+                            elif cmd.startswith("biografi "):
+                                query = cmd.replace("biografi ","")
                                 cond = query.split("|")
                                 search = str(cond[0])
-                                result = requests.get("http://api.ntcorp.us/joox/search?q={}".format(str(search)))
+                                result = requests.get("https://farzain.xyz/api/biografi.php?apikey=YcUTTUvO2xe75rxWhsqSkWkZsIeTn9&id={}".format(str(search)))
                                 data = result.text
                                 data = json.loads(data)
                                 if len(cond) == 1:
                                     num = 0
-                                    ret_ = "* Result Music *"
-                                    for music in data["result"]:
+                                    ret_ = " 「 Search Biografi 」\n"
+                                    for bio in data:
                                         num += 1
-                                        ret_ += "\n* {}. {}".format(str(num), str(music["single"]))
-                                    ret_ += "\n* [ Total {} Music ]".format(str(len(data["result"])))
-                                    ret_ += "\n\nUntuk Melihat Details Music, silahkan gunakan command {}SearchMusic {}|「number」".format(str(setKey), str(search))
-                                    client.sendMessage(to, str(ret_))
+                                        ret_ += "\n{}. {}".format(str(num), str(bio["title"]))                                        
+                                    ret_ += "\n\nExample: Biography {}|1".format(settings["keyCommand"],search)
+                                    puy.sendMessage(to, str(ret_))
                                 elif len(cond) == 2:
                                     num = int(cond[1])
-                                    if num <= len(data["result"]):
-                                        music = data["result"][num - 1]
-                                        result = requests.get("http://api.ntcorp.us/joox/song_info?sid={}".format(str(music["sid"])))
+                                    if num <= len(data):
+                                        bio = data[num - 1]
+                                        result = requests.get("https://farzain.xyz/api/biografi.php?apikey=YcUTTUvO2xe75rxWhsqSkWkZsIeTn9&id={}".format(str(search)))
                                         data = result.text
                                         data = json.loads(data)
-                                        if data["result"] != []:
-                                            ret_ = "* Music *"
-                                            ret_ += "\n* Title : {}".format(str(data["result"]["song"]))
-                                            ret_ += "\n* Album : {}".format(str(data["result"]["album"]))
-                                            ret_ += "\n* Size : {}".format(str(data["result"]["size"]))
-                                            ret_ += "\n* Link : {}".format(str(data["result"]["mp3"][0]))
-                                            ret_ += "\n* Finish *"
-                                            client.sendImageWithURL(to, str(data["result"]["img"]))
-                                            client.sendMessage(to, str(ret_))
-                                            client.sendAudioWithURL(to, str(data["result"]["mp3"][0]))
-                            elif cmd.startswith("searchlyric"):
-                                sep = msg.text.split(" ")
-                                query = msg.text.replace(sep[0] + " ","")
-                                cond = query.split("|")
-                                search = cond[0]
-                                api = requests.get("http://api.secold.com/joox/cari/{}".format(str(search)))
-                                data = api.text
-                                data = json.loads(data)
-                                if len(cond) == 1:
-                                    num = 0
-                                    ret_ = "╔══[ Result Lyric ]"
-                                    for lyric in data["results"]:
-                                        num += 1
-                                        ret_ += "\n╠ {}. {}".format(str(num), str(lyric["single"]))
-                                    ret_ += "\n╚══[ Total {} Music ]".format(str(len(data["results"])))
-                                    ret_ += "\n\nUntuk Melihat Details Lyric, silahkan gunakan command {}SearchLyric {}|「number」".format(str(setKey), str(search))
-                                    client.sendMessage(to, str(ret_))
-                                elif len(cond) == 2:
-                                    num = int(cond[1])
-                                    if num <= len(data["results"]):
-                                        lyric = data["results"][num - 1]
-                                        api = requests.get("http://api.secold.com/joox/sid/{}".format(str(lyric["songid"])))
-                                        data = api.text
-                                        data = json.loads(data)
-                                        lyrics = data["results"]["lyric"]
-                                        lyric = lyrics.replace('ti:','Title - ')
-                                        lyric = lyric.replace('ar:','Artist - ')
-                                        lyric = lyric.replace('al:','Album - ')
-                                        removeString = "[1234567890.:]"
-                                        for char in removeString:
-                                            lyric = lyric.replace(char,'')
-                                        client.sendMessage(msg.to, str(lyric))
-                            elif cmd.startswith("searchyoutube"):
-                                sep = text.split(" ")
-                                search = text.replace(sep[0] + " ","")
-                                params = {"search_query": search}
-                                r = requests.get("https://www.youtube.com/results", params = params)
-                                soup = BeautifulSoup(r.content, "html5lib")
-                                ret_ = "* Youtube Result *"
-                                datas = []
-                                for data in soup.select(".yt-lockup-title > a[title]"):
-                                    if "&lists" not in data["href"]:
-                                        datas.append(data)
-                                for data in datas:
-                                    ret_ += "\n* [ {} ]".format(str(data["title"]))
-                                    ret_ += "\n* https://www.youtube.com{}".format(str(data["href"]))
-                                ret_ += "\n* [ Total {} ]".format(len(datas))
-                                client.sendMessage(to, str(ret_))
-                            elif cmd.startswith("tr-"):
-                                sep = text.split("-")
-                                sep = sep[1].split(" ")
-                                lang = sep[0]
-                                say = text.replace("tr-" + lang + " ","")
-                                if lang not in list_language["list_translate"]:
-                                    return client.sendMessage(to, "Language not found")
-                                translator = Translator()
-                                hasil = translator.translate(say, dest=lang)
-                                A = hasil.text
-                                client.sendMessage(to, str(A))
-# SC #
-                            elif cmd.startswith("about rinda"):
+                                        ret_ = " 「 Details Biografi 」\n"                                        
+                                        ret_ += "\n    {}".format(str(bio["link"]))
+                                        puy.sendImageWithURL(to, str(bio["img"]))
+                                        puy.sendMessage(to, str(ret_))                                
+                                
+                            elif cmd.startswith("vidcall"):
+                              if msg._from in Owner:
+                                if 'MENTION' in msg.contentMetadata.keys()!= None:
+                                    names = re.findall(r'@(\w+)', text)
+                                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
+                                    mentionees = mention['MENTIONEES']
+                                    lists = []
+                                    group = puy.getGroup(to)
+                                    for mention in mentionees:
+                                        if mention["M"] not in lists:
+                                            lists.append(mention["M"])
+                                    for ls in lists:
+                                        for var in range(0,50):                                         
+                                            puy.acquireGroupCallRoute(to)                                            
+                                            members = [ls for ls in lists]
+                                            puy.inviteIntoGroupCall(to, contactIds=members)
+                                        try:
+                                            puy.sendMessage(to,"Ready to Vidcall in Private chat with "+puy.getContact(ls).displayName)
+                                        except Exception as error:
+                                            logError(error)
+                                
+                            elif cmd.startswith("randomlose"):
+                                group = puy.getGroup(to)
                                 try:
-                                    arr = []
-                                    Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
-                                    creator = client.getContact(Ownerz)
-                                    contact = client.getContact(clientMid)
-                                    grouplist = client.getGroupIdsJoined()
-                                    contactlist = client.getAllContactIds()
-                                    blockedlist = client.getBlockedContactIds()
-                                    ret_ = "╔══〘 About Rinda 〙"
-                                    ret_ += "\n╠  Bot Name : {}".format(contact.displayName)
-                                    ret_ += "\n╠  In Groups : {}".format(str(len(grouplist)))
-                                    ret_ += "\n╠  Friends : {}".format(str(len(contactlist)))
-                                    ret_ += "\n╠  Blocked Account : {}".format(str(len(blockedlist)))                                    
-                                    #ret_ += "\n  [ About Selfbot ]"
-                                    #ret_ += "\n  Version : Premium"
-                                    #ret_ += "\n  Creator : {}".format(creator.displayName)
-                                    #ret_ += "\n  Creator : @!".format(Owner)
-                                    ret_ += "\n╚═〘 READ TEXT BELOW 〙"
-                                    client.sendMessage(to, str(ret_))
-                                    #client.sendMessage(to, "「 Read Text Below 」")
-                                    sendMention(to, "The Beginning of this Bot Comes from Helloworld, I'm just Reworked This!\n\nOf Course Special Thanks To HelloWorld, And the Friends Around Me!\n\n*Creator : @!", [Ownerz])
+                                    members = [mem.mid for mem in group.members]
+                                except:
+                                    members = [mem.mid for mem in group.members]
+                                message = random.choice(members)
+                                sendMention(to, "「 RandomLoseMem 」\n\n• The Loser is :", [sender])
+                                puy.sendContact(to, message)
+                                
+                            elif cmd.startswith("guessed"):
+                                sendMention(to, "「 Guess 」\n\n• Getting random number 1-50", [sender])
+                                time.sleep(1)
+                                sendMention(to, "「 Guess 」\n\n• 30 Seconds...", [sender])
+                                time.sleep(1)
+                                sendMention(to, "「 Guess 」\n\n• 20 Seconds...", [sender])
+                                time.sleep(1)
+                                sendMention(to, "「 Guess 」\n\n• 10 Seconds...", [sender])
+                                path = random.randint(0,50)
+                                time.sleep(1)
+                                sendMention(to, "「 Guess 」\n\n• Lucky number is : ", [sender] + str(path))
+                                
+                            elif cmd.startswith("infomovie "):
+                                query = cmd.replace("infomovie ","")   
+                                r = requests.get("https://farzain.xyz/api/film.php?id={}".format(str(query)))
+                                data1 = r.text
+                                data1 = json.loads(data1)
+                                hasil="Imdb Result:\n"
+                                hasil += "\nTitle: {}".format(str(data1["Title"]))
+                                hasil += "\nYear: {}".format(str(data1["Year"]))
+                                hasil += "\n Rating: {}".format(str(data1["Rated"]))
+                                hasil += "\nRelease: {}".format(str(data1["Released"]))
+                                hasil += "\nDuration: {}".format(str(data1["Runtime"]))
+                                hasil += "\nDirector: {}".format(str(data1["Director"]))
+                                hasil += "\nWritter: {}".format(str(data1["Writer"]))
+                                hasil += "\nActor: {}".format(str(data1["Actors"]))
+                                hasil += "\n\n{}".format(str(data1["Plot"]))
+                                hasil += "\n\nAwards: {}".format(str(data1["Awards"]))
+                                puy.sendImageWithURL(to,str(data1["Poster"]))
+                                puy.sendMessage(to, str(hasil))                                
+                                
+                            elif cmd.startswith("rinda getmeme "):
+                                query = cmd.replace("rinda getmeme ","")
+                                #data = r.text
+                                #data = json.loads(data)
+                                meme = query.split('*')
+                                meme = meme[0].replace(' ','_')
+                                atas = query.split('*')
+                                atas = atas[1].replace(' ','_')
+                                bawah = query.split('*')
+                                bawah = bawah[2].replace(' ','_')
+                                memes = 'https://memegen.link/'+meme+'/'+atas+'/'+bawah+'.jpg'
+                                puy.sendMessage(msg.to, "Search Meme 「 " + query + " 」")
+                                puy.sendImageWithURL(msg.to, memes)
+                                
+                            elif cmd.startswith("memelists"):
+                                hasil = "「 Meme list 」\n"
+                                hasil += "\n  1. Distracted Boyfriend "
+                                hasil += "\n  2. Two Buttons "                           
+                                hasil += "\n  3. Expanding Brain "
+                                hasil += "\n  4. Batman Slapping Robin "
+                                hasil += "\n  5. Roll Safe Think About It "
+                                hasil += "\n  6. One Does Not Simply "
+                                hasil += "\n  7. Waiting Skeleton "
+                                hasil += "\n  8. Blank Nut Button "
+                                hasil += "\n  9. Boardroom Meeting Suggestion "
+                                hasil += "\n  10. Is This A Pigeon "
+                                hasil += "\n  11. Ancient Aliens "
+                                hasil += "\n  12. Left Exit 12 Off Ramp "
+                                hasil += "\n  13. X, X Everywhere "
+                                hasil += "\n  14. The Most Interesting Man In The World "
+                                hasil += "\n  15. Futurama Fry "
+                                hasil += "\n  16. Inhaling Seagull "
+                                hasil += "\n  17. Trump Bill Signing "
+                                hasil += "\n  18. Oprah You Get A "
+                                hasil += "\n  19. Y'all Got Any More Of That "
+                                hasil += "\n  20. Buzz "
+                                hasil += "\n\n Used : getmeme buzz*hei*puy "
+                                puy.sendMessage(msg.to, str(hasil))
+                  
+                            elif cmd == 'memelist':
+                                puy.sendMessage(to,"10 Guy = tenguy\nAfraid to Ask Andy = afraid\nAn Older Code Sir, But It Checks Out = older\nAncient Aliens Guy = aag\nAt Least You Tried = tried\nBaby Insanity Wolf = biw\nBad Luck Brian = blb\nBut That's None of My Business = kermit\nButthurt Dweller = bd\nCaptain Hindsight = ch\nComic Book Guy = cbg\nCondescending Wonka = wonka\nConfession Bear = cb\nConspiracy Keanu = keanu\nDating Site Murderer = dsm\nDo It Live! = live\nDo You Want Ants? = ants\nDoge = doge\nDrake Always On Beat = alwaysonbeat\nErmahgerd = ermg\nFirst World Problems = fwp\nForever Alone = fa\nFoul Bachelor Frog = fbf\nFuck Me, Right? = fmr\nFuturama Fry = fry\nGood Guy Greg = ggg\nHipster Barista = hipster\nI Can Has Cheezburger? = icanhas\nI Feel Like I'm Taking Crazy Pills = crazypills\nI Immediately Regret This Decision! = regret\nI Should Buy a Boat Cat = boat\nI Would Be So Happy = sohappy\nI am the Captain Now = captain\nInigo Montoya = inigo\nInsanity Wolf = iw\nIt's A Trap! = ackbar\nIt's Happening = happening\nIt's Simple, Kill the Batman = joker\nJony Ive Redesigns Things = ive\nLaughing Lizard = ll\nMatrix Morpheus = morpheus\nMilk Was a Bad Choice = badchoice\nMinor Mistake Marvin = mmm\nNothing To Do Here = jetpack\nOh, Is That What We're Going to Do Today? = red\nOne Does Not Simply Walk into Mordor = mordor\nOprah You Get a Car = oprah\nOverlay Attached Girlfriend = oag\nPepperidge Farm Remembers = remembers\nPhilosoraptor = philosoraptor\nProbably Not a Good Idea = jw\nSad Barack Obama = sad-obama\nSad Bill Clinton = sad-clinton\nSad Frog / Feels Bad Man = sadfrog\nSad George Bush = sad-bush\nSad Joe Biden = sad-biden\nSad John Boehner = sad-boehner\nSarcastic Bear = sarcasticbear\nSchrute Facts = dwight\nScumbag Brain =  sb\nScumbag Steve = ss\nSealed Fate = sf\nSee? Nobody Cares = dodgson\nShut Up and Take My Money! = money\nSo Hot Right Now = sohot\nSocially Awesome Awkward Penguin = awesome-awkward\nSocially Awesome Penguin = awesome\nSocially Awkward Awesome Penguin = awkward-awesome\nSocially Awkward Penguin = wkward\nStop Trying to Make Fetch Happen = fetch\nSuccess Kid = success\nSuper Cool Ski Instructor = ki\nThat Would Be Great = officespace\nThe Most Interesting Man in the World = interesting\nThe Rent Is Too Damn High = toohigh\nThis is Bull, Shark = bs\nWhy Not Both? = Both\nWinter is coming = winter\nX all the Y = xy\nX, X Everywhere = buzz\nXzibit Yo Dawg = yodawg\nY U NO Guy = yuno\nY'all Got Any More of Them = yallgot\nYou Should Feel Bad = bad\nYou Sit on a Throne of Lies = elf\nYou Were the Chosen One! = chosen\n\nUsage : Rinda getmeme sohot*Hello*Rin")
+                  
+                            elif cmd.startswith("rinda get quotes"):
+                                r=requests.get("https://talaikis.com/api/quotes/random")
+                                data=r.text
+                                data=json.loads(data)
+                                hasil = "  [ Search Random Quote ]\n\n"
+                                hasil += "Genre : " +str(data["cat"])
+                                hasil += "\n\n" +str(data["quote"])
+                                hasil += "\n\n From : " +str(data["author"])+ " "
+                                puy.sendMessage(msg.to, str(hasil))
+                  
+                            elif cmd.startswith("rinda get video "):
+                                try:
+                                    sep = msg.text.split(" ")
+                                    textToSearch = msg.text.replace(sep[0] + " ","")
+                                    query = urllib.parse.quote(textToSearch)
+                                    url = "https://www.youtube.com/results?search_query=" + query
+                                    response = urllib.request.urlopen(url)
+                                    html = response.read()
+                                    soup = BeautifulSoup(html, "html.parser")
+                                    results = soup.find(attrs={'class':'yt-uix-tile-link'})
+                                    dl=("https://www.youtube.com" + results['href'])
+                                    vid = pafy.new(dl)
+                                    stream = vid.streams
+                                    for s in stream:
+                                        vin = s.url
+                                        hasil = " 「 Video Search 」\n"
+                                        hasil += "\n [Judul] : {}".format(str(vid.title))
+                                        hasil += "\n [Nama channel] : {}".format(str(vid.author))
+                                        hasil += "\n [Durasi vidio] : " + str(vid.duration) + " Quality : " + s.quality + " "
+                                        hasil += "\n [Nilai] : " + str(vid.rating)
+                                        hasil += "\n [Penonton] : " + str(vid.viewcount) + "x"
+                                        hasil += "\n [Published] : " + str(vid.published)
+                                        hasil += "\n [Pencarian : Youtube]"
+                                        hasil += "\n\n Video Below"
+                                    puy.sendMessage(msg.to,hasil)
+                                    puy.sendVideoWithURL(msg.to,vin)
+                                    print("[YOUTUBE]MP4 Succes")
                                 except Exception as e:
-                                    client.sendMessage(msg.to, str(e))
-
-                            elif cmd.startswith("rinda bye"):
-                                heij = client.getGroupIdsJoined()
-                                #G = client.getGroup(heij)
-                                #client.sendMessage(to, "Gbye {}".format(str(G.name)))
-                                client.sendMessage(to, "Gbye")
-                                #client.getGroupIdsJoined()
-                                client.leaveGroup(to)
+                                    puy.sendMessage(to, str(e))
+                  
+                            elif cmd.startswith("rinda leave to"):
+                                number = cmd.replace("rinda leave to","")
+                                groups = puy.getGroupIdsJoined()
+                                try:
+                                    group = groups[int(number)-1]
+                                    G = puy.getGroup(group)
+                                    try:
+                                        puy.leaveGroup(G.id)
+                                    except:
+                                        puy.leaveGroup(G.id)
+                                    puy.sendMessage(to, "Leave To Group : " + G.name)
+                                except Exception as error:
+                                    puy.sendMessage(to, str(error))
+                  
+                            elif cmd.startswith(".whois "):
+                                spl = re.split(".whois ",msg.text,flags=re.IGNORECASE)
+                                if spl[0] == "":
+                                    msg.contentType = 13
+                                    msg.text = None
+                                    msg.contentMetadata = {"mid":spl[1]}
+                                    puy.sendMessage(msg)
+                  
+                            elif 'Autotrans en-' in msg.text:
+                              #if msg._from in admin:
+                                spl = msg.text.replace('Autotrans en-','')
+                                if spl == 'on':
+                                    if msg.to in translateen:
+                                         msgs = "Auto Translate sudah aktif"
+                                    else:
+                                         translateen.append(msg.to)
+                                         ginfo = puy.getGroup(msg.to)
+                                         msgs = "Auto Translate Diaktifkan\nDi Group : " +str(ginfo.name)
+                                    puy.sendMessage(msg.to, "Aktif\n" + msgs)
+                                elif spl == 'off':
+                                      if msg.to in translateen:
+                                           translateen.remove(msg.to)
+                                           ginfo = puy.getGroup(msg.to)
+                                           msgs = "Auto Translate Dinonaktifkan\nDi Group : " +str(ginfo.name)
+                                      else:
+                                           msgs = "Auto Translate Sudah Tidak Aktif"
+                                      puy.sendMessage(msg.to, "Aktif\n" + msgs)
+                  
+                            elif cmd.startswith("rinda img food: "):
+                              #if msg._from in admin:
+                                query = msg.text.replace("rinda img food: ","")
+                                r = requests.get("https://cryptic-ridge-9197.herokuapp.com/api/imagesearch/" + query + "?offset=1")
+                                data=r.text
+                                data=json.loads(r.text)
+                                if data != []:
+                                    for food in data:
+                                        puy.sendImageWithURL(msg.to, str(food["url"]))                  
+                  
+                            elif cmd.startswith("rinda setspamtag: "):
+                              if wait["selfbot"] == True:
+                               if msg._from in admin:
+                                    proses = text.split(":")
+                                    strnum = text.replace(proses[0] + ":","")
+                                    num =  int(strnum)
+                                    Setmain["ADITMADZSlimit"] = num
+                                    puy.sendMessage(msg.to,"Jumlah Spamtag telah diterapkan menjadi <" +strnum + ">")
+                  
+                            elif cmd.startswith("acaratv: "):
+                              #if msg._from in admin:
+                                try:
+                                    separate = msg.text.split(" ")
+                                    channel = msg.text.replace(separate[0] + " ","")
+                                    r = requests.get("https://farzain.xyz/api/premium/acaratv.php?apikey=al11241519&id="+channel)
+                                    data = r.text
+                                    data = json.loads(data)
+                                    puy.sendMessage(msg.to, "Acara TV Di "+channel+ ":\n" + str(data["url"]))
+                                except Exception as error:
+                            	    pass
                                     
+                            elif cmd.startswith("gimage: "):
+                              #if msg._from in admin:
+                                try:
+                                    separate = msg.text.split(" ")
+                                    keyword = msg.text.replace(separate[0] + " ","")
+                                    r = requests.get("https://farzain.xyz/api/gambarg.php?id="+keyword)
+                                    data = r.text
+                                    data = json.loads(data)
+                                    puy.sendImageWithURL(msg.to, str(data["url"]))
+                                except Exception as error:
+                            	    pass
+                                    
+                            elif cmd.startswith("fs: "):
+                              #if msg._from in admin:
+                                try:
+                                    separate = msg.text.split(" ")
+                                    nama = msg.text.replace(separate[0] + " ","")
+                                    nmor = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"]
+                                    plih = random.choice(nmor)
+                                    nmor2 = ["1","2","3","4","5","6","7"]
+                                    plih2 = random.choice(nmor2)
+                                    url = ("https://farzain.xyz//api//premium//fansign//fs%20("+plih+").php?text="+nama+"&apikey=al11241519","http://farzain.xyz/api/premium/fansign/cos/cos%20("+plih2+").php?text="+nama+"&apikey=al11241519")
+                                    plihurl = random.choice(url)
+                                    puy.sendImageWithURL(msg.to, plihurl)
+                                except Exception as error:
+                                    pass                                    
+                  
+                            elif cmd.startswith("Film "):
+                                proses = msg.text.split("*")
+                                get = msg.text.replace(proses[0] + ":","")
+                                getfilm = get.split()
+                                title = getfilm[0]
+                                tahun = getfilm[1]
+                                r = requests.get('http://www.omdbapi.com/?t='+title+'&y='+tahun+'&plot=full&apikey=4bdd1d70')
+                                start = time.time()
+                                data=r.text
+                                data=json.loads(data)
+                                hasil = "Informasi \n" +str(data["Title"])+ " (" +str(data["Year"])+ ")"
+                                hasil += "\n\n " +str(data["Plot"])
+                                hasil += "\n\n Director : " +str(data["Director"])
+                                hasil += "\n Actors   : " +str(data["Actors"])
+                                hasil += "\n Release : " +str(data["Released"])
+                                hasil += "\n Genre    : " +str(data["Genre"])
+                                hasil += "\n Runtime   : " +str(data["Runtime"])
+                                path = data["Poster"]
+                                puy.sendImageWithURL(msg.to, str(path))
+                                puy.sendMessage(msg.to,hasil)                  
+                  
+                            elif cmd == "rinda grouplist":
+                                groups = puy.getGroupIdsJoined()
+                                ret_ = "   [ Group List ]"
+                                no = 0
+                                for gid in groups:
+                                    group = puy.getGroup(gid)
+                                    no += 1
+                                    ret_ += "\n{}. {} = {} Members".format(str(no), str(group.name), str(len(group.members)))
+                                ret_ += "\n   [ Total {} Groups ]".format(str(len(groups)))
+                                puy.sendMessage(to, str(ret_))
+                  
+                            elif cmd == "invite:gcreator":
+                                if msg.toType == 2:                
+                                       ginfo = puy.getGroup(receiver)
+                                       try:
+                                           gcmid = ginfo.creator.mid
+                                       except:
+                                           gcmid = "Error"
+                                       if settings["lang"] == "JP":
+                                           puy.inviteIntoGroup(receiver,[gcmid])
+                                           puy.sendMessage(receiver, "Invited")
+                                       else:
+                                           puy.inviteIntoGroup(receiver,[gcmid])
+                                           puy.sendMessage(receiver, "Pembuat grupnya sudah ada di Grup.")                  
+                  
                             elif cmd.startswith("rinda get memberlist to"):
                               #if msg._from in Owner:
                                 number = cmd.replace("rinda get memberlist to","")
-                                groups = client.getGroupIdsJoined()
+                                groups = puy.getGroupIdsJoined()
                                 ret_ = ""
                                 try:
                                     group = groups[int(number)-1]
-                                    G = client.getGroup(group)
+                                    G = puy.getGroup(group)
                                     no = 0
                                     ret_ = " 「 Member List 」\n"
                                     for mem in G.members:
                                         no += 1
                                         ret_ += "\n " + str(no) + ". " + mem.displayName
-                                    client.sendMessage(to,"Members in Group : \n"+ str(G.name) + "\n\n" + ret_ + "\n\nTotal ada %i Members" % len(G.members))
+                                    puy.sendMessage(to,"Member in Group : \n"+ str(G.name) + "\n\n" + ret_ + "\n\nTotal ada %i Members" % len(G.members))
                                 except: 
                                     pass
-
-                            elif cmd == "rinda grouplist":
-                                groups = client.getGroupIdsJoined()
-                                ret_ = "   [ Group List ]"
-                                no = 0
-                                for gid in groups:
-                                    group = client.getGroup(gid)
-                                    no += 1
-                                    ret_ += "\n{}. {} = {} Members".format(str(no), str(group.name), str(len(group.members)))
-                                ret_ += "\n   [ {} Groups ]".format(str(len(groups)))
-                                client.sendMessage(to, str(ret_))
-
-                            elif cmd.startswith("rinda get groupinfo to "):
+                  
+                            elif cmd.startswith("rinda groupinfo "):
                               #if msg._from in Owner:
-                                number = cmd.replace("rinda get groupinfo to ","")
-                                groups = client.getGroupIdsJoined()
+                                number = cmd.replace("rinda groupinfo ","")
+                                groups = puy.getGroupIdsJoined()
                                 ret_ = ""
                                 try:
                                     group = groups[int(number)-1]
-                                    G = client.getGroup(group)
+                                    G = puy.getGroup(group)
                                     path = "http://dl.profile.line-cdn.net/" + G.pictureStatus
                                     try:
                                         gCreator = G.creator.displayName
@@ -1335,7 +1399,7 @@ def clientBot(op):
                                         gTicket = "Tidak ada"
                                     else:
                                         gQr = "Terbuka"
-                                        gTicket = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(G.id)))
+                                        gTicket = "https://line.me/R/ti/g/{}".format(str(puy.reissueGroupTicket(G.id)))
                                     timeCreated = []
                                     timeCreated.append(time.strftime("%d-%m-%Y [ %H:%M:%S ]", time.localtime(int(G.createdTime) / 1000)))
                                     ret_ += " 「 Group Info 」 \n"
@@ -1348,55 +1412,55 @@ def clientBot(op):
                                     ret_ += "\n Group Qr : {}".format(gQr)
                                     ret_ += "\n Group Ticket : {}".format(gTicket)
                                     ret_ += "\n\n 「 Kontak Pembuat dibawah 」"
-                                    client.sendImageWithURL(to, path)
-                                    client.sendMessage(to, str(ret_))
-                                    client.sendContact(to, G.creator.mid)
+                                    puy.sendImageWithURL(to, path)
+                                    puy.sendMessage(to, str(ret_))
+                                    puy.sendContact(to, G.creator.mid)
                                 except:
                                     pass
-
+                  
                             elif cmd.startswith("rinda tutupqr to"):
-                              if msg._from in admin:
+                              if msg._from in Owner:
                                 number = cmd.replace("rinda tutupqr to","")
-                                groups = client.getGroupIdsJoined()
+                                groups = puy.getGroupIdsJoined()
                                 try:
                                     group = groups[int(number)-1]
-                                    G = client.getGroup(group)
+                                    G = puy.getGroup(group)
                                     try:
                                         G.preventedJoinByTicket = True
-                                        client.updateGroup(G)
+                                        puy.updateGroup(G)
                                     except:
                                         G.preventedJoinByTicket = True
-                                        client.updateGroup(G)
-                                    client.sendMessage(to, " 「 Close Qr 」 InGroup : " + G.name)
+                                        puy.updateGroup(G)
+                                    puy.sendMessage(to, " 「 Close Qr 」 InGroup : " + G.name)
                                 except Exception as error:
-                                    client.sendMessage(to, str(error))
+                                    puy.sendMessage(to, str(error))
                   
                             elif cmd.startswith("rinda bukaqr to"):
-                              if msg._from in admin:
+                              if msg._from in Owner:
                                 number = cmd.replace("rinda bukaqr to","")
-                                groups = client.getGroupIdsJoined()
+                                groups = puy.getGroupIdsJoined()
                                 try:
                                     group = groups[int(number)-1]
-                                    G = client.getGroup(group)
+                                    G = puy.getGroup(group)
                                     try:
                                         G.preventedJoinByTicket = False
-                                        client.updateGroup(G)
-                                        gurl = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(G.id)))
+                                        puy.updateGroup(G)
+                                        gurl = "https://line.me/R/ti/g/{}".format(str(puy.reissueGroupTicket(G.id)))
                                     except:
                                         G.preventedJoinByTicket = False
-                                        client.updateGroup(G)
-                                        gurl = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(G.id)))
-                                    client.sendMessage(to, " 「 Close Qr 」 InGroup : " + G.name + "\n  Url : " + gurl)
+                                        puy.updateGroup(G)
+                                        gurl = "https://line.me/R/ti/g/{}".format(str(puy.reissueGroupTicket(G.id)))
+                                    puy.sendMessage(to, " 「 Close Qr 」 InGroup : " + G.name + "\n  Url : " + gurl)
                                 except Exception as error:
-                                    client.sendMessage(to, str(error))
+                                    puy.sendMessage(to, str(error))
                   
                             elif cmd.startswith("rinda mention to"):
                               #if msg._from in Owner:
                                 number = cmd.replace("rinda mention to","")
-                                groups = client.getGroupIdsJoined()
+                                groups = puy.getGroupIdsJoined()
                                 try:
                                     group = groups[int(number)-1]
-                                    G = client.getGroup(group)
+                                    G = puy.getGroup(group)
                                     try:
                                         contact = [mem.mid for mem in G.members]
                                         text = "Mentioning To %i Members\n" %len(contact)
@@ -1415,33 +1479,102 @@ def clientBot(op):
                                             no = (no+1)
                                         text += "\n\nInGroup : {}".format(str(G.name))
                                         sendMention(group, text, contact)
-                                    client.sendMessage(to, "Sended Mention To Group : " + G.name)
+                                    puy.sendMessage(to, "Send Mention To Group : " + G.name)
                                 except Exception as error:
-                                    client.sendMessage(to, str(error))
-
+                                    puy.sendMessage(to, str(error))
+                  
                             elif cmd.startswith("rinda crash to"):
-                              if msg._from in admin:
+                              if msg._from in Owner:
                                 number = cmd.replace("rinda crash to","")
-                                groups = client.getGroupIdsJoined()
+                                groups = puy.getGroupIdsJoined()
                                 try:
                                     group = groups[int(number)-1]
-                                    G = client.getGroup(group)
+                                    G = puy.getGroup(group)
                                     try:
-                                        client.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
+                                        puy.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
                                     except:
-                                        client.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
-                                    client.sendMessage(to, "Sended Crash To Group : " + G.name)
+                                        puy.sendContact(group, "uc7d319b7d2d38c35ef2b808e3a2aeed9',")
+                                    puy.sendMessage(to, "Send Crash To Group : " + G.name)
                                 except Exception as error:
-                                    client.sendMessage(to, str(error))
-
+                                    puy.sendMessage(to, str(error))
+                  
+                            elif cmd.startswith("github "):
+                                query = cmd.replace("github ","")
+                                b = urllib.parse.quote(query)
+                                #puy.sendMessage(to,"「 Searching 」\n" "Type: GitHub Search\nStatus: Processing...")
+                                puy.sendMessage(to, " " + a + "\nhttps://github.com/search?utf8=✓&q="+query)
+                                
+                            elif cmd.startswith("playstore "):
+                                query = cmd.replace("playstore ","")
+                                puy.sendMessage(to, "「 Title : "+query+"」\nhttps://play.google.com/store/search?q="+query)
+                  
+                            elif cmd.startswith("twitter "):
+                                query = cmd.replace("twitter ","")
+                                b = urllib.parse.quote(query)
+                                #puy.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Processing")
+                                puy.sendMessage(to, "https://www.twitter.com/"+query)
+                                #puy.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Success")
+                  
+                            elif cmd.startswith("smule "):
+                                query = cmd.replace("smule ","")
+                                b = urllib.parse.quote(query)
+                                #puy.sendMessage(to,"Searching to id smule..")
+                                puy.sendMessage(to, "Nama : "+b+"\nId smule : http://smule.com/"+query)
+                  
+                            elif cmd.startswith("asking "):
+                                query = cmd.replace("asking ","")
+                                #kata = cmd.replace("asking ", "")
+                                sch = query.replace(" ","+")
+                                with requests.session() as web:
+                                   urlz = "http://lmgtfy.com/?q={}".format(str(sch))
+                                   r = web.get("http://tiny-url.info/api/v1/create?apikey=A942F93B8B88C698786A&provider=cut_by&format=json&url={}".format(str(urlz)))
+                                   data = r.text
+                                   data = json.loads(data)
+                                   url = data["shorturl"]
+                                   ret_ = "\n"
+                                   ret_ += " => Link : {}".format(str(url))
+                                   #puy.sendMessage(to, str(ret_))
+                                   puy.sendMessage(msg.to, "「 Question is *" + query + "* 」  " + str(ret_))
+                  
+                            elif cmd.startswith("fc "):
+                                sep = msg.text.split(" ")
+                                anu = msg.text.replace(sep[0] + " "," ")                
+                                with requests.session() as web:
+                                    web.headers["user-agent"] = random.choice(settings["userAgent"])
+                                    r = web.get("https://farzain.xyz/api/premium/fs.php?apikey=apikey_saintsbot&id={}".format(urllib.parse.quote(anu)))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data["status"] == "success":
+                                        ret_ = data["url"]
+                                        puy.sendImageWithURL(msg.to,ret_)
+                                    else:
+                                        puy.sendMessage(msg.to, "Error")                  
+                  
+                            elif cmd.startswith("sendfile"):
+                              #if sender in admin:
+                                sep = text.split(" ")
+                                file = text.replace(sep[0] + " ","")
+             #                  sendMention(to,"[ Send File ]\nType: Send Files\nI Am Send Your Files @!Please Wait",[sender])
+                                time.sleep(1)
+                                puy.sendFile(to,file)
+                  
                             elif cmd.startswith("rinda get creepypasta"):
                                 r=requests.get("http://hipsterjesus.com/api")
                                 data=r.text
                                 data=json.loads(data)
                                 hasil = " 「 Creepypasta 」\n\n" 
                                 hasil += str(data["text"])
-                                client.sendMessage(msg.to, str(hasil))
-
+                                puy.sendMessage(msg.to, str(hasil))
+                  
+                            elif cmd.startswith("announcetext "):
+                               Text = cmd.replace("announcetext ","")
+                               Link = "http://line.me/ti/p/uv8Cqx77tB"
+                               Logo = "http://dl.profile.line-cdn.net/" + puy.getGroup(to).pictureStatus
+                               stype = 1
+                               announce = ChatRoomAnnouncementContents(displayFields=5,text=Text,link=Link,thumbnail=Logo)
+                               puy.createChatRoomAnnouncement(to,stype,announce)
+                               sendMention(receiver, sender, "? Create Announce ?\nType : Lock\n•", "\nSuccess Create Announce Lock "+str(Text)+" in Group : "+str(puy.getGroup(to).name))                  
+                  
                             elif cmd.startswith("timezone "):
                                 try:
                                     query = cmd.replace("timezone ","")
@@ -1454,15 +1587,15 @@ def clientBot(op):
                                     ret_ += "\n Longitude : " +str(data["data"]["longitude"])
                                     ret_ += "\n Address : " +str(data["data"]["address"])
                                     ret_ += "\n Country : " +str(data["data"]["country"])
-                                    #client.sendMessage(to, str(ret_))
-                                    client.sendMessage(to, " 「 Timezone " + query + " 」  " + str(ret_))
+                                    #puy.sendMessage(to, str(ret_))
+                                    puy.sendMessage(to, " 「 Timezone " + query + " 」  " + str(ret_))
                                 except Exception as error:
-                                    client.sendMessage(to, str(error))
-
+                                    puy.sendMessage(to, str(error))
+                  
                             elif cmd.startswith("rinda get image "):
                                 try:
                                     query = cmd.replace("rinda get image ","")
-                                    #search = cmd.replace("client image ","")
+                                    #search = cmd.replace("puy image ","")
                                     r = requests.get("https://xeonwz.herokuapp.com/images/google.api?q={}".format(query))
                                     data = r.text
                                     data = json.loads(data)
@@ -1471,13 +1604,13 @@ def clientBot(op):
                                         path = random.choice(items)
                                         a = items.index(path)
                                         b = len(items)
-                                        client.sendMessage(to, " Search Image 「 " + query + " 」  ")
-                                        client.sendImageWithURL(to, str(path))
+                                        puy.sendMessage(to, " Search Image 「 " + query + " 」  ")
+                                        puy.sendImageWithURL(to, str(path))
                                 except Exception as error:
                                      logError(error)
                                      var= traceback.print_tb(error.__traceback__)
-                                     client.sendMessage(to,str(var))
-
+                                     puy.sendMessage(to,str(var))
+                  
                             elif cmd.startswith("rinda get 1cak"):
                                 r=requests.get("http://api-1cak.herokuapp.com/random")
                                 data=r.text
@@ -1489,9 +1622,9 @@ def clientBot(op):
                                 hasil += "\n  Rates : " + str(data["votes"])
                                 hasil += "\n  Nsfw : " + str(data["nsfw"])
                                 image = str(data["img"])
-                                client.sendImageWithURL(msg.to, str(image))
-                                client.sendMessage(msg.to, str(hasil))
-
+                                #puy.sendImageWithURL(msg.to, str(image))
+                                puy.sendMessage(msg.to, str(hasil))
+                                
                             elif cmd.startswith("rinda get devianart "):
                                 query = cmd.replace("rinda get devianart ","")
                                 try:
@@ -1504,63 +1637,128 @@ def clientBot(op):
                                         path = random.choice(items)
                                         a = items.index(path)
                                         b = len(items)
-                                        client.sendMessage(msg.to, "Search Image 「 " + query + " 」")
-                                        client.sendImageWithURL(to, str(path))                                        
+                                        puy.sendMessage(msg.to, "Search Image 「 " + query + " 」")
+                                        puy.sendImageWithURL(to, str(path))                                        
                                 except Exception as error:
                                      logError(error)
                                      var= traceback.print_tb(error.__traceback__)
-                                     client.sendMessage(to,str(var))
-
+                                     puy.sendMessage(to,str(var))
+                                
                             elif cmd.startswith("hasil dari "):
                                 query = cmd.replace("hasil dari ","")
                                 puy1 = requests.get("https://www.calcatraz.com/calculator/api?c={}".format(urllib.parse.quote(query)))
                                 data=puy1.text
                                 data=json.loads(data)
-                                client.sendMessage(msg.to, "Hasil dari 「" + query + "」 = " + str(data))
-
-                            elif cmd.startswith("github "):
-                                query = cmd.replace("github ","")
-                                b = urllib.parse.quote(query)
-                                #client.sendMessage(to,"「 Searching 」\n" "Type: GitHub Search\nStatus: Processing...")
-                                client.sendMessage(to, " " + b + "\nhttps://github.com/"+query)
+                                puy.sendMessage(msg.to, query + " = " + str(data))
                                 
-                            elif cmd.startswith("playstore "):
-                                query = cmd.replace("playstore ","")
-                                client.sendMessage(to, "「 Searched : "+query+"」\nhttps://play.google.com/store/search?q="+query)
-                  
-                            elif cmd.startswith("twitter "):
-                                query = cmd.replace("twitter ","")
-                                b = urllib.parse.quote(query)
-                                #client.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Processing")
-                                client.sendMessage(to, "https://www.twitter.com/"+query)
-                                #client.sendMessage(to,"「 Searching 」\n" "Type:Search Info\nStatus: Success")
-
+                            elif cmd.startswith("cekig:"):
+                              #if msg._from in admin:
+                                try:
+                                    sep = text.split(" ")
+                                    search = text.replace(sep[0] + " ","")
+                                    r = requests.get("https://farzain.xyz/api/ig_profile.php?apikey=arTdnVbJkW1EuzDNQrIxQDvHtJIDcQ&id={}".format(search))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data != []:
+                                        ret_ = "[ Profile Instagram ]"
+                                        ret_ += "\n Nama : {}".format(str(data["info"]["full_name"]))
+                                        ret_ += "\n Username : {}".format(str(data["info"]["username"]))
+                                        ret_ += "\n Bio : {}".format(str(data["info"]["bio"]))
+                                        ret_ += "\n URL Bio : {}".format(str(data["info"]["url_bio"]))
+                                        ret_ += "\n Pengikut : {}".format(str(data["count"]["followers"]))
+                                        ret_ += "\n Diikuti : {}".format(str(data["count"]["followers"]))
+                                        ret_ += "\n Total Post : {}".format(str(data["count"]["post"]))
+                                        ret_ += "\n[ https://www.instagram.com/{} ]".format(search)
+                                        path = data["info"]["profile_pict"]
+                                        puy.sendMessage(to, str(ret_))
+                                        puy.sendImageWithURL(to, str(path))
+                                except Exception as e:
+                                    puy.sendMessage(msg.to, str(e))                                
+                                
+                            elif cmd.startswith("rinda get motivation"):
+                                puy1 = requests.get("https://talaikis.com/api/quotes/random")
+                                data=puy1.text
+                                data=json.loads(data)
+                                puy.sendMessage(to, " 「 Motivation 」 \n" + str(data["quote"]))
+                                
+                            elif cmd.startswith("bitcoin"):
+                                puy1 = requests.get("https://xeonwz.herokuapp.com/bitcoin.api")
+                                data=puy1.text
+                                data=json.loads(data)
+                                hasilnya = "「 Bitcoin 」\n" 
+                                hasilnya += "\n Price : " +str(data["btc"])
+                                hasilnya += "\n Expensive : " +str(data["high"])
+                                hasilnya += "\n Cheap : " +str(data["low"])
+                                puy.sendMessage(msg.to, str(hasilnya))
+                                
                             elif 'Simi ' in msg.text:
                               #if msg._from in admin:
                                 spl = msg.text.replace('Simi ','')
                                 if spl == 'on':
                                     if msg.to in simisimi:
-                                         msgs = "Simi Mode tidak aktif"
+                                         msgs = "Simi-simi sudah aktif"
                                     else:
                                          simisimi.append(msg.to)
-                                         ginfo = client.getGroup(msg.to)
-                                         msgs = "Simi Mode diaktifkan Di Group : \n「" +str(ginfo.name + "」")
-                                    client.sendMessage(msg.to, "Diaktifkan\n" + msgs)
+                                         ginfo = puy.getGroup(msg.to)
+                                         msgs = "Simi-simi Diaktifkan\nDi Group : " +str(ginfo.name)
+                                    puy.sendMessage(msg.to, "Diaktifkan\n" + msgs)
                                 elif spl == 'off':
                                       if msg.to in simisimi:
                                            simisimi.remove(msg.to)
-                                           ginfo = client.getGroup(msg.to)
-                                           msgs = "Simi Mode dimatikan Di Group : \n「" +str(ginfo.name + "」")
+                                           ginfo = puy.getGroup(msg.to)
+                                           msgs = "Simi-simi Dinonaktifkan\nDi Group : " +str(ginfo.name)
                                       else:
-                                           msgs = "Simi Mode tidak aktif"
-                                      client.sendMessage(msg.to, "Dinonaktifkan\n" + msgs)
-
-                            elif cmd.startswith("rinda get motivation"):
-                                puy1 = requests.get("https://talaikis.com/api/quotes/random")
-                                data=puy1.text
-                                data=json.loads(data)
-                                client.sendMessage(to, " 「 Motivation 」 \n" + str(data["quote"]))
-
+                                           msgs = "Simi-simi Sudah Tidak Aktif"
+                                      puy.sendMessage(msg.to, "Dinonaktifkan\n" + msgs)
+                                
+                            elif cmd.startswith("urban "):
+                                sep = cmd.split(" ")
+                                judul = cmd.replace(sep[0] + " ","")
+                                url = "http://api.urbandictionary.com/v0/define?term="+str(judul)
+                                with requests.session() as s:
+                                    s.headers["User-Agent"] = random.choice(settings["userAgent"])
+                                    puy1 = s.get(url)
+                                    data = puy1.text
+                                    data = json.loads(data)
+                                    y = "Result Urban :"
+                                    y += "\nTags: "+ data["tags"][0]
+                                    y += ","+ data["tags"][1]
+                                    y += ","+ data["tags"][2]
+                                    y += ","+ data["tags"][3]
+                                    y += ","+ data["tags"][4]
+                                    y += ","+ data["tags"][5]
+                                    y += ","+ data["tags"][6]
+                                    y += ","+ data["tags"][7]
+                                    y += "\n\n~Author : "+str(data["list"][0]["author"])
+                                    y += "\n~Word : "+str(data["list"][0]["word"])
+                                    y += "\n~Link : "+str(data["list"][0]["permalink"])
+                                    y += "\n~Definition : "+str(data["list"][0]["definition"])
+                                    y += "\n~Example : "+str(data["list"][0]["example"])
+                                    puy.sendMessage(to, str(y))                                
+                                
+                            elif cmd.startswith("instagram "):
+                                try:
+                                    search = cmd.replace("instagram ","")
+                                    r=requests.get("http://rahandiapi.herokuapp.com/instainfo/"+search+"?key=betakey")
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data != []:
+                                        ret_="    [ Instagram Result ]\n"
+                                        ret_ += "\nName: {}".format(str(data["result"]["name"]))
+                                        ret_ += "\nUsername: {}".format(str(data["result"]["username"]))                 
+                                        ret_ += "\n\n {}".format(str(data["result"]["bio"]))            
+                                        ret_ += "\n\nFollowers: {}".format(str(data["result"]["follower"]))
+                                        ret_ += "\nFollowing: {}".format(str(data["result"]["following"]))                                 
+                                        ret_ += "\nTotal Post: {}".format(str(data["result"]["mediacount"]))
+                                        ret_ += "\nhttps://www.instagram.com/{}".format(search)
+                                        path = data["result"]["url"]
+                                        puy.sendImageWithURL(to, str(path))
+                                        puy.sendMessage(to, str(ret_))
+                                except Exception as error:
+                                    logError(error)
+                                    var= traceback.print_tb(error.__traceback__)
+                                    puy.sendMessage(to,str(var))                                
+                                
                             elif cmd.startswith("rinda get suggestion to "):
                                 query = cmd.replace("rinda get suggestion to ","")
                                 puy1 = requests.get("http://api.ntcorp.us/se/v1/?q={}".format(urllib.parse.quote(query)))
@@ -1573,8 +1771,8 @@ def clientBot(op):
                                     hmm = s
                                     no += 1
                                     ret_ += "\n" + str(no) + ") " + "{}\n".format(str(hmm))
-                                client.sendMessage(msg.to, " This is Suggestion to 「 " + query + " 」  " + str(ret_))
-
+                                puy.sendMessage(msg.to, " This is Suggestion to 「 " + query + " 」  " + str(ret_))
+                                
                             elif cmd.startswith("rinda get gif "):
                                 proses = text.split(" ")
                                 urutan = text.replace(proses[0] + " ","")
@@ -1589,7 +1787,7 @@ def clientBot(op):
                                         no += 1
                                         hasil += "\n" + str(no) + ") " + str(aa["title"])
                                         ret_ = "\n\nRinda get gif {}*number".format(str(search))
-                                    client.sendMessage(to,hasil+ret_)
+                                    puy.sendMessage(to,hasil+ret_)
                                 elif len(count) == 2:
                                     try:
                                         num = int(count[1])
@@ -1597,33 +1795,51 @@ def clientBot(op):
                                         c = str(b["id"])
                                         hasil = " Gif ID : "+str(c)
                                         hasil += ""
-                                        client.sendMessage(msg.to,hasil)
+                                        puy.sendMessage(msg.to,hasil)
                                         dl = str(b["media"][0]["loopedmp4"]["url"])
-                                        client.sendVideoWithURL(msg.to,dl)
+                                        puy.sendVideoWithURL(msg.to,dl)
                                     except Exception as e:
-                                        client.sendMessage(to," "+str(e))
+                                        puy.sendMessage(to," "+str(e))
 
-                            elif cmd.startswith("rinda get topnews"):
-                                mpui = requests.get("https://newsapi.org/v2/top-headlines?country=id&apiKey=1214d6480f6848e18e01ba6985e2008d")
-                                data = mpui.text
-                                data = json.loads(data)
-                                hasil = "      「 Top News 」\n\n"
-                                hasil += "1) \n<" + str(data["articles"][0]["title"] + ">")
-                                hasil += "\n     Sumber : " + str(data["articles"][0]["source"]["name"])
-                                hasil += "\n     Penulis : " + str(data["articles"][0]["author"])
-                                hasil += "\n     Link : " + str(data["articles"][0]["url"])
-                                hasil += "\n\n2) \n<" + str(data["articles"][0]["title"] + ">")
-                                hasil += "\n     Sumber : " + str(data["articles"][1]["source"]["name"])
-                                hasil += "\n     Penulis : " + str(data["articles"][1]["author"])   
-                                hasil += "\n     Link : " + str(data["articles"][1]["url"])
-                                hasil += "\n\n3) \n<" + str(data["articles"][0]["title"] + ">")
-                                hasil += "\n     Sumber : " + str(data["articles"][2]["source"]["name"])
-                                hasil += "\n     Penulis : " + str(data["articles"][2]["author"])
-                                hasil += "\n     Link : " + str(data["articles"][2]["url"])
-                                path = data["articles"][3]["urlToImage"]
-                                client.sendMessage(msg.to, str(hasil))
-                                client.sendImageWithURL(msg.to, str(path))
-
+                            elif cmd.startswith("fmylife"):
+                              if msg._from in Owner:
+                                result = requests.get("http://www.fmylife.com/random")
+                                data = BeautifulSoup(result.content, 'html5lib')                                                                             
+                                for sam in data.findAll('figure', attrs={'class':'text-center visible-xs'}):                                        
+                                    path = str(sam.find('img')['data-src'])                                    
+                                puy.sendImageWithURL(to, str(path))                                        
+                                        
+                            elif cmd.startswith("news today"):
+                                try:
+                                    api_key = "a53cb61cee4d4c518b69473893dba73b"
+                                    r = _session.get("https://newsapi.org/v2/top-headlines?country=id&apiKey={}".format(str(api_key)))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    ret_ = "Top News\n"
+                                    no = 1
+                                    anu = data["articles"]
+                                    if len(anu) >= 5:
+                                        for s in range(5):
+                                            syit = anu[s]
+                                            sumber = syit['source']['name']
+                                            author = syit['author']
+                                            judul = syit['title']
+                                            url = syit['url']
+                                            ret_ += "\n\n{}. Title : {}\n    Sumber : {}\n    Penulis : {}\n    Link : {}".format(str(no), str(judul), str(sumber), str(author), str(url))
+                                            no += 1
+                                    else:
+                                        for s in anu:
+                                            syit = s
+                                            sumber = syit['source']['name']
+                                            author = syit['author']
+                                            judul = syit['title']
+                                            url = syit['url']
+                                            ret_ += "\n\n{}. Judul : {}\n    Sumber : {}\n    Penulis : {}\n    Link : {}".format(str(no), str(judul), str(sumber), str(author), str(url))
+                                            no += 1
+                                    puy.sendMessage(to, str(ret_))
+                                except:
+                                    puy.sendMessage(to, "Top news Not Found !")
+                                        
                             elif cmd.startswith("rinda get lockscreen "):
                               #if msg._from in Owner:
                                 query = cmd.replace("rinda get lockscreen ","")
@@ -1639,7 +1855,7 @@ def clientBot(op):
                                         num += 1
                                         ret_ += "\n{}. {}".format(str(num),str(sam["judul"]))
                                     ret_ += "\n\nMore : Rinda get lockscreen {}*(number) to Details.".format(str(search))
-                                    client.sendMessage(to, str(ret_))
+                                    puy.sendMessage(to, str(ret_))
                                 elif len(cond) == 2:
                                     num = int(cond[1])
                                     if num <= len(data["result"]):
@@ -1648,122 +1864,148 @@ def clientBot(op):
                                         data = result.text
                                         data = json.loads(data)
                                         if data["result"] != []:
-                                            client.sendImageWithURL(to, str(sam["link"]))
-
+                                            puy.sendImageWithURL(to, str(sam["link"]))
+                                
+                            elif cmd.startswith("searchcharacter "):
+                                kata = cmd.replace("searchcharacter ", "")
+                                with _session as web:
+                                    try:
+                                        r = web.get("http://ariapi.herokuapp.com/api/anime/search?q={}".format(urllib.parse.quote(kata)))
+                                        data = r.text
+                                        data = json.loads(data)
+                                        anu = data["result"]["character"][0]
+                                        title = anu['title']
+                                        link = anu['link']
+                                        ret_ = "     「 Character 」"
+                                        ret_ += "\n\nTitle : {}\nLink : {}".format(str(title), str(link))
+                                        puy.sendMessage(to, str(ret_))
+                                    except:
+                                        puy.sendMessage(to, "No result found")                                
+                                
+                            elif cmd.startswith("square"):
+                                number = cmd.replace("square","")
+                                squares = puy.getJoinedSquares().squares
+                                ret_ = "「 Square 」\n"
+                                try:
+                                    square = squares[int(number)-1]
+                                    path = "http://dl.profile.line-cdn.net/" + square.profileImageObsHash
+                                    ret_ += "\n1. Name : {}".format(str(square.name))
+                                    ret_ += "\n2. Description: {}".format(str(square.desc))
+                                    ret_ += "\n3. ID Square : {}".format(str(square.mid))
+                                    ret_ += "\n4. Link : {}".format(str(square.invitationURL))
+                                    puy.sendImageWithURL(to, path)
+                                    puy.sendMessage(to, str(ret_))
+                                except Exception as error:
+                                    puy.sendMessage(to, str(error))
+                                
                             elif cmd.startswith("rindabc: "):
-                              if msg._from in admin:
+                              if msg._from in Owner:
                                 sep = text.split(" ")
                                 pesan = text.replace(sep[0] + " ","")
-                                saya = client.getGroupIdsJoined()
+                                saya = puy.getGroupIdsJoined()
                                 for group in saya:
-                                   client.sendMessage(group,"" + str(pesan))
+                                   puy.sendMessage(group,"" + str(pesan))
 
-                            elif cmd.startswith("rindafbc: "):
-                              if msg._from in admin:                            
-                                sep = text.split(" ")
-                                txt = text.replace(sep[0] + " ","")
-                                friends = client.friends
-                                for friend in friends:
-                                    sendMention(friend, "「 Broadcast from @! 」\n\n{}".format(str(txt), [sender]))
-                                    client.sendMessage(to, "Berhasil mengirim ke {} Teman".format(str(len(friends))))
-
-                            elif cmd.startswith("smule "):
-                                query = cmd.replace("smule ","")
-                                b = urllib.parse.quote(query)
-                                #client.sendMessage(to,"Searching to id smule..")
-                                client.sendMessage(to, "Name : "+b+"\nId smule : http://smule.com/"+query)
-
-                            elif cmd.startswith("asking "):
-                                query = cmd.replace("asking ","")
-                                #kata = cmd.replace("asking ", "")
-                                sch = query.replace(" ","+")
+                            elif cmd.startswith("#cuaca: "):
+                                separate = text.split(" ")
+                                location = text.replace(separate[0] + " ","")
                                 with requests.session() as web:
-                                   urlz = "http://lmgtfy.com/?q={}".format(str(sch))
-                                   r = web.get("http://tiny-url.info/api/v1/create?apikey=A942F93B8B88C698786A&provider=cut_by&format=json&url={}".format(str(urlz)))
-                                   data = r.text
-                                   data = json.loads(data)
-                                   url = data["shorturl"]
-                                   ret_ = "\n"
-                                   ret_ += " 「 Link : {}".format(str(url) + " 」")
-                                   #client.sendMessage(to, str(ret_))
-                                   client.sendMessage(msg.to, "「 Question is *" + query + "* 」  " + str(ret_))
-
-                            elif cmd.startswith("rinda get wikipedia "):
-                                query = cmd.replace("rinda get wikipedia ","")
+                                    web.headers["user-agent"] = random.choice(settings["userAgent"])
+                                    r = web.get("http://api.corrykalam.net/apicuaca.php?kota={}".format(urllib.parse.quote(location)))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    tz = pytz.timezone("Asia/Jakarta")
+                                    timeNow = datetime.now(tz=tz)
+                                    if "result" not in data:
+                                        ret_ = "「Status Cuaca」"
+                                        ret_ += "\n┃🇮🇩┃ Lokasi : " + data[0].replace("Temperatur di kota ","")
+                                        ret_ += "\n┃🇮🇩┃ Suhu : " + data[1].replace("Suhu : ","") + " C"
+                                        ret_ += "\n┃🇮🇩┃ Kelembaban : " + data[2].replace("Kelembaban : ","") + " %"
+                                        ret_ += "\n┃🇮🇩┃ Tekanan udara : " + data[3].replace("Tekanan udara : ","") + " HPa"
+                                        ret_ += "\n┃🇮🇩┃ Kecepatan angin : " + data[4].replace("Kecepatan angin : ","") + " m/s"
+                                        ret_ += "\n\nTanggal : " + datetime.strftime(timeNow,'%Y-%m-%d')
+                                        ret_ += "\nJam : " + datetime.strftime(timeNow,'%H:%M:%S')
+                                    puy.sendMessage(msg.to, str(ret_))                                                                                                                                                             
+                            elif cmd.startswith("#igpost"):
+                                separate = msg.text.split(" ")
+                                user = msg.text.replace(separate[0] + " ","")
+                                profile = "https://www.instagram.com/" + user
+                                with requests.session() as x:
+                                    x.headers['user-agent'] = random.choice(settings['userAgent'])
+                                    end_cursor = ''
+                                    for count in range(1, 999):
+                                        print('PAGE: ', count)
+                                        r = x.get(profile, params={'max_id': end_cursor})
+                        
+                                        data = re.search(r'window._sharedData = (\{.+?});</script>', r.text).group(1)
+                                        j    = json.loads(data)
+                        
+                                        for node in j['entry_data']['ProfilePage'][0]['user']['media']['nodes']: 
+                                            if node['is_video']:
+                                                page = 'https://www.instagram.com/p/' + node['code']
+                                                r = x.get(page)
+                                                url = re.search(r'"video_url": "([^"]+)"', r.text).group(1)
+                                                print(url)
+                                                puy.sendVideoWithURL(msg.to,url)
+                                            else:
+                                                print (node['display_src'])
+                                                puy.sendImageWithURL(msg.to,node['display_src'])
+                                        end_cursor = re.search(r'"end_cursor": "([^"]+)"', r.text).group(1)                                                                                  
+                            elif cmd.startswith("lirik "):
+                              #if msg._from in admin:
                                 try:
                                     sep = msg.text.split(" ")
-                                    wiki = msg.text.replace(sep[0] + " ","")
-                                    wikipedia.set_lang("id")
-                                    pesan=" 「 Judul 」 "
-                                    pesan+=wikipedia.page(wiki).title
-                                    pesan+="\n 「 Teks 」 "
-                                    pesan+=wikipedia.summary(wiki, sentences=1)
-                                    pesan+="\n 「 Alamat url 」 "+wikipedia.page(wiki).url
-                                    pesan+="\n"
-                                    client.sendMessage(to, pesan)
-                                except:
-                                        try:
-                                            pesan="Teks terlalu panjang, Klik url untuk lebih lengkap\n"
-                                            pesan+=wikipedia.page(wiki).url
-                                            #client.sendMessage(to, pesan)
-                                            client.sendMessage(to, " Wikipedia Search 「 " + query + " 」  \n" + pesan)
-                                        except Exception as e:
-                                            #client.sendMessage(to, "Wikipedia [ " + query + " ] " + str(e))
-                                            client.sendMessage(msg.to, " Wikipedia Search 「 " + query + " 」 \n" + str(e))
-
-                            elif cmd.startswith("rinda getmeme "):
-                                query = cmd.replace("rinda getmeme ","")
-                                #data = r.text
-                                #data = json.loads(data)
-                                meme = query.split('*')
-                                meme = meme[0].replace(' ','_')
-                                atas = query.split('*')
-                                atas = atas[1].replace(' ','_')
-                                bawah = query.split('*')
-                                bawah = bawah[2].replace(' ','_')
-                                memes = 'https://memegen.link/'+meme+'/'+atas+'/'+bawah+'.jpg'
-                                client.sendMessage(msg.to, "Creating Meme " + query + "...")
-                                client.sendImageWithURL(msg.to, memes)
-
-                            elif cmd == "me":
-                                contact = client.getContact(sender)
-                                userid = "https://line.me/ti/p/~" + client.profile.userid
-                                sendMention(to, "@!", [sender])
-                                #client.sendContact(to, sender)
-                                client.sendImageWithURL(to,"http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus))
-
-                            elif cmd == 'rinda memelist':
-                                client.sendMessage(to,"10 Guy = tenguy\nAfraid to Ask Andy = afraid\nAn Older Code Sir, But It Checks Out = older\nAncient Aliens Guy = aag\nAt Least You Tried = tried\nBaby Insanity Wolf = biw\nBad Luck Brian = blb\nBut That's None of My Business = kermit\nButthurt Dweller = bd\nCaptain Hindsight = ch\nComic Book Guy = cbg\nCondescending Wonka = wonka\nConfession Bear = cb\nConspiracy Keanu = keanu\nDating Site Murderer = dsm\nDo It Live! = live\nDo You Want Ants? = ants\nDoge = doge\nDrake Always On Beat = alwaysonbeat\nErmahgerd = ermg\nFirst World Problems = fwp\nForever Alone = fa\nFoul Bachelor Frog = fbf\nFuck Me, Right? = fmr\nFuturama Fry = fry\nGood Guy Greg = ggg\nHipster Barista = hipster\nI Can Has Cheezburger? = icanhas\nI Feel Like I'm Taking Crazy Pills = crazypills\nI Immediately Regret This Decision! = regret\nI Should Buy a Boat Cat = boat\nI Would Be So Happy = sohappy\nI am the Captain Now = captain\nInigo Montoya = inigo\nInsanity Wolf = iw\nIt's A Trap! = ackbar\nIt's Happening = happening\nIt's Simple, Kill the Batman = joker\nJony Ive Redesigns Things = ive\nLaughing Lizard = ll\nMatrix Morpheus = morpheus\nMilk Was a Bad Choice = badchoice\nMinor Mistake Marvin = mmm\nNothing To Do Here = jetpack\nOh, Is That What We're Going to Do Today? = red\nOne Does Not Simply Walk into Mordor = mordor\nOprah You Get a Car = oprah\nOverlay Attached Girlfriend = oag\nPepperidge Farm Remembers = remembers\nPhilosoraptor = philosoraptor\nProbably Not a Good Idea = jw\nSad Barack Obama = sad-obama\nSad Bill Clinton = sad-clinton\nSad Frog / Feels Bad Man = sadfrog\nSad George Bush = sad-bush\nSad Joe Biden = sad-biden\nSad John Boehner = sad-boehner\nSarcastic Bear = sarcasticbear\nSchrute Facts = dwight\nScumbag Brain =  sb\nScumbag Steve = ss\nSealed Fate = sf\nSee? Nobody Cares = dodgson\nShut Up and Take My Money! = money\nSo Hot Right Now = sohot\nSocially Awesome Awkward Penguin = awesome-awkward\nSocially Awesome Penguin = awesome\nSocially Awkward Awesome Penguin = awkward-awesome\nSocially Awkward Penguin = wkward\nStop Trying to Make Fetch Happen = fetch\nSuccess Kid = success\nSuper Cool Ski Instructor = ki\nThat Would Be Great = officespace\nThe Most Interesting Man in the World = interesting\nThe Rent Is Too Damn High = toohigh\nThis is Bull, Shark = bs\nWhy Not Both? = Both\nWinter is coming = winter\nX all the Y = xy\nX, X Everywhere = buzz\nXzibit Yo Dawg = yodawg\nY U NO Guy = yuno\nY'all Got Any More of Them = yallgot\nYou Should Feel Bad = bad\nYou Sit on a Throne of Lies = elf\nYou Were the Chosen One! = chosen\n\nUsage : Rinda getmeme sohot*Hello*Rin")
-
-                            elif cmd.startswith("rinda get quotes"):
-                                r=requests.get("https://talaikis.com/api/quotes/random")
-                                data=r.text
-                                data=json.loads(data)
-                                hasil = "  [ Search Random Quote ]\n\n"
-                                hasil += "Genre : " +str(data["cat"])
-                                hasil += "\n\n" +str(data["quote"])
-                                hasil += "\n\n From : " +str(data["author"])+ " "
-                                client.sendMessage(msg.to, str(hasil))
-
-                            elif cmd.startswith("rinda leave to"):
-                                number = cmd.replace("rinda leave to","")
-                                groups = client.getGroupIdsJoined()
-                                try:
-                                    group = groups[int(number)-1]
-                                    G = client.getGroup(group)
-                                    try:
-                                        client.leaveGroup(G.id)
-                                    except:
-                                        client.leaveGroup(G.id)
-                                    client.sendMessage(to, "Leave To Group : " + G.name)
+                                    query = msg.text.replace(sep[0] + " ","")
+                                    cond = query.split(":")
+                                    search = cond[0]
+                                    api = requests.get("http://api.secold.com/joox/cari/{}".format(str(search)))
+                                    data = api.text
+                                    data = json.loads(data)
+                                    if len(cond) == 1:
+                                        num = 0
+                                        ret_ = "  [ List Lirik ]  "
+                                        for lyric in data["results"]:
+                                            num += 1
+                                            ret_ += "\n {}. {}".format(str(num), str(lyric["single"]))
+                                        ret_ += "\n [ Total {} Lagu ] ".format(str(len(data["results"])))
+                                        ret_ += "\n\nUntuk Melihat Details Musik, Silahkan Ketik \nâ˜¬ã€Œ {}Lirik {}:nomor ".format(str(),str(search))
+                                        ret_ += "\ {}Playlist {}:nomor ".format(str(),str(search))
+                                        puy.sendMessage(msg.to, str(ret_))
+                                    elif len(cond) == 2:
+                                        num = int(cond[1])
+                                        if num <= len(data["results"]):
+                                            lyric = data["results"][num - 1]
+                                            api = requests.get("http://api.secold.com/joox/sid/{}".format(str(lyric["songid"])))
+                                            data = api.text
+                                            data = json.loads(data)
+                                            lyrics = data["results"]["lyric"]
+                                            lyric = lyrics.replace('ti:','Title - ')
+                                            lyric = lyric.replace('ar:','Artist - ')
+                                            lyric = lyric.replace('al:','Album - ')
+                                            removeString = "[1234567890.:]"
+                                            for char in removeString:
+                                                lyric = lyric.replace(char,'')
+                                            puy.sendMessage(msg.to, str(lyric))
                                 except Exception as error:
-                                    client.sendMessage(to, str(error))
-                  
-                            elif cmd == "rinda look errorlogs":
-                                with open('logError.txt', 'r') as er:
-                                        error = er.read()
-                                client.sendMessage(to, str(error))
-
+                                    pass
+                                         
+                            elif cmd.startswith("#lokasi "):
+                                try:
+                                    sep = text.split(" ")
+                                    location = text.replace(sep[0] + " ","")
+                                    r = requests.get("http://api.corrykalam.net/apiloc.php?lokasi={}".format(location))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data[0] != "" and data[1] != "" and data[2] != "":
+                                        link = "https://www.google.co.id/maps/@{},{},15z".format(str(data[1]), str(data[2]))
+                                        ret_ = "╔═══[ ʟᴏᴄᴀᴛɪᴏɴ sᴛᴀᴛᴜs ]"
+                                        ret_ += "\n╠❂➣ ʟᴏᴄᴀᴛɪᴏɴ : " + data[0]
+                                        ret_ += "\n╠❂➣  ɢᴏᴏɢʟᴇ ᴍᴀᴘs : " + link
+                                        ret_ += "\n╚════[ ✯ ᴅɴᴀ ʙᴏᴛ ✯ ]"
+                                        puy.sendMessage(to, str(ret_))
+                                except Exception as error:
+                                    logError(error)
+                                         
                             elif cmd.startswith("rinda get imageart "):
                                 try:                                   
                                     search = cmd.replace("rinda get imageart ","")
@@ -1775,324 +2017,90 @@ def clientBot(op):
                                         path = random.choice(items)
                                         a = items.index(path)
                                         b = len(items)
-                                        client.sendMessage(to,"Image in #%s From #%s." %(str(a),str(b)))
-                                        client.sendImageWithURL(to, str(path))
+                                        puy.sendMessage(to,"Image in #%s From #%s." %(str(a),str(b)))
+                                        puy.sendImageWithURL(to, str(path))
                                         log.info("Art #%s from #%s." %(str(a),str(b)))
                                 except Exception as error:
                                     logError(error)
                                     traceback.print_tb(error.__traceback__)
+               ## RINDA SC ##
+#=======================================================  ADMIN  ===============================================================#
+                            elif ("Rinda+admin " in msg.text):
+                              if wait["selfbot"] == True:
+                                if msg._from in admin:
+                                   key = eval(msg.contentMetadata["MENTION"])
+                                   key["MENTIONEES"][0]["M"]
+                                   targets = []
+                                   for x in key["MENTIONEES"]:
+                                        targets.append(x["M"])
+                                   for target in targets:
+                                           try:
+                                               admin.append(target)
+                                               puy.sendMessage(msg.to,"Berhasil menambahkan admin")
+                                           except:
+                                               pass
 
-# Pembatas Script #
-                        if text.lower() == "mykey":
-                            client.sendMessage(to, "KeyCommand Saat ini adalah [ {} ]".format(str(settings["keyCommand"])))
-                        if text.lower() == "token win10":
-                            req = requests.get(url = 'https://api.eater.host/WIN10')
-                            a = req.text
-                            b= json.loads(a)
-                            tknop= codecs.open("tkn.json","r","utf-8")
-                            tkn = json.load(tknop)
-                            tkn['{}'.format(msg._from)] = []
-                            tkn['{}'.format(msg._from)].append({
-                                'qr': b['result'][0]['linkqr'],
-                                'tkn': b['result'][0]['linktkn']
-                                })
-                            qrz = b['result'][0]['linkqr']
-                            client.sendMessage(msg.to, '{}'.format(qrz))
-                            with open('tkn.json', 'w') as outfile:
-                                json.dump(tkn, outfile)    
-                        elif text.lower() == 'announce':
-                            gett = client.getChatRoomAnnouncements(receiver)
-                            for a in gett:
-                                aa = client.getContact(a.creatorMid).displayName
-                                bb = a.contents
-                                cc = bb.link
-                                textt = bb.text
-                                client.sendMessage(receiver, 'Link: ' + str(cc) + '\nText: ' + str(textt) + '\nMaker: ' + str(aa))
-                        elif text.lower() == "setkey on":
-                            settings["setKey"] = True
-                            client.sendMessage(to, "Berhasil mengaktifkan setkey")
-                        elif text.lower() == "setkey off":
-                            settings["setKey"] = False
-                            client.sendMessage(to, "Berhasil menonaktifkan setkey")
-# Pembatas Script #
-## GET TOKEN ##
-                        if text.lower() == 'rinda get token win10':
-                          try:
-                              aa = client.getContact(sender).displayName
-                              ab = client.getGroup(msg.to).name
-                              ac = client.getContact(sender).mid
-                              req = requests.get('https://api.eater.pw/WIN10')
-                              a = req.text
-                              b = json.loads(a)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              tkn['{}'.format(msg._from)] = []
-                              tkn['{}'.format(msg._from)].append({
-                              'qr': b['result'][0]['linkqr'],
-                              'tkn': b['result'][0]['linktkn']
-                                  })
-                              qrz = b['result'][0]['linkqr']
-                              client.sendMessage(to, '「 WIN 10 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
-                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
-                              with open('tkn.json', 'w') as outfile:
-                                  json.dump(tkn, outfile)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              a = tkn['{}'.format(msg._from)][0]['tkn']
-                              req = requests.get(url = '{}'.format(a))
-                              b = req.text
-                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #client.sendMessage(to, '「 WIN 10 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
-                              client.sendMessage(receiver, '{}'.format(b))
-                          except Exception as e:
-                                 client.sendMessage(to, str(e))
-                             
-                        if text.lower() == 'rinda get token chrome':
-                          try:
-                              aa = client.getContact(sender).displayName
-                              ab = client.getGroup(msg.to).name
-                              ac = client.getContact(sender).mid
-                              req = requests.get('https://api.eater.pw/CHROMEOS')
-                              a = req.text
-                              b = json.loads(a)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              tkn['{}'.format(msg._from)] = []
-                              tkn['{}'.format(msg._from)].append({
-                              'qr': b['result'][0]['linkqr'],
-                              'tkn': b['result'][0]['linktkn']
-                                  })
-                              qrz = b['result'][0]['linkqr']
-                              client.sendMessage(to, '「 CHROMEOS 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
-                              with open('tkn.json', 'w') as outfile:
-                                  json.dump(tkn, outfile)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              a = tkn['{}'.format(msg._from)][0]['tkn']
-                              req = requests.get(url = '{}'.format(a))
-                              b = req.text
-                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : '+aa+'\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #client.sendMessage(receiver,'「 CHROME 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
-                              client.sendMessage(receiver, '{}'.format(b))
-                          except Exception as e:
-                                 client.sendMessage(to, str(e))
-                               
-                        if text.lower() == 'rinda get token iospad':
-                          try:
-                              aa = client.getContact(sender).displayName
-                              ab = client.getGroup(msg.to).name
-                              ac = client.getContact(sender).mid
-                              req = requests.get('https://api.eater.pw/IOSIPAD')
-                              a = req.text
-                              b = json.loads(a)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              tkn['{}'.format(msg._from)] = []
-                              tkn['{}'.format(msg._from)].append({
-                              'qr': b['result'][0]['linkqr'],
-                              'tkn': b['result'][0]['linktkn']
-                                  })
-                              qrz = b['result'][0]['linkqr']
-                              client.sendMessage(to, '「 IOSIPAD 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
-                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
-                              with open('tkn.json', 'w') as outfile:
-                                  json.dump(tkn, outfile)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              a = tkn['{}'.format(msg._from)][0]['tkn']
-                              req = requests.get(url = '{}'.format(a))
-                              b = req.text
-                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #client.sendMessage(receiver,'「 IOSPAD 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
-                              client.sendMessage(receiver, '{}'.format(b))
-                          except Exception as e:
-                                 client.sendMessage(to, str(e))
-                                
-                        if text.lower() == 'rinda get token desktopwin':
-                          try:
-                              aa = client.getContact(sender).displayName
-                              ab = client.getGroup(msg.to).name
-                              ac = client.getContact(sender).mid
-                              req = requests.get('https://api.eater.pw/DESKTOPWIN')
-                              a = req.text
-                              b = json.loads(a)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              tkn['{}'.format(msg._from)] = []
-                              tkn['{}'.format(msg._from)].append({
-                              'qr': b['result'][0]['linkqr'],
-                              'tkn': b['result'][0]['linktkn']
-                                  })
-                              qrz = b['result'][0]['linkqr']
-                              client.sendMessage(to, '「 DESKTOPWIN 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
-                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
-                              with open('tkn.json', 'w') as outfile:
-                                  json.dump(tkn, outfile)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              a = tkn['{}'.format(msg._from)][0]['tkn']
-                              req = requests.get(url = '{}'.format(a))
-                              b = req.text
-                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #client.sendMessage(receiver,'「 DESKTOPWIN 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
-                              client.sendMessage(receiver, '{}'.format(b))
-                          except Exception as e:
-                                 client.sendMessage(to, str(e))
-                            
-                        if text.lower() == 'rinda get token desktopmac':
-                          try:
-                              aa = client.getContact(sender).displayName
-                              ab = client.getGroup(msg.to).name
-                              ac = client.getContact(sender).mid
-                              req = requests.get('https://api.eater.pw/DESKTOPMAC')
-                              a = req.text
-                              b = json.loads(a)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              tkn['{}'.format(msg._from)] = []
-                              tkn['{}'.format(msg._from)].append({
-                              'qr': b['result'][0]['linkqr'],
-                              'tkn': b['result'][0]['linktkn']
-                                  })
-                              qrz = b['result'][0]['linkqr']
-                              client.sendMessage(to, '「 DESKTOPMAC 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
-                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
-                              with open('tkn.json', 'w') as outfile:
-                                  json.dump(tkn, outfile)
-                              tknop= codecs.open("tkn.json","r","utf-8")
-                              tkn = json.load(tknop)
-                              a = tkn['{}'.format(msg._from)][0]['tkn']
-                              req = requests.get(url = '{}'.format(a))
-                              b = req.text
-                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
-                              #dap.sendMessage(to,'「 CHROMEOS 」\nUntuk: '+aa+'\nFrom Group: '+ab+'\nMid User: '+ac+'\n\n- TOKEN : \n{}'.format(b))
-                              #puy.sendMessage(receiver,'「 DESKTOPMAC 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
-                              client.sendMessage(receiver, '{}'.format(b))
-                          except Exception as e:
-                                 client.sendMessage(to, str(e))
-## GET TOKEN ##
-                    elif msg.contentType == 1:
-                        if settings["changeDisplayPicture"] == True:
-                            path = client.downloadObjectMsg(msg_id)
-                            settings["changeDisplayProfile"] = False
-                            client.updateProfilePicture(path)
-                            client.sendMessage(to, "Successfully changed profile photo")
-                        if msg.toType == 2:
-                            if to in settings["changeGroupPicture"]:
-                                path = client.downloadObjectMsg(msg_id)
-                                settings["changeGroupPicture"].remove(to)
-                                client.updateGroupPicture(to, path)
-                                client.sendMessage(to, "Successfully changed group photo")
-                    elif msg.contentType == 7:
-                        if settings["checkSticker"] == True:
-                            stk_id = msg.contentMetadata['STKID']
-                            stk_ver = msg.contentMetadata['STKVER']
-                            pkg_id = msg.contentMetadata['STKPKGID']
-                            ret_ = "* Sticker Info *"
-                            ret_ += "\n* STICKER ID : {}".format(stk_id)
-                            ret_ += "\n* STICKER PACKAGES ID : {}".format(pkg_id)
-                            ret_ += "\n* STICKER VERSION : {}".format(stk_ver)
-                            ret_ += "\n* STICKER URL : line://shop/detail/{}".format(pkg_id)
-                            ret_ += ""
-                            client.sendMessage(to, str(ret_))
-                    elif msg.contentType == 13:
-                        if settings["checkContact"] == True:
-                            try:
-                                contact = client.getContact(msg.contentMetadata["mid"])
-                                if client != None:
-                                    cover = client.getProfileCoverURL(msg.contentMetadata["mid"])
-                                else:
-                                    cover = "Tidak dapat masuk di line channel"
-                                path = "http://dl.profile.line-cdn.net/{}".format(str(contact.pictureStatus))
-                                try:
-                                    client.sendImageWithURL(to, str(path))
-                                except:
-                                    pass
-                                ret_ = "*--[* Details Contact *]--*"
-                                ret_ += "\n* Name : {}".format(str(contact.displayName))
-                                ret_ += "\n* MID : {}".format(str(msg.contentMetadata["mid"]))
-                                ret_ += "\n* Bio : {}".format(str(contact.statusMessage))
-                                ret_ += "\n* Profile Picture : http://dl.profile.line-cdn.net/{}".format(str(contact.pictureStatus))
-                                ret_ += "\n* Cover Picture : {}".format(str(cover))
-                                ret_ += ""
-                                client.sendMessage(to, str(ret_))
-                            except:
-                                client.sendMessage(to, "Invalid contact")
-                    elif msg.contentType == 16:
-                        if settings["checkPost"] == True:
-                            try:
-                                ret_ = "* Details Post *"
-                                if msg.contentMetadata["serviceType"] == "GB":
-                                    contact = client.getContact(sender)
-                                    auth = "\n* Author : {}".format(str(contact.displayName))
-                                else:
-                                    auth = "\n* Author : {}".format(str(msg.contentMetadata["serviceName"]))
-                                purl = "\n* URL : {}".format(str(msg.contentMetadata["postEndUrl"]).replace("line://","https://line.me/R/"))
-                                ret_ += auth
-                                ret_ += purl
-                                if "mediaOid" in msg.contentMetadata:
-                                    object_ = msg.contentMetadata["mediaOid"].replace("svc=myhome|sid=h|","")
-                                    if msg.contentMetadata["mediaType"] == "V":
-                                        if msg.contentMetadata["serviceType"] == "GB":
-                                            ourl = "\n* Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
-                                            murl = "\n* Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(msg.contentMetadata["mediaOid"]))
-                                        else:
-                                            ourl = "\n* Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
-                                            murl = "\n* Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(object_))
-                                        ret_ += murl
-                                    else:
-                                        if msg.contentMetadata["serviceType"] == "GB":
-                                            ourl = "\n* Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
-                                        else:
-                                            ourl = "\n* Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
-                                    ret_ += ourl
-                                if "stickerId" in msg.contentMetadata:
-                                    stck = "\n* Sticker : https://line.me/R/shop/detail/{}".format(str(msg.contentMetadata["packageId"]))
-                                    ret_ += stck
-                                if "text" in msg.contentMetadata:
-                                    text = "\n* the contents of writing : {}".format(str(msg.contentMetadata["text"]))
-                                    ret_ += text
-                                ret_ += "\n"
-                                client.sendMessage(to, str(ret_))
-                            except:
-                                client.sendMessage(to, "Invalid post")
-            except Exception as error:
-                logError(error)
-                traceback.print_tb(error.__traceback__)
-                
-        if op.type == 26:
-            try:
-                print ("[ 26 ] RECIEVE MESSAGE")
-                msg = op.message
-                text = msg.text
-                msg_id = msg.id
-                receiver = msg.to
-                sender = msg._from
-                if msg.toType == 0 or msg.toType == 1 or msg.toType == 2:
-                    if msg.toType == 0:
-                        if sender != client.profile.mid:
-                            to = sender
-                        else:
-                            to = receiver
-                    elif msg.toType == 1:
-                        to = receiver
-                    elif msg.toType == 2:
-                        to = receiver
-                    #if settings["autoRead"] == True:
-                    #    client.sendChatChecked(to, msg_id)
-                    if to in read["readPoint"]:
-                        if receiver not in read["ROM"][to]:
-                            read["ROM"][to][sender] = True
-                    if settings["unsendMessage"] == True:
-                        try:
-                            msg = op.message
-                            if msg.toType == 0:
-                                client.log("[{} : {}]".format(str(msg._from), str(msg.text)))
+                            elif ("Rinda-admin " in msg.text):
+                                if msg._from in admin:
+                                   key = eval(msg.contentMetadata["MENTION"])
+                                   key["MENTIONEES"][0]["M"]
+                                   targets = []
+                                   for x in key["MENTIONEES"]:
+                                        targets.append(x["M"])
+                                   for target in targets:
+                                       #if target not in puy:
+                                           try:
+                                               admin.remove(target)
+                                               puy.sendMessage(msg.to,"Berhasil menghapus admin")
+                                           except:
+                                               pass
+
+                            elif cmd == "rinda+admin:on" or text.lower() == 'rindaaddadmin:on':
+                                if msg._from in admin:
+                                    wait["addadmin"] = True
+                                    puy.sendMessage(msg.to,"Sent a Contact")
+
+                            elif cmd == "rinda-admin:on" or text.lower() == 'admin:remove':
+                                if msg._from in admin:
+                                    wait["delladmin"] = True
+                                    puy.sendMessage(msg.to,"Sent a Contact")
+
+                            elif cmd == "rinda refresh admin" or text.lower() == 'refreshhh':
+                                if msg._from in admin:
+                                    wait["addadmin"] = False
+                                    wait["delladmin"] = False
+                                    puy.sendMessage(msg.to,"Admin has been Refreshed")
+
+                            elif cmd == "admin contact" or text.lower() == 'virüssz':
+                                if msg._from in admin:
+                                    ma = ""
+                                    for i in admin:
+                                        ma = puy.getContact(i)
+                                        puy.sendMessage(msg.to, None, contentMetadata={'mid': 'sezer'}, contentType=13)
+#=======================================================  ADMIN FINISHED ===============================================================#
+        ## PREFIX ##          
+                        elif cmd.startswith("setprefix:"):
+                          if msg._from in Owner:
+                            sep = text.split(" ")
+                            key = text.replace(sep[0] + " ","")
+                            if " " in key:
+                                puy.sendMessage(to, "\nTanpa spasi.\n")
                             else:
-                                client.log("[{} : {}]".format(str(msg.to), str(msg.text)))
-                                msg_dict[msg.id] = {"text": msg.text, "from": msg._from, "createdTime": msg.createdTime, "contentType": msg.contentType, "contentMetadata": msg.contentMetadata}
-                        except Exception as error:
-                            logError(error)
+                                settings["keyCommand"] = str(key).lower()
+                                sendMessageWithFooter(to, "text [ {} ]".format(str(key).lower()))        
+                        if text.lower() == "myprefix":
+                            puy.sendMessage(to, "Prefix diterapkan menjadi [ {} ]\n".format(str(settings["keyCommand"])))
+                        elif text.lower() == "prefix":
+                            puy.sendMessage(to, "Prefix saat ini [ {} ]".format(str(settings["keyCommand"])))
+                        elif text.lower() == "prefix on":
+                          if msg._from in Owner:
+                            settings["prefix"] = True
+                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix")
+                        elif text.lower() == "prefix off":
+                          if msg._from in Owner:
+                            settings["prefix"] = False
+                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix")
+        ## PREFIX ##                            
                     if msg.contentType == 0:
                         if text is None:
                             return
@@ -2105,103 +2113,140 @@ def clientBot(op):
                                     if l not in n_links:
                                         n_links.append(l)
                                 for ticket_id in n_links:
-                                    group = client.findGroupByTicket(ticket_id)
-                                    client.acceptGroupInvitationByTicket(group.id,ticket_id)
-                                    client.sendMessage(to, "Berhasil masuk ke group %s" % str(group.name))
+                                    group = puy.findGroupByTicket(ticket_id)
+                                    puy.acceptGroupInvitationByTicket(group.id,ticket_id)
+                                    puy.sendMessage(to, "Berhasil masuk ke group %s" % str(group.name))                                             
                         if 'MENTION' in msg.contentMetadata.keys()!= None:
                             names = re.findall(r'@(\w+)', text)
                             mention = ast.literal_eval(msg.contentMetadata['MENTION'])
                             mentionees = mention['MENTIONEES']
                             lists = []
                             for mention in mentionees:
-                                if clientMid in mention["M"]:
+                                if puyMid in mention["M"]:
                                     if settings["autoRespon"] == True:
-                                        sendMention(sender, "Oi Asw @!,jangan main tag tag", [sender])
+                                        sendMention(sender, " @!, don't tag", [sender])
                                     break
             except Exception as error:
                 logError(error)
                 traceback.print_tb(error.__traceback__)
-        if op.type == 65:
-            if settings["unsendMessage"] == True:
-                try:
-                    at = op.param1
-                    msg_id = op.param2
-                    if msg_id in msg_dict:
-                        if msg_dict[msg_id]["from"]:
-                           if msg_dict[msg_id]["text"] == 'Gambarnya':  
-                            ginfo = client.getGroup(at)                           
-                            contact = client.getContact(msg_dict[msg_id]["from"])
-                            zx = ""
-                            zxc = ""
-                            zx2 = []       
-                            xpesan =  "「 Gambar Dihapus 」\n◤ Pengirim : "             
-                            ret_ = "◤ Nama Grup : {}".format(str(ginfo.name))   
-                            ret_ += "\n◤ Waktu Ngirim : {}".format(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"])))  
-                            ry = str(contact.displayName)
-                            pesan = ''
-                            pesan2 = pesan+"@x \n"
-                            xlen = str(len(zxc)+len(xpesan))
-                            xlen2 = str(len(zxc)+len(pesan2)+len(xpesan)-1)
-                            zx = {'S':xlen, 'E':xlen2, 'M':contact.mid}
-                            zx2.append(zx)
-                            zxc += pesan2
-                            text = xpesan + zxc + ret_ + ""
-                            client.sendMessage(at, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
-                            cl.sendImage(at, msg_dict[msg_id]["data"])     
-                        else:              
-                            ginfo = client.getGroup(at)
-                            contact = client.getContact(msg_dict[msg_id]["from"])    
-                            ret_ =  "「 Pesan Dihapus 」\n"
-                            ret_ += "◤ Pengirim : {}".format(str(contact.displayName))
-                            ret_ += "\n◤ Nama Grup : {}".format(str(ginfo.name))
-                            ret_ += "\n◤ Waktu Ngirim : {}".format(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"])))
-                            ret_ += "\n◤ Pesannya : {}".format(str(msg_dict[msg_id]["text"]))
-                            client.sendMessage(at, str(ret_))          
-                        del msg_dict[msg_id]      
-                except Exception as e:                    
-                    print(e)                 
-        if op.type == 65:
-            if settings["unsendMessage"] == True:
-                try:
-                    at = op.param1
-                    msg_id = op.param2
-                    if msg_id in msg_dict:
-                        if msg_dict[msg_id]["from"]:
-                                ginfo = client.getGroup(at)
-                                contact = client.getContact(msg_dict[msg_id]["from"])
-                                ret_ =  "「 Sticker Dihapus 」\n"
-                                ret_ += "◤ Pengirim : {}".format(str(contact.displayName))
-                                ret_ += "\n◤ Nama Grup : {}".format(str(ginfo.name))
-                                ret_ += "\n◤ Waktu Ngirim : {}".format(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"])))
-                                ret_ += "{}".format(str(msg_dict[msg_id]["text"]))
-                                client.sendMessage(at, str(ret_))
-                                client.sendImage(at, msg_dict[msg_id]["data"])
-                        del msg_dict[msg_id]
-                except Exception as e:
-                    print(e)
-                
-        if op.type == 17:
-           print ("MEMBER JOIN TO GROUP")
-           if settings["Sambutan"] == True:
-             if op.param2 in lineMID:
-                 return
-             ginfo = client.getGroup(op.param1)
-             contact = client.getContact(op.param2)
-             image = "http://dl.profile.line.naver.jp/" + contact.pictureStatus
-             client.sendMessage(op.param1,"Hi " + client.getContact(op.param2).displayName + "\nWlc")
-             client.sendImageWithURL(op.param1,image)
-
-        if op.type == 15:
-           print ("MEMBER LEAVE TO GROUP")
-           if settings["Sambutan"] == True:
-             if op.param2 in lineMID:
-                 return
-             ginfo = client.getGroup(op.param1)
-             contact = client.getContact(op.param2)
-             image = "http://dl.profile.line.naver.jp/" + contact.pictureStatus
-             client.sendImageWithURL(op.param1,image)
-             client.sendMessage(op.param1,"Selamat jalan " + client.getContact(op.param2).displayName + "")                
-                
+                            
+        if op.type == 26:
+            try:
+                print ("[ 26 ] RECIEVE MESSAGE")
+                msg = op.message
+                text = msg.text
+                msg_id = msg.id
+                receiver = msg.to
+                sender = msg._from
+                if msg.toType == 0 or msg.toType == 1 or msg.toType == 2:
+                    if msg.toType == 0:
+                    #if text =='mute':
+                        if sender != puy.profile.mid:
+                            to = sender
+                        else:
+                            to = receiver
+                    elif msg.toType == 1:
+                        to = receiver
+                    elif msg.toType == 2:
+                        to = receiver
+                    #if settings["autoRead"] == True:
+                        #puy.sendChatChecked(to, msg_id)
+                    if to in read["readPoint"]:
+                        if sender not in read["ROM"][to]:
+                            read["ROM"][to][sender] = True
+            except Exception as error:
+                logError(error)
+                traceback.print_tb(error.__traceback__)                    
+## INI KALAU MAU DI HAPUS SILAHKAN ## 
+        if op.type == 25 and 26:
+            try:
+                print ("[ 26 ] SEND MESSAGE")
+                msg = op.message
+                text = msg.text
+                msg_id = msg.id
+                receiver = msg.to
+                sender = msg._from
+                if msg.toType == 0 or msg.toType == 2:
+                    if msg.toType == 0:
+                        to = receiver
+                    elif msg.toType == 2:
+                        to = receiver
+                    if msg.contentType == 0:
+                        if text is None:
+                            return
+                        else:
+                            cmd = command(text)
+                            if msg.text:
+                                if msg.text.lower().lstrip().rstrip() in wbanlist:
+                                    if msg.text not in puyMid:
+                                        try:
+                                            puy.kickoutFromGroup(msg.to,[sender])
+                                        except Exception as e:
+                                            print(e)
+                            if receiver in temp_flood:
+                                if temp_flood[receiver]["expire"] == True:
+                                   if cmd == "open":
+                                        temp_flood[receiver]["expire"] = False
+                                        temp_flood[receiver]["time"] = time.time()
+                                        puy.sendMessage(to,"Bot Actived")
+                                   return
+                                elif time.time() - temp_flood[receiver]["time"] <= 5:
+                                    temp_flood[receiver]["flood"] += 1
+                                    if temp_flood[receiver]["flood"] >= 20:
+                                        temp_flood[receiver]["flood"] = 0
+                                        temp_flood[receiver]["expire"] = True
+                                        ret_ = "I will be off for 30 seconds, type open to re-enable"
+                                        userid = "https://line.me/ti/p/~" + puy.profile.userid
+                                        puy.sendFooter(to, "Flood Detect !\n"+str(ret_), str(userid), "http://dl.profile.line-cdn.net/"+puy.getContact(puyMid).pictureStatus, puy.getContact(puyMid).displayName)
+                                else:
+                                     temp_flood[receiver]["flood"] = 0
+                                temp_flood[receiver]["time"] = time.time()
+                            else:
+                                temp_flood[receiver] = {
+    	                            "time": time.time(),
+    	                            "flood": 0,
+    	                            "expire": False
+                                }
+                                                                     
+                    elif msg.contentType == 16:
+                        if settings["checkPost"] == True:
+                            try:
+                                ret_ = "\n  [ Details Post ]  "
+                                if msg.contentMetadata["serviceType"] == "GB":
+                                    contact = puy.getContact(sender)
+                                    auth = "\n  Author : {}".format(str(contact.displayName))
+                                else:
+                                    auth = "\n  Author : {}".format(str(msg.contentMetadata["serviceName"]))
+                                purl = "\n  URL : {}".format(str(msg.contentMetadata["postEndUrl"]).replace("line://","https://line.me/R/"))
+                                ret_ += auth
+                                ret_ += purl
+                                if "mediaOid" in msg.contentMetadata:
+                                    object_ = msg.contentMetadata["mediaOid"].replace("svc=myhome|sid=h|","")
+                                    if msg.contentMetadata["mediaType"] == "V":
+                                        if msg.contentMetadata["serviceType"] == "GB":
+                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
+                                            murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(msg.contentMetadata["mediaOid"]))
+                                        else:
+                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                                            murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(object_))
+                                        ret_ += murl
+                                    else:
+                                        if msg.contentMetadata["serviceType"] == "GB":
+                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
+                                        else:
+                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                                    ret_ += ourl
+                                if "text" in msg.contentMetadata:
+                                    text = "\n  the contents of writing : {}".format(str(msg.contentMetadata["text"]))
+                                    ret_ += text
+                                ret_ += "\n"
+                                puy.sendMessage(to, str(ret_))
+                            except:
+                                puy.sendMessage(to, "\nInvalid post\n")
+            except Exception as error:
+                logError(error)
+                traceback.print_tb(error.__traceback__)
+                            
         if op.type == 55:
             print ("[ 55 ] NOTIFIED READ MESSAGE")
             try:
@@ -2223,11 +2268,11 @@ def clientBot(op):
 while True:
     try:
         delete_log()
-        ops = clientPoll.singleTrace(count=50)
+        ops = puyPoll.singleTrace(count=50)
         if ops is not None:
             for op in ops:
-                clientBot(op)
-                clientPoll.setRevision(op.revision)
+                puyBot(op)
+                puyPoll.setRevision(op.revision)
     except Exception as error:
         logError(error)
         
@@ -2237,4 +2282,3 @@ def atend():
         json.dump(msg_dict, f, ensure_ascii=False, indent=4,separators=(',', ': '))
     print("BYE")
 atexit.register(atend)
-
