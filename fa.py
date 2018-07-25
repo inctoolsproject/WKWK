@@ -20,8 +20,8 @@ aditmadzs.log("Auth Token : " + str(aditmadzs.authToken))
 aditmadzsMid = aditmadzs.profile.mid
 #aditmadzs.log("Channel Access Token : " + str(channel.channelAccessToken))
 
-poll = LinePoll(aditmadzs)
-call = aditmadzs
+aditmadzsPoll = OEPoll(aditmadzs)
+#call = aditmadzs
 
 mid = aditmadzs.getProfile().mid
 
