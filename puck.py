@@ -17,7 +17,7 @@ import time, random, sys, json, codecs, pafy, subprocess, threading, glob, re, s
 
 #puy = LINE() 
 puy = LINE("Ev0FrM6DTZyCZCQSTNG3.m7QAK9mmg/fv3Yt11op1GW.gogCmbiU5FT05GnAbxI8NDONSUHtO3k/1MWirpUObaA=")    # UNTUK LOGIN TOKEN #
-#puy = LINE('mkhadaffy1805@gmail.com','Muhamad18')      # UNTUK LOGIN MAIL LINE #
+#puy = LINE('','')      # UNTUK LOGIN MAIL LINE #
 puyMid = puy.profile.mid
 puyProfile = puy.getProfile()
 puySettings = puy.getSettings()
@@ -154,7 +154,7 @@ def restartBot():
 
 def autoRestart():
     if time.time() - botStart > int(settings["timeRestart"]):
-        time.sleep(100)
+        time.sleep(5)
         restartBot()
         
 def sendSticker(to, version, packageId, stickerId):
@@ -275,7 +275,7 @@ def logError(text):
         if bln == str(k): bln = bulan[k-1]
     time = "{}, {} - {} - {} | {}".format(str(hasil), str(inihari.strftime('%d')), str(bln), str(inihari.strftime('%Y')), str(inihari.strftime('%H:%M:%S')))
     with open("logError.txt","a") as error:
-            error.write("\n[ {} ] {}".format(str(time), text))
+            error.write("\n[ {} ] {}".format(str(time), text))        
         
 def sendMention(to, text="", mids=[]):
     arrData = ""
@@ -598,39 +598,31 @@ def puyBot(op):
                                 ownerMessage = ownermessage()
                                 poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 creator = puy.getContact(poey)
-                                sendMention(to, str(ownerMessage), [poey])
+                                sendMention(to, str(ownerMessage), [poey])                                
                             
                             if cmd == "rinda pause":
                               if msg._from in admin:
                                   wait["selfbot"] = False
-                                  puy.sendMessage(msg.to, "Rinda diberhentikan sementara")
-                            
-                            if cmd == "rinda comeon":
-                                if msg._from in admin:
-                                    wait["selfbot"] = True
-                                    puy.sendMessage(msg.to, "Rinda aktif kembali")
+                                  puy.sendMessage(msg.to, "Rinda diberhentikan sementara")                            
                             
                             if cmd == "#help":
                               if wait["selfbot"] == True:
                                 helpMessage = helpmessage()
                                 puy.sendMessage(to, str(helpMessage),{'AGENT_ICON':'http://dl.profile.line-cdn.net/0hkY3juiptNHYOExk5wsdLITJWOht5PTI-diUpGX8RPhZ0IydzMSV_FC0VaxV0I3JyMCZ4Ei8VOEQh','AGENT_LINK':'https://line.me/ti/p/~yapuy','AGENT_NAME':'Help Message'})
                             
-                            elif cmd == "meh":
-                                puy.sendMentionFooter(to, '「Me」\n', sender, "https://line.me/ti/p/~yapuy", "http://dl.profile.line-cdn.net/"+puy.getContact(sender).pictureStatus, puy.getContact(sender).displayName);puy.sendMessage(to, puy.getContact(sender).displayName, contentMetadata = {'previewUrl': 'http://dl.profile.line-cdn.net/'+puy.getContact(sender).pictureStatus, 'i-installUrl': 'https://line.me/ti/p/~yapuy', 'type': 'mt', 'subText': "Pi", 'a-installUrl': 'https://line.me/ti/p/~yapuy', 'a-installUrl': 'https://line.me/ti/p/~yapuy', 'a-packageName': 'com.spotify.music', 'countryCode': 'ID', 'a-linkUri': 'https://line.me/ti/p/~yapuy', 'i-linkUri': 'https://line.me/ti/p/~yapuy', 'id': 'mt000000000a6b79f9', 'text': 'Khie', 'linkUri': 'https://line.me/ti/p/~yapuy'}, contentType=19)                            
-                            
                             elif cmd == "tokengen":
                                 sendMentionFooter(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
                             elif cmd == "rinda get token":
                                 sendMentionFooter(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
                                 
-                            elif cmd == "sp1":
+                            elif cmd == "sp":
                                 start = time.time()
                                 puy.sendMessage(to, "Counting...")
                                 speed = time.time() - start
                                 ping = speed * 1000
-                                puy.sendMessage(to, "The result is {} ms".format(str(speed(ping))))
+                                puy.sendMessage(to, "The result is {} ms".format(str(speedtest(ping))))
                                 
-                            elif cmd == "sp2":
+                            elif cmd == "rinda .speed":
                               if msg._from in Owner:
                                 start = time.time()
                                 puy.sendMessage(to, "...")
@@ -643,8 +635,7 @@ def puyBot(op):
                                 runtime = format_timespan(runtime)
                                 puy.sendMessage(to, "Rinda has been Active for {} puy".format(str(runtime)))                                
                                 
-                            elif cmd.startswith("sp3"):
-                                Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                            elif cmd.startswith("rinda speed"):
                                 get_profile_time_start = time.time()
                                 get_profile = puy.getProfile()
                                 get_profile_time = time.time() - get_profile_time_start
@@ -652,9 +643,10 @@ def puyBot(op):
                                 get_group = puy.getGroupIdsJoined()
                                 get_group_time = time.time() - get_group_time_start
                                 get_contact_time_start = time.time()
-                                get_contact = puy.getContact(Ownerz)
+                                #get_contact = puy.getContact(clientMid)
                                 get_contact_time = time.time() - get_contact_time_start
-                                puy.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
+                                #puy.sendMessage("u3b07c57b6239e5216aa4c7a02687c86d", '.')
+                                puy.sendMessage(to, "%.6f" % (get_group_time/3))                                
                                 
                             elif cmd == "rinda update":
                               if sender in Owner:
@@ -713,12 +705,21 @@ def puyBot(op):
                                 userid = "https://line.me/ti/p/~" + puy.profile.userid
                                 sendMention(to, "@!", [sender])
                                 #puy.sendContact(to, sender)
-                                puy.sendImageWithURL(to,"http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus))
+                                #puy.sendImageWithURL(to,"http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus))
+                                puy.sendMusic(to, puy.getContact(sender).displayName, "http://dl.profile.line-cdn.net/"+puy.getContact(sender).pictureStatus, str(userid), "Khie Bot", puy.getContact(sender).displayName)
                                 
                             elif cmd == "rinda check errorlog":
                                 with open('logError.txt', 'r') as er:
                                         error = er.read()
-                                puy.sendMessage(to, str(error))
+                                puy.sendMessage(to, str(error))                                          
+                                
+                            elif cmd == "change to self":
+                                mode = "25"
+                                puy.sendMessage(receiver, 'Has ben Changed to Self Mode')
+                            elif cmd == "change to public":
+                                mode = "26"
+                                puy.sendMessage(receiver, 'Has ben Changed to Public Mode')
+                                
 
               ## LURKING ##                      
                             elif text.lower() == 'rinda get reader on':
@@ -817,56 +818,48 @@ def puyBot(op):
                                     #sendMention(to, "「 Getreader belum diaktifkan 」\n@!", [sender])
                                     puy.sendMessage(to, "「 Getreader belum diaktifkan 」\n\n" + readTime)
 
-                            elif cmd == "rinda get readers":
-                              #if msg._from in admin:
-                                if msg.to in read['readPoint']:
-                                    if read['readPoint'][msg.to] != {}:
-                                        aa = []
-                                        for x in read['readPoint'][msg.to]:
-                                            aa.append(x)
-                                        try:
-                                            arrData = ""
-                                            textx = "  [ {} Reader ]\n\n1. ".format(str(len(aa)))
-                                            arr = []
-                                            no = 1
-                                            b = 1
-                                            for i in aa:
-                                                b = b + 1
-                                                end = "\n"
-                                                mention = "@!\n"
-                                                slen = str(len(textx))
-                                                elen = str(len(textx) + len(mention) - 1)
-                                                arrData = {'S':slen, 'E':elen, 'M':i}
-                                                arr.append(arrData)
-                                                tz = pytz.timezone("Asia/Jakarta")
-                                                timeNow = datetime.now(tz=tz)
-                                                textx += mention
-                                                if no < len(aa):
-                                                    no += 1
-                                                    textx += str(b) + ". "
-                                                else:
-                                                    try:
-                                                        no = "[ {} ]".format(str(puy.getGroup(msg.to).name))
-                                                    except:
-                                                        no = "  "
-                                            msg.to = msg.to
-                                            msg.text = textx+"\nPada : "+ datetime.strftime(timeNow,'%Y-%m-%d')+"\n* "+ datetime.strftime(timeNow,'%H:%M:%S')+"* "
-                                            msg.contentMetadata = {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}
-                                            msg.contentType = 0
-                                            puy.sendMessage1(msg)
-                                        except:
-                                            pass
-                                        try:
-                                            del read['readPoint'][msg.to]
-                                            del read['readPoint'][msg.to]
-                                        except:
-                                            pass
-                                        read['readPoint'][msg.to] = msg.id
-                                        read['readPoint'][msg.to] = {}
+                            elif text.lower() == 'rinda get reader':
+                                tz = pytz.timezone("Asia/Jakarta")
+                                timeNow = datetime.now(tz=tz)
+                                day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
+                                hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+                                bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+                                hr = timeNow.strftime("%A")
+                                bln = timeNow.strftime("%m")
+                                for i in range(len(day)):
+                                    if hr == day[i]: hasil = hari[i]
+                                for k in range(0, len(bulan)):
+                                    if bln == str(k): bln = bulan[k-1]
+                                readTime = hasil + ", " + timeNow.strftime('%d') + " - " + bln + " - " + timeNow.strftime('%Y') + "\nJam : [ " + timeNow.strftime('%H:%M:%S') + " ]"
+                                if receiver in read['readPoint']:
+                                    if read["ROM"][receiver].items() == []:
+                                        puy.sendMessage(receiver,"   「 Daftar Pembaca 」\nNone")
                                     else:
-                                        puy.sendMessage(msg.to, "Tidak ada satupun")
+                                        chiya = []
+                                        for rom in read["ROM"][receiver].items():
+                                            chiya.append(rom[1])
+                                        cmem = puy.getContacts(chiya) 
+                                        zx = ""
+                                        zxc = ""
+                                        zx2 = []
+                                        xpesan = '「 Daftar Pembaca 」\n\n'
+                                    for x in range(len(cmem)):
+                                        xname = str(cmem[x].displayName)
+                                        pesan = ''
+                                        pesan2 = pesan+"@c\n"
+                                        xlen = str(len(zxc)+len(xpesan))
+                                        xlen2 = str(len(zxc)+len(pesan2)+len(xpesan)-1)
+                                        zx = {'S':xlen, 'E':xlen2, 'M':cmem[x].mid}
+                                        zx2.append(zx)
+                                        zxc += pesan2
+                                    text = xpesan+ zxc + "\n" + readTime
+                                    try:
+                                        puy.sendMessage(receiver, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
+                                    except Exception as error:
+                                        print (error)
+                                    pass
                                 else:
-                                    puy.sendMessage(msg.to, "Getreader status is Unactived")
+                                    puy.sendMessage(receiver,"*Belum diaktifkan\nKetik 「 Rinda get reader on 」 untuk mengaktifkan.")
               ## LURKING ##
               
 ##SETTINGS MESSAGE##
@@ -1237,7 +1230,7 @@ def puyBot(op):
                                     msg.contentType = 13
                                     msg.text = None
                                     msg.contentMetadata = {"mid":spl[1]}
-                                    puy.sendMessage(msg)
+                                    puy.sendMessage(msg)                  
                   
                             elif 'Autotrans en-' in msg.text:
                               #if msg._from in admin:
@@ -1522,7 +1515,7 @@ def puyBot(op):
                                 query = cmd.replace("smule ","")
                                 b = urllib.parse.quote(query)
                                 #puy.sendMessage(to,"Searching to id smule..")
-                                puy.sendMessage(to, "Nama : "+b+"\nId smule : http://smule.com/"+query)
+                                puy.sendMessage(to, "Nama : "+b+"\nId smule : http://smule.com/"+query)                  
                   
                             elif cmd.startswith("asking "):
                                 query = cmd.replace("asking ","")
@@ -1712,7 +1705,7 @@ def puyBot(op):
                                            msgs = "Simi-simi Dinonaktifkan\nDi Group : " +str(ginfo.name)
                                       else:
                                            msgs = "Simi-simi Sudah Tidak Aktif"
-                                      puy.sendMessage(msg.to, "Dinonaktifkan\n" + msgs)
+                                      puy.sendMessage(msg.to, "Dinonaktifkan\n" + msgs)                                
                                 
                             elif cmd.startswith("urban "):
                                 sep = cmd.split(" ")
@@ -1841,7 +1834,7 @@ def puyBot(op):
                                             no += 1
                                     puy.sendMessage(to, str(ret_))
                                 except:
-                                    puy.sendMessage(to, "Top news Not Found !")
+                                    puy.sendMessage(to, "Top news Not Found !")                                        
                                         
                             elif cmd.startswith("rinda get lockscreen "):
                               #if msg._from in Owner:
@@ -2022,7 +2015,7 @@ def puyBot(op):
                                         b = len(items)
                                         puy.sendMessage(to,"Image in #%s From #%s." %(str(a),str(b)))
                                         puy.sendImageWithURL(to, str(path))
-                                        log.info("Art #%s from #%s." %(str(a),str(b)))
+                                        log.info("Art #%s from #%s." %(str(a),str(b)))                                    
                                 except Exception as error:
                                     logError(error)
                                     traceback.print_tb(error.__traceback__)
@@ -2080,29 +2073,186 @@ def puyBot(op):
                                     for i in admin:
                                         ma = puy.getContact(i)
                                         puy.sendMessage(msg.to, None, contentMetadata={'mid': 'sezer'}, contentType=13)
-#=======================================================  ADMIN FINISHED ===============================================================#
+#=======================================================  ADMIN FINISHED ===============================================================#               
+## GET TOKEN ##
+                        if text.lower() == 'rinda get token win10':
+                          try:
+                              aa = puy.getContact(sender).displayName
+                              ab = puy.getGroup(msg.to).name
+                              ac = puy.getContact(sender).mid
+                              req = requests.get('https://api.eater.pw/WIN10')
+                              a = req.text
+                              b = json.loads(a)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              tkn['{}'.format(msg._from)] = []
+                              tkn['{}'.format(msg._from)].append({
+                              'qr': b['result'][0]['linkqr'],
+                              'tkn': b['result'][0]['linktkn']
+                                  })
+                              qrz = b['result'][0]['linkqr']
+                              puy.sendMessage(to, '「 WIN 10 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
+                              with open('tkn.json', 'w') as outfile:
+                                  json.dump(tkn, outfile)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              a = tkn['{}'.format(msg._from)][0]['tkn']
+                              req = requests.get(url = '{}'.format(a))
+                              b = req.text
+                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
+                              #puy.sendMessage(to, '「 WIN 10 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
+                              puy.sendMessage(receiver, '{}'.format(b))
+                          except Exception as e:
+                                 puy.sendMessage(to, str(e))
+                             
+                        if text.lower() == 'rinda get token chrome':
+                          try:
+                              aa = puy.getContact(sender).displayName
+                              ab = puy.getGroup(msg.to).name
+                              ac = puy.getContact(sender).mid
+                              req = requests.get('https://api.eater.pw/CHROMEOS')
+                              a = req.text
+                              b = json.loads(a)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              tkn['{}'.format(msg._from)] = []
+                              tkn['{}'.format(msg._from)].append({
+                              'qr': b['result'][0]['linkqr'],
+                              'tkn': b['result'][0]['linktkn']
+                                  })
+                              qrz = b['result'][0]['linkqr']
+                              puy.sendMessage(to, '「 CHROMEOS 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              with open('tkn.json', 'w') as outfile:
+                                  json.dump(tkn, outfile)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              a = tkn['{}'.format(msg._from)][0]['tkn']
+                              req = requests.get(url = '{}'.format(a))
+                              b = req.text
+                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : '+aa+'\n\n- TOKEN : \n{}'.format(b), [sender])
+                              #puy.sendMessage(receiver,'「 CHROME 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'.')
+                              puy.sendMessage(receiver, '{}'.format(b))
+                          except Exception as e:
+                                 puy.sendMessage(to, str(e))
+                               
+                        if text.lower() == 'rinda get token iospad':
+                          try:
+                              aa = puy.getContact(sender).displayName
+                              ab = puy.getGroup(msg.to).name
+                              ac = puy.getContact(sender).mid
+                              req = requests.get('https://api.eater.pw/IOSIPAD')
+                              a = req.text
+                              b = json.loads(a)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              tkn['{}'.format(msg._from)] = []
+                              tkn['{}'.format(msg._from)].append({
+                              'qr': b['result'][0]['linkqr'],
+                              'tkn': b['result'][0]['linktkn']
+                                  })
+                              qrz = b['result'][0]['linkqr']
+                              puy.sendMessage(to, '「 IOSIPAD 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
+                              with open('tkn.json', 'w') as outfile:
+                                  json.dump(tkn, outfile)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              a = tkn['{}'.format(msg._from)][0]['tkn']
+                              req = requests.get(url = '{}'.format(a))
+                              b = req.text
+                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
+                              #puy.sendMessage(receiver,'「 IOSPAD 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
+                              puy.sendMessage(receiver, '{}'.format(b))
+                          except Exception as e:
+                                 puy.sendMessage(to, str(e))
+                                
+                        if text.lower() == 'rinda get token desktopwin':
+                          try:
+                              aa = puy.getContact(sender).displayName
+                              ab = puy.getGroup(msg.to).name
+                              ac = puy.getContact(sender).mid
+                              req = requests.get('https://api.eater.pw/DESKTOPWIN')
+                              a = req.text
+                              b = json.loads(a)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              tkn['{}'.format(msg._from)] = []
+                              tkn['{}'.format(msg._from)].append({
+                              'qr': b['result'][0]['linkqr'],
+                              'tkn': b['result'][0]['linktkn']
+                                  })
+                              qrz = b['result'][0]['linkqr']
+                              puy.sendMessage(to, '「 DESKTOPWIN 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
+                              with open('tkn.json', 'w') as outfile:
+                                  json.dump(tkn, outfile)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              a = tkn['{}'.format(msg._from)][0]['tkn']
+                              req = requests.get(url = '{}'.format(a))
+                              b = req.text
+                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
+                              #puy.sendMessage(receiver,'「 DESKTOPWIN 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
+                              puy.sendMessage(receiver, '{}'.format(b))
+                          except Exception as e:
+                                 puy.sendMessage(to, str(e))
+                            
+                        if text.lower() == 'rinda get token desktopmac':
+                          try:
+                              aa = puy.getContact(sender).displayName
+                              ab = puy.getGroup(msg.to).name
+                              ac = puy.getContact(sender).mid
+                              req = requests.get('https://api.eater.pw/DESKTOPMAC')
+                              a = req.text
+                              b = json.loads(a)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              tkn['{}'.format(msg._from)] = []
+                              tkn['{}'.format(msg._from)].append({
+                              'qr': b['result'][0]['linkqr'],
+                              'tkn': b['result'][0]['linktkn']
+                                  })
+                              qrz = b['result'][0]['linkqr']
+                              puy.sendMessage(to, '「 DESKTOPMAC 」\n'+aa+', Buka Link dibawah dan Tekan Login\n\nYour ID : '+ac+'\nInGroup : '+ab+'\n{}'.format(qrz))
+                              #dap.sendMessage(msg.to, 'Buka Link dibawah dan Tekan Login\n{}'.format(qrz))
+                              with open('tkn.json', 'w') as outfile:
+                                  json.dump(tkn, outfile)
+                              tknop= codecs.open("tkn.json","r","utf-8")
+                              tkn = json.load(tknop)
+                              a = tkn['{}'.format(msg._from)][0]['tkn']
+                              req = requests.get(url = '{}'.format(a))
+                              b = req.text
+                              #sendMention(to, '- TIPE TOKEN : WIN10\n- For : @!\n\n- TOKEN : \n{}'.format(b), [sender])
+                              #dap.sendMessage(to,'「 CHROMEOS 」\nUntuk: '+aa+'\nFrom Group: '+ab+'\nMid User: '+ac+'\n\n- TOKEN : \n{}'.format(b))
+                              #puy.sendMessage(receiver,'「 DESKTOPMAC 」\n\nUntuk : '+aa+'\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n*「 From BotEater / Edited By PUY 」'.format(b))
+                              puy.sendMessage(receiver, '{}'.format(b))
+                          except Exception as e:
+                                 puy.sendMessage(to, str(e))                              
+## GET TOKEN ##
+                                
         ## PREFIX ##          
-                            elif cmd.startswith("setprefix:"):
-                              if msg._from in Owner:
-                                sep = text.split(" ")
-                                key = text.replace(sep[0] + " ","")
-                                if " " in key:
-                                    puy.sendMessage(to, "\nTanpa spasi.\n")
-                                else:
-                                    settings["keyCommand"] = str(key).lower()
-                                    sendMessageWithFooter(to, "text [ {} ]".format(str(key).lower()))        
-                            if text.lower() == "myprefix":
-                                puy.sendMessage(to, "Prefix diterapkan menjadi [ {} ]\n".format(str(settings["keyCommand"])))
-                            elif text.lower() == "prefix":
-                                puy.sendMessage(to, "Prefix saat ini [ {} ]".format(str(settings["keyCommand"])))
-                            elif text.lower() == "prefix on":
-                              if msg._from in Owner:
-                                settings["prefix"] = True
-                                puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix")
-                            elif text.lower() == "prefix off":
-                              if msg._from in Owner:
-                                settings["prefix"] = False
-                                puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix")
+                        elif cmd.startswith("setprefix:"):
+                          if msg._from in Owner:
+                            sep = text.split(" ")
+                            key = text.replace(sep[0] + " ","")
+                            if " " in key:
+                                puy.sendMessage(to, "\nTanpa spasi.\n")
+                            else:
+                                settings["keyCommand"] = str(key).lower()
+                                sendMessageWithFooter(to, "text [ {} ]".format(str(key).lower()))        
+                        if text.lower() == "myprefix":
+                            puy.sendMessage(to, "Prefix diterapkan menjadi [ {} ]\n".format(str(settings["keyCommand"])))
+                        elif text.lower() == "prefix":
+                            puy.sendMessage(to, "Prefix saat ini [ {} ]".format(str(settings["keyCommand"])))
+                        elif text.lower() == "prefix on":
+                          if msg._from in Owner:
+                            settings["prefix"] = True
+                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix")
+                        elif text.lower() == "prefix off":
+                          if msg._from in Owner:
+                            settings["prefix"] = False
+                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix")
         ## PREFIX ##                            
                     if msg.contentType == 0:
                         if text is None:
