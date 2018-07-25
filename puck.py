@@ -615,6 +615,9 @@ def puyBot(op):
                                 helpMessage = helpmessage()
                                 puy.sendMessage(to, str(helpMessage),{'AGENT_ICON':'http://dl.profile.line-cdn.net/0hkY3juiptNHYOExk5wsdLITJWOht5PTI-diUpGX8RPhZ0IydzMSV_FC0VaxV0I3JyMCZ4Ei8VOEQh','AGENT_LINK':'https://line.me/ti/p/~yapuy','AGENT_NAME':'Help Message'})
                             
+                            elif cmd == "meh":
+                                puy.sendMentionFooter(to, '「Me」\n', sender, "https://line.me/ti/p/~yapuy", "http://dl.profile.line-cdn.net/"+puy.getContact(sender).pictureStatus, puy.getContact(sender).displayName);puy.sendMessage(to, puy.getContact(sender).displayName, contentMetadata = {'previewUrl': 'http://dl.profile.line-cdn.net/'+puy.getContact(sender).pictureStatus, 'i-installUrl': 'https://line.me/ti/p/~yapuy', 'type': 'mt', 'subText': "Pi", 'a-installUrl': 'https://line.me/ti/p/~yapuy', 'a-installUrl': 'https://line.me/ti/p/~yapuy', 'a-packageName': 'com.spotify.music', 'countryCode': 'ID', 'a-linkUri': 'https://line.me/ti/p/~yapuy', 'i-linkUri': 'https://line.me/ti/p/~yapuy', 'id': 'mt000000000a6b79f9', 'text': 'Khie', 'linkUri': 'https://line.me/ti/p/~yapuy'}, contentType=19)                            
+                            
                             elif cmd == "tokengen":
                                 sendMentionFooter(to, "「 GET TOKEN 」\n\n1) DESKTOPWIN\n2) WIN10\n3) DESKTOPMAC\n4) IOSPAD\n5) CHROME\n\nUsage : Rinda get token chrome\n@! - Selamat Mencoba.", [sender])
                             elif cmd == "rinda get token":
@@ -816,10 +819,10 @@ def puyBot(op):
 
                             elif cmd == "rinda get readers":
                               #if msg._from in admin:
-                                if msg.to in wait['readPoint']:
-                                    if wait['readPoint'][msg.to] != {}:
+                                if msg.to in read['readPoint']:
+                                    if read['readPoint'][msg.to] != {}:
                                         aa = []
-                                        for x in wait['readPoint'][msg.to]:
+                                        for x in read['readPoint'][msg.to]:
                                             aa.append(x)
                                         try:
                                             arrData = ""
@@ -854,12 +857,12 @@ def puyBot(op):
                                         except:
                                             pass
                                         try:
-                                            del wait['readPoint'][msg.to]
-                                            del wait['readPoint'][msg.to]
+                                            del read['readPoint'][msg.to]
+                                            del read['readPoint'][msg.to]
                                         except:
                                             pass
-                                        wait['readPoint'][msg.to] = msg.id
-                                        wait['readPoint'][msg.to] = {}
+                                        read['readPoint'][msg.to] = msg.id
+                                        read['readPoint'][msg.to] = {}
                                     else:
                                         puy.sendMessage(msg.to, "Tidak ada satupun")
                                 else:
