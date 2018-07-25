@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-import LINEPY
-from LINEPY import *
-from akad.ttypes import *
-from multiprocessing import Pool, Process
+
+#import LINEPY
+
+from LineAPI.linepy import *
+from LineAPI.akad.ttypes import Message
+from LineAPI.akad.ttypes import ContentType as Type
 from time import sleep
 import pytz, datetime, time, timeit, random, sys, ast, re, os, json, subprocess, threading, string, codecs, requests, tweepy, ctypes, urllib, wikipedia, pafy
 from datetime import timedelta, date
@@ -12,7 +14,7 @@ from googletrans import Translator
 import youtube_dl
 
 #aditmadzs = LineClient()
-aditmadzs = LineClient(authToken='EvoBbWqUN1lxhN6Bs4t3.m7QAK9mmg/fv3Yt11op1GW.5fLIhx9QFPz1MihDNI/+x7KGz0HqDcswb73TWXrxUmA=')
+aditmadzs = LineClient(authToken='Ev0FrM6DTZyCZCQSTNG3.m7QAK9mmg/fv3Yt11op1GW.gogCmbiU5FT05GnAbxI8NDONSUHtO3k/1MWirpUObaA=')
 aditmadzs.log("Auth Token : " + str(aditmadzs.authToken))
 channel = LineChannel(aditmadzs)
 aditmadzsMid = aditmadzs.profile.mid
@@ -91,6 +93,7 @@ wait = {
     "Talkwblacklist":False,
     "Talkdblacklist":False,
     "talkban":True,
+    "protectionkick": [],
     "contact":False,
     'autoJoin':True,
     'autoAdd':True,
@@ -124,7 +127,7 @@ cctv = {
     "sidermem":{}
 }
 
-Setbot = codecs.open("setting.json","r","utf-8")
+Setbot = codecs.open("setting.json","r","utf_8_sig")
 Setmain = json.load(Setbot)
 
 mulai = time.time()
@@ -217,7 +220,7 @@ def mentionMembers(to, mid):
         no = 1
         num = 2
         for i in mid:
-            mention = "@x\n"
+            mention = "@puy\n"
             slen = str(len(textx))
             elen = str(len(textx) + len(mention) - 1)
             arrData = {'S':slen, 'E':elen, 'M':i}
@@ -239,12 +242,12 @@ def mentionMembers(to, mid):
 def siderMembers(to, mid):
     try:
         arrData = ""
-        textx = "{} Sider".format(str(len(mid)))
+        textx = " ".format(str(len(mid)))
         arr = []
         no = 1
         num = 2
         for i in mid:
-            mention = "@x\n"
+            mention = "@puy\n"
             slen = str(len(textx))
             elen = str(len(textx) + len(mention) - 1)
             arrData = {'S':slen, 'E':elen, 'M':i}
@@ -300,7 +303,7 @@ def leaveMembers(to, mid):
         num = 2
         for i in mid:
             ginfo = aditmadzs.getGroup(to)
-            mention = "@x\n"
+            mention = "@puy\n"
             slen = str(len(textx))
             elen = str(len(textx) + len(mention) - 1)
             arrData = {'S':slen, 'E':elen, 'M':i}
@@ -853,10 +856,10 @@ def bot(op):
                    stk_ver = msg.contentMetadata["STKVER"]
                    pkg_id = msg.contentMetadata["STKPKGID"]
                    ret_ = "\n\n Sticker Url : line://shop/detail/{}".format(pkg_id)
-                   #ret_ += "\n• Sticker ID : {}".format(stk_id)
-                   #ret_ += "\n• Sticker Version : {}".format(stk_ver)
-                   #ret_ += "\n• Sticker Package : {}".format(pkg_id)
-                   #ret_ += "\n• Sticker Url : line://shop/detail/{}".format(pkg_id)
+                   #ret_ += "\nâ€¢ Sticker ID : {}".format(stk_id)
+                   #ret_ += "\nâ€¢ Sticker Version : {}".format(stk_ver)
+                   #ret_ += "\nâ€¢ Sticker Package : {}".format(pkg_id)
+                   #ret_ += "\nâ€¢ Sticker Url : line://shop/detail/{}".format(pkg_id)
                    query = int(stk_id)
                    if type(query) == int:
                             data = 'https://stickershop.line-scdn.net/stickershop/v1/sticker/'+str(query)+'/ANDROID/sticker.png'
@@ -1567,7 +1570,7 @@ def bot(op):
                             except:
                                 members = [mem.mid for mem in group.members]
                             message = random.choice(members)
-                            sendMentions(to, "< RandomLoseMem >\n\n• The Loser is :", [sender])
+                            sendMentions(to, "< RandomLoseMem >\n\nâ€¢ The Loser is :", [sender])
                             aditmadzs.sendContact(to, message)                                
                                 
                         elif cmd.startswith("rinda getmeme "):
@@ -2282,9 +2285,10 @@ def bot(op):
                                 aditmadzs.sendMessage(msg.to, "Bye"+str(G.name))
                                 aditmadzs.leaveGroup(msg.to)
 
-                        elif cmd == "sprespon":
+                        elif cmd == "rinda speed":
                           if wait["selfbot"] == True:
                             #if msg._from in admin:
+                                Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
                                 get_profile_time_start = time.time()
                                 get_profile = aditmadzs.getProfile()
                                 get_profile_time = time.time() - get_profile_time_start
@@ -2292,11 +2296,18 @@ def bot(op):
                                 get_group = aditmadzs.getGroupIdsJoined()
                                 get_group_time = time.time() - get_group_time_start
                                 get_contact_time_start = time.time()
-                                get_contact = aditmadzs.getContact(mid)
+                                get_contact = aditmadzs.getContact(Ownerz)
                                 get_contact_time = time.time() - get_contact_time_start
-                                aditmadzs.sendMessage(msg.to, "BOT Speed respon\n\n - Get Profile\n   %.10f\n - Get Contact\n   %.10f\n - Get Group\n   %.10f" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
+                                aditmadzs.sendMessage(msg.to, "About Group speed is <%.10f>\nAbout Info Profile speed is <%.10f>\nAbout Contact speed is <%.10f>" % (get_profile_time/3,get_contact_time/3,get_group_time/3))
 
-                        elif cmd == "speed" or cmd == "sp":
+                        elif cmd == ".speed":
+                            start = time.time()
+                            aditmadzs.sendMessage(to, "Counting...")
+                            speed = time.time() - start
+                            ping = speed * 1000
+                            aditmadzs.sendMessage(to, "The result is {} ms".format(str(speed(ping))))                                
+                                
+                        elif cmd == "..rinda speed" or cmd == "..sps":
                           if wait["selfbot"] == True:
                             #if msg._from in admin:
                                start = time.time()
@@ -2373,6 +2384,81 @@ def bot(op):
                             else:
                                 aditmadzs.sendMessage(msg.to, "Getreader status is Unactived")
 
+                        elif cmd.startswith("rinda get topnews"):
+                            mpui = requests.get("https://newsapi.org/v2/top-headlines?country=id&apiKey=1214d6480f6848e18e01ba6985e2008d")
+                            data = mpui.text
+                            data = json.loads(data)
+                            hasil = "Top News\n\n"
+                            hasil += "1) \n<" + str(data["articles"][0]["title"] + ">")
+                            hasil += "\n     Sumber : " + str(data["articles"][0]["source"]["name"])
+                            hasil += "\n     Penulis : " + str(data["articles"][0]["author"])
+                            hasil += "\n     Link : " + str(data["articles"][0]["url"])
+                            hasil += "\n\n2) \n<" + str(data["articles"][0]["title"] + ">")
+                            hasil += "\n     Sumber : " + str(data["articles"][1]["source"]["name"])
+                            hasil += "\n     Penulis : " + str(data["articles"][1]["author"])   
+                            hasil += "\n     Link : " + str(data["articles"][1]["url"])
+                            hasil += "\n\n3) \n<" + str(data["articles"][0]["title"] + ">")
+                            hasil += "\n     Sumber : " + str(data["articles"][2]["source"]["name"])
+                            hasil += "\n     Penulis : " + str(data["articles"][2]["author"])
+                            hasil += "\n     Link : " + str(data["articles"][2]["url"])
+                            #hasil += "\n\n4) \n<" + str(data["articles"][0]["title"] + ">")
+                            #hasil += "\n     Sumber : " + str(data["articles"][3]["source"]["name"])
+                            #hasil += "\n     Penulis : " + str(data["articles"][3]["author"])
+                            #hasil += "\n     Link : " + str(data["articles"][3]["url"])
+                            #hasil += "\n\n5) \n<" + str(data["articles"][0]["title"] + ">")
+                            #hasil += "\n     Sumber : " + str(data["articles"][4]["source"]["name"])
+                            #hasil += "\n     Penulis : " + str(data["articles"][4]["author"])
+                            #hasil += "\n     Link : " + str(data["articles"][4]["url"])
+                            #hasil += "\n\n6) \n<" + str(data["articles"][0]["title"] + ">")
+                            #hasil += "\n     Sumber : " + str(data["articles"][5]["source"]["name"])
+                            #hasil += "\n     Penulis : " + str(data["articles"][5]["author"])
+                            #hasil += "\n     Link : " + str(data["articles"][5]["url"])
+                            path = data["articles"][3]["urlToImage"]
+                            aditmadzs.sendMessage(msg.to, str(hasil))
+                            aditmadzs.sendImageWithURL(msg.to, str(path))
+                                
+                        elif cmd.startswith("urban: "):
+                            sep = msg.text.split(" ")
+                            judul = msg.text.replace(sep[0] + " ","")
+                            url = "http://api.urbandictionary.com/v0/define?term="+str(judul)
+                            with requests.session() as s:
+                                s.headers["User-Agent"] = random.choice(Mozilla["userAgent"])
+                                r = s.get(url)
+                                data = r.text
+                                data = json.loads(data)
+                                cu = "Urban Result\n\n"
+                                cu += "\nText: "+ data["tags"][0]
+                                cu += ","+ data["tags"][1]
+                                cu += ","+ data["tags"][2]
+                                cu += ","+ data["tags"][3]
+                                cu += ","+ data["tags"][4]
+                                cu += ","+ data["tags"][5]
+                                cu += ","+ data["tags"][6]
+                                cu += ","+ data["tags"][7]
+                                cu += "\n[1]\n Author: "+str(data["list"][0]["author"])+"\n"
+                                cu += "\n Word: "+str(data["list"][0]["word"])+"\n"
+                                cu += "\n Link: "+str(data["list"][0]["permalink"])+"\n"
+                                cu += "\n Definition: "+str(data["list"][0]["definition"])+"\n"
+                                cu += "\n Sample: "+str(data["list"][0]["example"])+"\n"
+                                aditmadzs.sendMessage(msg.to, str(cu))                                
+
+                        elif cmd.startswith("rinda getmaps "):
+                            location = msg.text.replace("rinda getmaps ","")
+                            with requests.session() as web:
+                                web.headers["user-agent"] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                                kris = web.get("http://api.corrykalam.net/apiloc.php?lokasi={}".format(urllib.parse.quote(location)))
+                                data = kris.text
+                                data = json.loads(data)
+                                if data[0] != "" and data[1] != "" and data[2] != "":
+                                    link = "https://www.google.co.id/maps/@{},{},15z".format(str(data[1]), str(data[2]))
+                                    ret_ = "Check Location\n"
+                                    ret_ += "\n Lokasi : " + data[0]
+                                    ret_ += "\n Google Maps : " + link
+                                    #ret_ += "\n\nSearch Location Success"
+                                else:
+                                    ret_ = "Lokasi tidak ditemukan"
+                                aditmadzs.sendMessage(msg.to, str(ret_))
+                                
                         elif cmd == "rinda get sider on":
                           if wait["selfbot"] == True:
                            #if msg._from in admin:
@@ -2870,7 +2956,7 @@ def bot(op):
                                 wait["delladmin"] = False
                                 aditmadzs.sendMessage(msg.to,"Admin has been Refreshed")
 
-                        elif cmd == "admin contact" or text.lower() == 'virüssz':
+                        elif cmd == "admin contact" or text.lower() == 'virÃ¼ssz':
                             if msg._from in admin:
                                 ma = ""
                                 for i in admin:
@@ -2899,13 +2985,13 @@ def bot(op):
                         elif cmd == "rinda pro on" or text.lower() == 'rindapro':
                           if wait["selfbot"] == True:
                             if msg._from in admin:
-                                setting["protectionkick"] = True
+                                wait["protectionkick"] = True
                                 aditmadzs.sendMessage(msg.to,"Rinda protect admin already on")
                                 
                         elif cmd == "rinda pro off" or text.lower() == 'rindaproff':
                           if wait["selfbot"] == True:
                             if msg._from in admin:
-                                setting["protectionkick"] = False
+                                wait["protectionkick"] = False
                                 aditmadzs.sendMessage(msg.to,"Rinda protect admin already off")
                                 
                         elif cmd == "rinda getinfo off" or text.lower() == 'contactt off':
