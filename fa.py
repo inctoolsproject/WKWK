@@ -16,7 +16,7 @@ import youtube_dl
 #aditmadzs = LINE()
 aditmadzs = LINE('Ev0FrM6DTZyCZCQSTNG3.m7QAK9mmg/fv3Yt11op1GW.gogCmbiU5FT05GnAbxI8NDONSUHtO3k/1MWirpUObaA=')
 aditmadzs.log("Auth Token : " + str(aditmadzs.authToken))
-channel = LineChannel(aditmadzs)
+#channel = LineChannel(aditmadzs)
 aditmadzsMid = aditmadzs.profile.mid
 aditmadzs.log("Channel Access Token : " + str(channel.channelAccessToken))
 
