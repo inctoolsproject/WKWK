@@ -18,7 +18,7 @@ aditmadzs = LINE('Ev0FrM6DTZyCZCQSTNG3.m7QAK9mmg/fv3Yt11op1GW.gogCmbiU5FT05GnAbx
 aditmadzs.log("Auth Token : " + str(aditmadzs.authToken))
 #channel = LineChannel(aditmadzs)
 aditmadzsMid = aditmadzs.profile.mid
-aditmadzs.log("Channel Access Token : " + str(channel.channelAccessToken))
+#aditmadzs.log("Channel Access Token : " + str(channel.channelAccessToken))
 
 poll = LinePoll(aditmadzs)
 call = aditmadzs
