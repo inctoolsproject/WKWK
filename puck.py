@@ -15,8 +15,8 @@ from bs4 import BeautifulSoup
 from humanfriendly import format_timespan, format_size, format_number, format_length
 import time, random, sys, json, codecs, pafy, subprocess, threading, glob, re, string, os, wikipedia, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
 
-#puy = LINE() 
-puy = LINE("Ev7NsZpbtAStY3iwZXT3.m7QAK9mmg/fv3Yt11op1GW.ndlfVGqRprpqG64XDjtVS8Go/7Xa+eWUzobUAWvthyk=")    # UNTUK LOGIN TOKEN #
+puy = LINE() 
+#puy = LINE("Ev7NsZpbtAStY3iwZXT3.m7QAK9mmg/fv3Yt11op1GW.ndlfVGqRprpqG64XDjtVS8Go/7Xa+eWUzobUAWvthyk=")    # UNTUK LOGIN TOKEN #
 #puy = LINE('','')      # UNTUK LOGIN MAIL LINE #
 puyMid = puy.profile.mid
 puyProfile = puy.getProfile()
@@ -33,8 +33,8 @@ translateid = []
 translatetr = []
 simisimi = []
 
-Owner = ["uac8e3eaf1eb2a55770bf10c3b2357c33","u33ba9a93d30c1be155df24f5d4e3f583"]
-admin =["uac8e3eaf1eb2a55770bf10c3b2357c33","u33ba9a93d30c1be155df24f5d4e3f583"]
+Owner = ["ube187443474747c3ec352e7efeb48c1b"]
+admin =["ube187443474747c3ec352e7efeb48c1b"]
 
 settings = {
     "autoJoin": True,
@@ -111,7 +111,7 @@ wait = {
     "autoLeave1": False,
     "detectMention": False,
     "selfbot": True,
-    "ADITMADZSmessage1": "Author Rinda (https://line.me/ti/p/~yapuy)",
+    "ADITMADZSmessage1": "Author Rinda (https://line.me/ti/p/~situ.sehat)",
     "Mentiongift": False,
     "Mentionkick": True,
     "welcomeOn": True,
@@ -122,7 +122,7 @@ wait = {
     "Respontag": "Im busy huh",
     "welcome": "Selamat Datang",
     "leave": "Selamat Jalan",
-    "comment": "Auto like by PUY\nhttps://line.me/ti/p/~yapuy",
+    "comment": "Auto like by PUY\nhttps://line.me/ti/p/~situ.sehat",
     "message": "Thx For Added Rinda",
     }
 
@@ -191,7 +191,7 @@ def sendMentionFooter(to, text="", mids=[]):
         arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mids[0]}
         arr.append(arrData)
         textx += mention + str(text)
-    puy.sendMessage(to, textx, {'AGENT_NAME':'@Muh.khadaffy on Instagram', 'AGENT_LINK': 'https://www.instagram.com/muh.khadaffy', 'AGENT_ICON': "http://dl.profile.line-cdn.net/" + puy.getProfile().picturePath, 'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)    
+    puy.sendMessage(to, textx, {'AGENT_NAME':'Menu Command', 'AGENT_LINK': 'https://www.instagram.com/akedboy', 'AGENT_ICON': "http://dl.profile.line-cdn.net/" + puy.getProfile().picturePath, 'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)    
     #'AGENT_LINK': 'line://ti/p/~{}'.format(puy.getProfile().userid),
     
 def sendMusic(send_to,music_id,title,artist,thumbnail,link):
@@ -589,14 +589,14 @@ def puyBot(op):
                             if cmd == "help":
                               if wait["selfbot"] == True:
                                 helpMessage = helpmessage()
-                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                poey = "ube187443474747c3ec352e7efeb48c1b"
                                 creator = puy.getContact(poey)
                                 sendMention(to, str(helpMessage), [poey])
                                 
                             if cmd == "helpstaff":
                               if wait["selfbot"] == True:
                                 ownerMessage = ownermessage()
-                                poey = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                poey = "ube187443474747c3ec352e7efeb48c1b"
                                 creator = puy.getContact(poey)
                                 sendMention(to, str(ownerMessage), [poey])                                
                             
@@ -673,7 +673,7 @@ def puyBot(op):
                             elif cmd.startswith("about rinda"):
                                 try:
                                     arr = []
-                                    Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
+                                    Ownerz = "ube187443474747c3ec352e7efeb48c1b"
                                     creator = puy.getContact(Ownerz)
                                     contact = puy.getContact(puyMid)
                                     grouplist = puy.getGroupIdsJoined()
