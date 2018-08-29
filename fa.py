@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 from googletrans import Translator
 import youtube_dl
 
-aditmadzs = LINE()
-#aditmadzs = LINE('Ev7NsZpbtAStY3iwZXT3.m7QAK9mmg/fv3Yt11op1GW.ndlfVGqRprpqG64XDjtVS8Go/7Xa+eWUzobUAWvthyk=')
+#aditmadzs = LINE()
+aditmadzs = LINE('EwQ3WjJRpOG5WWDonjub.VHH0q0Dhr8pSns5/+RsmgW.bplWBT6VNc48n4OaTYaHR7y0sMSGqG1Abb4Xbvt+jnQ=')
 aditmadzs.log("Auth Token : " + str(aditmadzs.authToken))
 #channel = LineChannel(aditmadzs)
 aditmadzsMid = aditmadzs.profile.mid
