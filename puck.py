@@ -560,9 +560,9 @@ def puyBot(op):
                    except Exception as error:
                        pass                                
                                 
-        if op.type == 26:
+        if op.type == 25:
             try:
-                print ("[ 26 ] PUBLIC")
+                print ("[ 25 ] PUBLIC")
                 msg = op.message
                 text = msg.text
                 msg_id = msg.id
