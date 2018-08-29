@@ -839,7 +839,7 @@ def bot(op):
                         aditmadzs.sendMessage(msg.to," Nama : " + msg.contentMetadata["displayName"] + "\n MID : " + msg.contentMetadata["mid"] + "\n Status Msg : \n" + contact.statusMessage + "\n Picture URL : http://dl.profile.line-cdn.net/" + contact.pictureStatus)
                         aditmadzs.sendImageWithURL(msg.to, image)
 
-        if op.type == 25 or op.type == 26:
+        if op.type == 25:
             msg = op.message
             text = msg.text
             msg_id = msg.id
