@@ -15,8 +15,8 @@ from bs4 import BeautifulSoup
 from humanfriendly import format_timespan, format_size, format_number, format_length
 import time, random, sys, json, codecs, pafy, subprocess, threading, glob, re, string, os, wikipedia, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
 
-puy = LINE() 
-#puy = LINE("Ev7NsZpbtAStY3iwZXT3.m7QAK9mmg/fv3Yt11op1GW.ndlfVGqRprpqG64XDjtVS8Go/7Xa+eWUzobUAWvthyk=")    # UNTUK LOGIN TOKEN #
+#puy = LINE() 
+puy = LINE("EwQ3WjJRpOG5WWDonjub.VHH0q0Dhr8pSns5/+RsmgW.bplWBT6VNc48n4OaTYaHR7y0sMSGqG1Abb4Xbvt+jnQ=")    # UNTUK LOGIN TOKEN #
 #puy = LINE('','')      # UNTUK LOGIN MAIL LINE #
 puyMid = puy.profile.mid
 puyProfile = puy.getProfile()
