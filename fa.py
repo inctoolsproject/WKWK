@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 from googletrans import Translator
 import youtube_dl
 
-#aditmadzs = LINE()
-aditmadzs = LINE('Ev7NsZpbtAStY3iwZXT3.m7QAK9mmg/fv3Yt11op1GW.ndlfVGqRprpqG64XDjtVS8Go/7Xa+eWUzobUAWvthyk=')
+aditmadzs = LINE()
+#aditmadzs = LINE('Ev7NsZpbtAStY3iwZXT3.m7QAK9mmg/fv3Yt11op1GW.ndlfVGqRprpqG64XDjtVS8Go/7Xa+eWUzobUAWvthyk=')
 aditmadzs.log("Auth Token : " + str(aditmadzs.authToken))
 #channel = LineChannel(aditmadzs)
 aditmadzsMid = aditmadzs.profile.mid
@@ -25,10 +25,10 @@ aditmadzsPoll = OEPoll(aditmadzs)
 
 mid = aditmadzs.getProfile().mid
 
-admin = ["uac8e3eaf1eb2a55770bf10c3b2357c33","u33ba9a93d30c1be155df24f5d4e3f583"]
+admin = ["ube187443474747c3ec352e7efeb48c1b"]
 
 KAC = [aditmadzs]
-Bots = ["u33ba9a93d30c1be155df24f5d4e3f583"]
+Bots = ["ube187443474747c3ec352e7efeb48c1b"]
 Aditmadzs = admin
 
 welcome = []
@@ -110,7 +110,7 @@ wait = {
     "Respontag":"Im busy huh",
     "welcome":"Selamat Datang",
     "leave":"Selamat Jalan",
-    "comment":"Auto like by PUY\nhttps://line.me/ti/p/~yapuy",
+    "comment":"Auto like by PUY\nhttps://line.me/ti/p/~situ.sehat",
     "message":"Thx For Added Rinda",
     }
 
@@ -361,7 +361,7 @@ def sendMention(to, mid, firstmessage):
         arrData = {'S':slen, 'E':elen, 'M':mid}
         arr.append(arrData)
         today = datetime.today()
-        future = datetime(2018,3,1)
+        future = datetime(2018,9,1)
         hari = (str(future - today))
         comma = hari.find(",")
         hari = hari[:comma]
