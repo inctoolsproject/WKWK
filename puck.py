@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-#  「 From Helloworld+Eater/ Edited by Puy 」 "
-#The Beginning of this Bot Comes from Helloworld, I'm just Reworked This!
-#Of Course Special Thanks To HelloWorld, And the Friends Around Me!
-#ID : yapuy
+#  「 From Helloworld+Eater 」 "
+#The Beginning of this Bot Comes from Helloworld, I'm just Remaked This!
+#Of Course Special Thanks To Allah SWT, And the Friends Around Me!
+#ID : calon_almarhum99
 
 from LineAPI.linepy import *
 from LineAPI.akad.ttypes import Message
